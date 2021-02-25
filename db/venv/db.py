@@ -152,14 +152,28 @@ def create_toppings_csv():
     toppings_df = pd.DataFrame(toppings_data, columns = columns)
     toppings_df.to_csv('../tableData/toppings.csv', index = False)
 
+def create_meal_csv():
+    columns = ['id', 'name', 'price', 'calories']
+    
+    meal_data = []
+
+    count = 1
+    for i in range(1, 5 + 1):
+        meal_data.append([str(count), 'M' + str(i), '', ''])
+        count += 1
+    
+    meal_df = pd.DataFrame(meal_data, columns = columns)
+    meal_df.to_csv('../tableData/meal.csv', index = False)
+
 if __name__ == '__main__':
     # create_customer_and_order_csv()
-    create_beverages_csv()
-    create_deserts_csv()
+    # create_beverages_csv()
+    # create_deserts_csv()
     # This csv would be empty right now so don't make it
     # create_employee_csv()
-    create_entrees_csv()
-    create_sides_csv()
-    create_toppings_csv()
+    # create_entrees_csv()
+    # create_sides_csv()
+    # create_toppings_csv()
+    create_meal_csv()
 
     print("Done.")
