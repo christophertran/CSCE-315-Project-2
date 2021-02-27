@@ -11,6 +11,8 @@
 
 from csv import reader
 import pandas as pd
+import random
+import names
 
 # This was used to create the allNamesDatesOrders_new.csv file from the original one given to us
 def create_new_allNamesDatesOrders_file():
@@ -80,21 +82,32 @@ def create_employee_csv():
     employee_data = []
 
     count = 1
-    for i in range(1, 7 + 1):
-        employee_data.append([str(count), '', '', ''])
+    for i in range(1, 3 + 1):
+        employee_data.append([str(count), names.get_last_name() + ' ' + names.get_first_name(), '', ''])
         count += 1
     
     employee_df = pd.DataFrame(employee_data, columns = columns)
-    employee_df.to_csv('../tableData/entrees.csv', index = False)
+    employee_df.to_csv('../tableData/employee.csv', index = False)
 
 def create_entrees_csv():
     columns = ['id', 'name', 'price', 'calories', 'toppings']
 
     entrees_data = []
+    toppings_data = pd.read_csv('../tableData/toppings.csv')
+    toppings = toppings_data['name']
 
     count = 1
     for i in range(1, 7 + 1):
-        entrees_data.append([str(count), 'E' + str(i), '', '', ''])
+        random_toppings = []
+
+        count = 0
+        while count < 3:
+            choice = random.choice(toppings)
+            if choice not in random_toppings:
+                random_toppings.append(choice)
+                count += 1
+
+        entrees_data.append([str(count), 'E' + str(i), '', '', ' '.join(topping for topping in random_toppings)])
         count += 1
     
     entrees_df = pd.DataFrame(entrees_data, columns = columns)
@@ -152,28 +165,38 @@ def create_toppings_csv():
     toppings_df = pd.DataFrame(toppings_data, columns = columns)
     toppings_df.to_csv('../tableData/toppings.csv', index = False)
 
-def create_meal_csv():
-    columns = ['id', 'name', 'price', 'calories']
+def create_meals_csv():
+    columns = ['id', 'name', 'price', 'calories', 'contents']
     
-    meal_data = []
+    meals_data = []
+
+    entrees_data = pd.read_csv('../tableData/entrees.csv')
+    sides_data = pd.read_csv('../tableData/sides.csv')
+    beverages_data = pd.read_csv('../tableData/beverages.csv')
+
+    entrees = entrees_data['name']
+    sides = sides_data['name']
+    beverages = beverages_data['name']
 
     count = 1
     for i in range(1, 5 + 1):
-        meal_data.append([str(count), 'M' + str(i), '', ''])
+        contents = [random.choice(entrees), random.choice(sides), random.choice(beverages)]
+        meals_data.append([str(count), 'M' + str(i), '', '', ' '.join(item for item in contents)])
         count += 1
     
-    meal_df = pd.DataFrame(meal_data, columns = columns)
-    meal_df.to_csv('../tableData/meal.csv', index = False)
+    meals_df = pd.DataFrame(meals_data, columns = columns)
+    meals_df.to_csv('../tableData/meals.csv', index = False)
 
 if __name__ == '__main__':
     # create_customer_and_order_csv()
     # create_beverages_csv()
     # create_deserts_csv()
-    # This csv would be empty right now so don't make it
     # create_employee_csv()
-    # create_entrees_csv()
-    # create_sides_csv()
     # create_toppings_csv()
-    create_meal_csv()
+    # create_sides_csv()
+
+    # entrees table and meals table depend on the above to be created first.
+    # create_entrees_csv()
+    create_meals_csv()
 
     print("Done.")

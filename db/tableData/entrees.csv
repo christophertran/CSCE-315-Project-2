@@ -1,8 +1,8 @@
 id,name,price,calories,toppings
-1,E1,,,T1 T3
-2,E2,,,T2 T4
-3,E3,,,T5 T6
-4,E4,,,T1 T3
-5,E5,,,T2 T4
-6,E6,,,T5 T6
-7,E7,,,T1 T3
+3,E1,,,T2 T6 T3
+3,E2,,,T4 T6 T2
+3,E3,,,T1 T6 T2
+3,E4,,,T6 T3 T4
+3,E5,,,T1 T3 T4
+3,E6,,,T1 T6 T3
+3,E7,,,T4 T2 T3
