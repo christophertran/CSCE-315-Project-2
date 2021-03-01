@@ -74,8 +74,8 @@ def create_customer_and_order_csv():
 
     order_df = create_order_df(customer_name_to_id)
 
-    customer_df.to_csv('../tableData/customer.csv', index = False)
-    order_df.to_csv('../tableData/order.csv', index = False)
+    customer_df.to_csv('../tableData/customers.csv', index = False)
+    order_df.to_csv('../tableData/orders.csv', index = False)
 
 def create_employee_csv():
     columns = ['id', 'name', 'address', 'email']
@@ -88,7 +88,7 @@ def create_employee_csv():
         count += 1
     
     employee_df = pd.DataFrame(employee_data, columns = columns)
-    employee_df.to_csv('../tableData/employee.csv', index = False)
+    employee_df.to_csv('../tableData/employees.csv', index = False)
 
 def create_entrees_csv():
     columns = ['id', 'name', 'price', 'calories', 'toppings']
@@ -139,18 +139,18 @@ def create_beverages_csv():
     beverages_df = pd.DataFrame(beverages_data, columns = columns)
     beverages_df.to_csv('../tableData/beverages.csv', index = False)
 
-def create_deserts_csv():
+def create_desserts_csv():
     columns = ['id', 'name', 'price', 'calories']
     
-    deserts_data = []
+    desserts_data = []
 
     count = 1
-    for i in range(1, 2 + 1):
-        deserts_data.append([str(count), 'D' + str(i), round(random.uniform(1.99, 4.99), 2), math.floor(random.uniform(200, 500))])
+    for i in range(1, 3 + 1):
+        desserts_data.append([str(count), 'D' + str(i), round(random.uniform(1.99, 4.99), 2), math.floor(random.uniform(200, 500))])
         count += 1
     
-    deserts_df = pd.DataFrame(deserts_data, columns = columns)
-    deserts_df.to_csv('../tableData/deserts.csv', index = False)
+    desserts_df = pd.DataFrame(desserts_data, columns = columns)
+    desserts_df.to_csv('../tableData/desserts.csv', index = False)
 
 def create_toppings_csv():
     columns = ['id', 'name', 'price', 'calories']
@@ -190,17 +190,60 @@ def create_meals_csv():
     meals_df = pd.DataFrame(meals_data, columns = columns)
     meals_df.to_csv('../tableData/meals.csv', index = False)
 
+def add_total_price_to_orders():
+    entrees_data = pd.read_csv('../tableData/entrees.csv')
+    sides_data = pd.read_csv('../tableData/sides.csv')
+    beverages_data = pd.read_csv('../tableData/beverages.csv')
+    desserts_data = pd.read_csv('../tableData/desserts.csv')
+
+    entree_names = entrees_data['name'].tolist()
+    side_names = sides_data['name'].tolist()
+    beverage_names = beverages_data['name'].tolist()
+    dessert_names = desserts_data['name'].tolist()
+
+    orders_data = pd.read_csv('../tableData/orders.csv')
+
+    orders_total_price = []
+
+    previous_orders_to_price = {}
+
+    for index, row in orders_data.iterrows():
+        orders_total_price.append(0.0)
+        order_contents = row['contents']
+
+        if order_contents not in previous_orders_to_price:
+            for item in order_contents.split():
+                if item in entree_names:
+                    orders_total_price[-1] += float(entrees_data.loc[entrees_data['name'] == item]['price'])
+                elif item in side_names:
+                    orders_total_price[-1] += float(sides_data.loc[sides_data['name'] == item]['price'])
+                elif item in beverage_names:
+                    orders_total_price[-1] += float(beverages_data.loc[beverages_data['name'] == item]['price'])
+                elif item in dessert_names:
+                    orders_total_price[-1] += float(desserts_data.loc[desserts_data['name'] == item]['price'])
+                else:
+                    print('Unknown: \'' + item + '\'')
+            orders_total_price[-1] = round(orders_total_price[-1], 2)
+            previous_orders_to_price[order_contents] = orders_total_price[-1]
+        else:
+            orders_total_price[-1] = previous_orders_to_price[order_contents]
+    
+    orders_data['total_price'] = orders_total_price
+    orders_data.to_csv('../tableData/orders.csv', index = False)
+
 if __name__ == '__main__':
     # create_customer_and_order_csv()
     # create_employee_csv()
 
-    create_beverages_csv()
-    create_deserts_csv()
-    create_toppings_csv()
-    create_sides_csv()
+    # create_beverages_csv()
+    # create_desserts_csv()
+    # create_toppings_csv()
+    # create_sides_csv()
 
     # entrees table and meals table depend on the above to be created first.
-    create_entrees_csv()
-    create_meals_csv()
+    # create_entrees_csv()
+    # create_meals_csv()
+
+    add_total_price_to_orders()
 
     print("Done.")
