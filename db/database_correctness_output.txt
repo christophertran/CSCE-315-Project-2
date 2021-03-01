@@ -1,0 +1,218 @@
+1. Orders from January 2018
+┌────────┬─────────────┬─────────────┬────────────┬────────┬─────────────────────────┬───────────┐
+│   id   │ customer_id │ employee_id │    date    │  time  │        contents         │ fulfilled │
+├────────┼─────────────┼─────────────┼────────────┼────────┼─────────────────────────┼───────────┤
+│ 227194 │       78671 │      (null) │ 2018-01-21 │ (null) │ E5 S3 B5 D2             │ t         │
+│ 362568 │       91231 │      (null) │ 2018-01-14 │ (null) │ E3 S4 B4 D2             │ t         │
+│ 435071 │       53248 │      (null) │ 2018-01-04 │ (null) │ E2 E4 S1 S4 B2 B4 D3 D2 │ t         │
+│ 440765 │       85867 │      (null) │ 2018-01-31 │ (null) │ E3 S2 B3 D2             │ t         │
+│ 447007 │      154548 │      (null) │ 2018-01-09 │ (null) │ E7 E1 S3 S1 B5 B1 D1 D2 │ t         │
+│ 473321 │       26284 │      (null) │ 2018-01-13 │ (null) │ E1 S2 B1 D2             │ t         │
+│ 502026 │       32516 │      (null) │ 2018-01-28 │ (null) │ E2 S2 B1 D3             │ t         │
+│ 554153 │       35116 │      (null) │ 2018-01-23 │ (null) │ E4 S3 B5 D1             │ t         │
+│ 564423 │      104604 │      (null) │ 2018-01-09 │ (null) │ E2 S3 B2 D3             │ t         │
+│ 719649 │      128667 │      (null) │ 2018-01-17 │ (null) │ E1 S1 B2 D1             │ t         │
+└────────┴─────────────┴─────────────┴────────────┴────────┴─────────────────────────┴───────────┘
+(10 rows)
+
+2a. Unfulfilled orders
+┌───────┬─────────────┬─────────────┬────────────┬────────┬─────────────┬───────────┐
+│  id   │ customer_id │ employee_id │    date    │  time  │  contents   │ fulfilled │
+├───────┼─────────────┼─────────────┼────────────┼────────┼─────────────┼───────────┤
+│  8172 │       39610 │      (null) │ 2020-12-31 │ (null) │ E4 S2 B2 D3 │ f         │
+│ 11341 │      145220 │      (null) │ 2020-12-31 │ (null) │ E4 S2 B2 D3 │ f         │
+│ 16553 │      119199 │      (null) │ 2020-12-31 │ (null) │ E4 S2 B2 D3 │ f         │
+│ 18454 │       21733 │      (null) │ 2020-12-31 │ (null) │ E4 S2 B2 D3 │ f         │
+│ 20181 │      137102 │      (null) │ 2020-12-31 │ (null) │ E4 S2 B2 D3 │ f         │
+│ 25418 │       64586 │      (null) │ 2020-12-31 │ (null) │ E4 S2 B2 D3 │ f         │
+│ 26042 │      133392 │      (null) │ 2020-12-31 │ (null) │ E4 S2 B2 D3 │ f         │
+│ 26522 │      147729 │      (null) │ 2020-12-31 │ (null) │ E4 S2 B2 D3 │ f         │
+│ 30617 │       93430 │      (null) │ 2020-12-31 │ (null) │ E4 S2 B2 D3 │ f         │
+│ 31118 │       71387 │      (null) │ 2020-12-31 │ (null) │ E4 S2 B2 D3 │ f         │
+└───────┴─────────────┴─────────────┴────────────┴────────┴─────────────┴───────────┘
+(10 rows)
+
+2b. Fulfilled orders
+┌────────┬─────────────┬─────────────┬────────────┬────────┬─────────────┬───────────┐
+│   id   │ customer_id │ employee_id │    date    │  time  │  contents   │ fulfilled │
+├────────┼─────────────┼─────────────┼────────────┼────────┼─────────────┼───────────┤
+│ 130424 │       90523 │      (null) │ 2016-03-23 │ (null) │ E2 S4 B3 D1 │ t         │
+│ 130843 │       75525 │      (null) │ 2016-06-27 │ (null) │ E2 S3 B4 D2 │ t         │
+│ 131333 │      159100 │      (null) │ 2016-04-22 │ (null) │ E5 S2 B2 D1 │ t         │
+│ 132254 │      132921 │      (null) │ 2018-08-27 │ (null) │ E3 S2 B4 D2 │ t         │
+│ 134677 │       59360 │      (null) │ 2016-12-20 │ (null) │ E3 S3 B4 D2 │ t         │
+│ 134982 │       64807 │      (null) │ 2019-06-15 │ (null) │ E2 S2 B4 D3 │ t         │
+│ 137033 │        8888 │      (null) │ 2019-07-13 │ (null) │ E6 S2 B5 D2 │ t         │
+│ 137741 │       64649 │      (null) │ 2018-09-09 │ (null) │ E4 S3 B5 D2 │ t         │
+│ 138143 │       99768 │      (null) │ 2018-09-13 │ (null) │ E5 S3 B1 D3 │ t         │
+│ 138651 │       13728 │      (null) │ 2020-09-23 │ (null) │ E1 S1 B5 D1 │ t         │
+└────────┴─────────────┴─────────────┴────────────┴────────┴─────────────┴───────────┘
+(10 rows)
+
+3. Meals between 2500 and 2600 calories
+┌────┬──────┬───────┬──────────┬──────────┐
+│ id │ name │ price │ calories │ contents │
+├────┼──────┼───────┼──────────┼──────────┤
+│  5 │ M5   │ 16.59 │     2599 │ E5 S2 B5 │
+│  4 │ M4   │ 17.44 │     2501 │ E1 S2 B1 │
+└────┴──────┴───────┴──────────┴──────────┘
+(2 rows)
+
+4. Orders taken down by a specific employee (Mayer Robert)
+┌──────┬─────────────┬────────────┬───────────────┐
+│  id  │ customer_id │    date    │ employee_name │
+├──────┼─────────────┼────────────┼───────────────┤
+│ 5944 │       58703 │ 2020-12-31 │ MAYER ROBERT  │
+└──────┴─────────────┴────────────┴───────────────┘
+(1 row)
+
+5. Orders by a specific customer
+┌──────┬────────────┬─────────────┬────────┬─────────────┐
+│  id  │    date    │    name     │ email  │  contents   │
+├──────┼────────────┼─────────────┼────────┼─────────────┤
+│ 5863 │ 2017-02-10 │ LEWIS SARAH │ (null) │ E4 S2 B2 D3 │
+│ 5721 │ 2017-08-13 │ LEWIS SARAH │ (null) │ E4 S2 B2 D3 │
+│ 5722 │ 2017-08-10 │ LEWIS SARAH │ (null) │ E4 S2 B2 D3 │
+│ 5723 │ 2019-09-15 │ LEWIS SARAH │ (null) │ E4 S2 B2 D3 │
+│ 5724 │ 2019-03-09 │ LEWIS SARAH │ (null) │ E4 S2 B2 D3 │
+│ 5725 │ 2020-12-20 │ LEWIS SARAH │ (null) │ E4 S2 B2 D3 │
+│ 5726 │ 2019-05-20 │ LEWIS SARAH │ (null) │ E4 S2 B2 D3 │
+│ 5727 │ 2015-03-10 │ LEWIS SARAH │ (null) │ E4 S2 B2 D3 │
+│ 5728 │ 2016-11-04 │ LEWIS SARAH │ (null) │ E4 S2 B2 D3 │
+│ 5729 │ 2017-01-11 │ LEWIS SARAH │ (null) │ E4 S2 B2 D3 │
+└──────┴────────────┴─────────────┴────────┴─────────────┘
+(10 rows)
+
+6. Total number of orders by day
+┌────────────────┬────────────┐
+│ orders_on_date │    date    │
+├────────────────┼────────────┤
+│            140 │ 2015-01-01 │
+│            309 │ 2015-01-02 │
+│            287 │ 2015-01-03 │
+│            250 │ 2015-01-04 │
+│            263 │ 2015-01-05 │
+│            284 │ 2015-01-06 │
+│            295 │ 2015-01-07 │
+│            293 │ 2015-01-08 │
+│            255 │ 2015-01-09 │
+│            272 │ 2015-01-10 │
+└────────────────┴────────────┘
+(10 rows)
+
+7. List of Employees
+┌────┬───────────────────┬───────────────────┬──────────────────────┐
+│ id │       name        │      address      │        email         │
+├────┼───────────────────┼───────────────────┼──────────────────────┤
+│  1 │ MAYER ROBERT      │ 102 University Dr │ mayer@email.com      │
+│  2 │ SANDERS CHRISTINE │ 100 Texas Ave     │ sanders@email.com    │
+│  3 │ GRIFFIN VIRGINIA  │ 100 main st       │ griffin@email.com    │
+│  4 │ SHAWNA THOMAS     │ HRBB 415          │ sthomas@cse.tamu.edu │
+└────┴───────────────────┴───────────────────┴──────────────────────┘
+(4 rows)
+
+8. List of Customers
+┌────┬──────────────────┬─────────┬────────┐
+│ id │       name       │ address │ email  │
+├────┼──────────────────┼─────────┼────────┤
+│  0 │ BASS SEBASTIAN   │ (null)  │ (null) │
+│  1 │ DOVE JORDON      │ (null)  │ (null) │
+│  2 │ LUCIANO ELIAS    │ (null)  │ (null) │
+│  3 │ LANG AMBROSE     │ (null)  │ (null) │
+│  4 │ LINDGREN GERARDO │ (null)  │ (null) │
+│  5 │ DEGRAW COLBY     │ (null)  │ (null) │
+│  6 │ DEWBERRY MAURO   │ (null)  │ (null) │
+│  7 │ DIEBOLD TAMMARA  │ (null)  │ (null) │
+│  8 │ TRISLER HECTOR   │ (null)  │ (null) │
+│  9 │ YUNKER CARMEN    │ (null)  │ (null) │
+└────┴──────────────────┴─────────┴────────┘
+(10 rows)
+
+9. List of meals
+┌────┬──────┬───────┬──────────┬──────────┐
+│ id │ name │ price │ calories │ contents │
+├────┼──────┼───────┼──────────┼──────────┤
+│  5 │ M5   │ 16.59 │     2599 │ E5 S2 B5 │
+│  4 │ M4   │ 17.44 │     2501 │ E1 S2 B1 │
+│  3 │ M3   │  19.8 │     2134 │ E6 S3 B2 │
+│  1 │ M1   │ 15.82 │     2495 │ E1 S2 B4 │
+│  2 │ M2   │ 16.74 │     2843 │ E5 S4 B5 │
+└────┴──────┴───────┴──────────┴──────────┘
+(5 rows)
+
+10. Average number of calories in meals
+┌───────────────────────┐
+│          avg          │
+├───────────────────────┤
+│ 2514.4000000000000000 │
+└───────────────────────┘
+(1 row)
+
+11. Average price of meals
+┌────────┐
+│  avg   │
+├────────┤
+│ 17.278 │
+└────────┘
+(1 row)
+
+12. Name of recommendation when you start searching a customer name
+┌────┬──────────────────┬─────────┬────────┐
+│ id │       name       │ address │ email  │
+├────┼──────────────────┼─────────┼────────┤
+│  1 │ DOVE JORDON      │ (null)  │ (null) │
+│  5 │ DEGRAW COLBY     │ (null)  │ (null) │
+│  6 │ DEWBERRY MAURO   │ (null)  │ (null) │
+│  7 │ DIEBOLD TAMMARA  │ (null)  │ (null) │
+│ 10 │ DAHLE CHRISTOPER │ (null)  │ (null) │
+│ 11 │ DEMEO SCOTT      │ (null)  │ (null) │
+│ 18 │ DESCHAMP JANESSA │ (null)  │ (null) │
+│ 22 │ DARDEN MARTY     │ (null)  │ (null) │
+│ 36 │ DICE KANDACE     │ (null)  │ (null) │
+│ 39 │ DOWDY JACINTA    │ (null)  │ (null) │
+└────┴──────────────────┴─────────┴────────┘
+(10 rows)
+
+13. Insert into the meals table
+INSERT 0 1
+
+14. Changing the contents of an order
+
+15. Deleting a meal
+DELETE 1
+
+16. Adding a topping to an order
+UPDATE 1
+
+17. Looking up a specific order
+┌──────┬─────────────┬─────────────┬────────────┬────────┬───────────────────┬───────────┐
+│  id  │ customer_id │ employee_id │    date    │  time  │     contents      │ fulfilled │
+├──────┼─────────────┼─────────────┼────────────┼────────┼───────────────────┼───────────┤
+│ 5944 │       58703 │           1 │ 2020-12-31 │ (null) │ M1 S2 B4 T2 T2 T2 │ f         │
+└──────┴─────────────┴─────────────┴────────────┴────────┴───────────────────┴───────────┘
+(1 row)
+
+18. Cheapest meal for recommendation
+┌───────┐
+│  min  │
+├───────┤
+│ 15.82 │
+└───────┘
+(1 row)
+
+19. Lowest calorie food for recommendation
+┌──────┐
+│ min  │
+├──────┤
+│ 2134 │
+└──────┘
+(1 row)
+
+20. Most expensive meal to provide a deal
+┌──────┐
+│ max  │
+├──────┤
+│ 19.8 │
+└──────┘
+(1 row)
+
