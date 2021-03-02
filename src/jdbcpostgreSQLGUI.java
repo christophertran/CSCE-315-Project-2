@@ -12,7 +12,7 @@ public class jdbcpostgreSQLGUI {
      Connection conn = null;
      try {
         Class.forName("org.postgresql.Driver");
-        conn = DriverManager.getConnection("jdbc:postgresql://csce-315-db.engr.tamu.edu/sthomas_demo",
+        conn = DriverManager.getConnection("jdbc:postgresql://csce-315-db.engr.tamu.edu/db907_group10_project2",
            my.user, my.pswd);
      } catch (Exception e) {
         e.printStackTrace();

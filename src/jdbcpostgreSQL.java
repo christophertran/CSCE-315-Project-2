@@ -15,7 +15,7 @@ public class jdbcpostgreSQL {
      try {
         //Class.forName("org.postgresql.Driver");
         conn = DriverManager.getConnection(
-          "jdbc:postgresql://csce-315-db.engr.tamu.edu/sthomas_demo",
+          "jdbc:postgresql://csce-315-db.engr.tamu.edu/db907_group10_project2",
            my.user, my.pswd);
      } catch (Exception e) {
         e.printStackTrace();
@@ -28,7 +28,7 @@ public class jdbcpostgreSQL {
      //create a statement object
        Statement stmt = conn.createStatement();
        //create an SQL statement
-       String sqlStatement = "SELECT cus_lname FROM customer";
+       String sqlStatement = "SELECT name from customers";
        //send statement to DBMS
        ResultSet result = stmt.executeQuery(sqlStatement);
 
@@ -36,7 +36,7 @@ public class jdbcpostgreSQL {
        System.out.println("Customer Last names from the Database.");
        System.out.println("______________________________________");
        while (result.next()) {
-         System.out.println(result.getString("cus_lname"));
+         System.out.println(result.getString("name"));
        }
    } catch (Exception e){
      System.out.println("Error accessing Database.");
