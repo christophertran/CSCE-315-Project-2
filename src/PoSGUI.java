@@ -25,7 +25,7 @@ public class PoSGUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+        //COMPONENTS
         textArea1 = new java.awt.TextArea();
         scrollPane1 = new java.awt.ScrollPane();
         scrollbar4 = new java.awt.Scrollbar();
@@ -59,6 +59,7 @@ public class PoSGUI extends javax.swing.JFrame {
         scrollPane1.add(scrollbar2);
         scrollPane1.add(scrollbar1);
 
+        //Main Panel Settings
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PoS System");
         setPreferredSize(new java.awt.Dimension(1280, 720));
@@ -82,6 +83,7 @@ public class PoSGUI extends javax.swing.JFrame {
 
         dessertsButton.setLabel("Desserts");
 
+        //Panel1 = Side Panel
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -168,6 +170,7 @@ public class PoSGUI extends javax.swing.JFrame {
             }
         });
 
+        //Panel 2 == Section with all the meal buttons
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -230,6 +233,7 @@ public class PoSGUI extends javax.swing.JFrame {
             }
         });
 
+        //Panel 3 == Current Order panel
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
