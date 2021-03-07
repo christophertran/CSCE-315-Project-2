@@ -2,11 +2,9 @@ package api;
 
 import db.dbSetup;
 
-import javax.management.Query;
+import java.io.*;
+import java.util.*;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 class QueryBuilder {
     static Connection conn = null;
@@ -22,6 +20,7 @@ class QueryBuilder {
                 QueryBuilder.conn = DriverManager.getConnection(
                         "jdbc:postgresql://csce-315-db.engr.tamu.edu/db907_group10_project2",
                         dbSetup.user, dbSetup.pswd);
+                System.out.println("Connection Opened.");
             } catch (Exception e) {
                 e.printStackTrace();
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -45,6 +44,8 @@ class QueryBuilder {
 
     static ArrayList<HashMap<String, String>> executeQuery(String sqlStatement) throws SQLException {
         ResultSet result = null;
+
+//        System.out.println(sqlStatement);
 
         try {
             //create a statement object
@@ -73,6 +74,8 @@ class QueryBuilder {
 
     static Integer executeUpdate(String sqlStatement) {
         Integer result = null;
+
+//        System.out.println(sqlStatement);
 
         try {
             //create a statement object
@@ -129,8 +132,6 @@ class QueryBuilder {
 
         stringBuilder.append(");");
 
-        System.out.println(stringBuilder.toString());
-
         return stringBuilder.toString();
     }
 
@@ -143,7 +144,7 @@ class QueryBuilder {
         return stringBuilder.toString();
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, FileNotFoundException {
         QueryBuilder.openDBConnection();
 
 //        ArrayList<String> cols = new ArrayList<>();
@@ -161,6 +162,30 @@ class QueryBuilder {
 //        Topping topping = new Topping(5, "Fruit", 10, 200);
 //        items.add(topping);
 //        Order order = new Order(items, temp, null, false);
+
+//        Code to insert csv file data into database.
+//        Scanner sc = new Scanner(new File("db/tableData/newOrders.csv"));
+//
+//        Integer count = 0;
+//        while (sc.hasNextLine()) {
+//            String row = sc.nextLine();
+//
+//            if (count > 0) {
+//                Scanner rowScanner = new Scanner(row);
+//                rowScanner.useDelimiter(",");
+//
+//                ArrayList<String> values = new ArrayList<>();
+//                while (rowScanner.hasNext()) {
+//                    values.add(rowScanner.next());
+//                }
+//
+//                Order temp = new Order(values.get(1), Customer.getCustomerByName(values.get(0).toUpperCase()), null, true);
+//            }
+//
+//            count++;
+//        }
+//
+//        sc.close();
 
         QueryBuilder.closeDBConnection();
     }

@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 class Item {
+    static final String id_column = "id";
+    static final String name_column = "name";
+    static final String price_column = "price";
+    static final String calories_column = "calories";
+
     int id;
     String name;
     float price;
@@ -26,10 +31,10 @@ class Item {
         ArrayList<Item> items = new ArrayList<>();
         ArrayList<HashMap<String, String>> itemsDict = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(itemType, null));
         for (HashMap h : itemsDict) {
-            Item i = new Item(Integer.parseInt((String) h.get("id")),
-                    (String) h.get("name"),
-                    Float.parseFloat((String) h.get("price")),
-                    Integer.parseInt((String) h.get("calories")));
+            Item i = new Item(Integer.parseInt((String) h.get(Item.id_column)),
+                    (String) h.get(Item.name_column),
+                    Float.parseFloat((String) h.get(Item.price_column)),
+                    Integer.parseInt((String) h.get(Item.calories_column)));
             items.add(i);
         }
         return items;
