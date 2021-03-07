@@ -5,12 +5,7 @@ import java.util.ArrayList;
 public class Entree extends Item {
     ArrayList<Topping> toppings;
 
-    Entree(int id) {
-        super(id);
-
-    }
-
-    Entree(String name, float price, int calories) {
-        super(name, price, calories);
+    Entree(int id, String name, float price, int calories) {
+        super(id, name, price, calories);
     }
 }
