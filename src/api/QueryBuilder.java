@@ -187,6 +187,13 @@ class QueryBuilder {
 //
 //        sc.close();
 
+        ArrayList<Beverage> allBeverages = Beverage.getAllItems();
+        ArrayList<Dessert> allDesserts = Dessert.getAllItems();
+        ArrayList<Entree> allEntrees = Entree.getAllItems();
+        ArrayList<Meal> allMeals = Meal.getAllItems();
+        ArrayList<Side> allSides = Side.getAllItems();
+        ArrayList<Topping> allToppings = Topping.getAllItems();
+
         QueryBuilder.closeDBConnection();
     }
 }
