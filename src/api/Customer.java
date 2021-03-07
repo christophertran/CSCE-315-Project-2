@@ -1,5 +1,6 @@
 package api;
 
+import javax.management.Query;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,19 +23,24 @@ public class Customer {
 
         HashMap<String, String> constraints = new HashMap<>();
         constraints.put("name", customerName);
-        ArrayList<HashMap<String, String>> result = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery("customer", constraints));
+        ArrayList<HashMap<String, String>> customerResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery("customers", constraints));
 
-        if (result.size() == 0)
+        if (customerResult == null)
         {
             // The customer does NOT exist in the database yet, we need to add them.
+            HashMap<String, String> values = new HashMap<>();
 
-        }
-        else
-        {
-            // The customer DOES exist in the database, so return an object with their information.
-            ret = new Customer (Integer.parseInt(result.get(0).get("id")), result.get(0).get("name"), result.get(0).get("address"), result.get(0).get("email"));
+            values.put("name", customerName);
+            String query = QueryBuilder.buildInsertionQuery("customers", values);
+            Integer updateResult = QueryBuilder.executeUpdate(query);
+
+            if (updateResult > 0) {
+                customerResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery("customers", constraints));
+            }
+
+            System.out.println();
         }
 
-        return ret;
+        return new Customer (Integer.parseInt(customerResult.get(0).get("id")), customerResult.get(0).get("name"), customerResult.get(0).get("address"), customerResult.get(0).get("email"));
     }
 }
