@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Customer {
+    static final String tableName = "customers";
+
     Integer id;
     String name;
     String address;
@@ -23,7 +25,7 @@ public class Customer {
 
         HashMap<String, String> constraints = new HashMap<>();
         constraints.put("name", customerName);
-        ArrayList<HashMap<String, String>> customerResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery("customers", constraints));
+        ArrayList<HashMap<String, String>> customerResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Customer.tableName, constraints));
 
         if (customerResult == null || customerResult.size() == 0)
         {
@@ -31,11 +33,11 @@ public class Customer {
             HashMap<String, String> values = new HashMap<>();
 
             values.put("name", customerName);
-            String query = QueryBuilder.buildInsertionQuery("customers", values);
+            String query = QueryBuilder.buildInsertionQuery(Customer.tableName, values);
             Integer updateResult = QueryBuilder.executeUpdate(query);
 
             if (updateResult > 0) {
-                customerResult = QueryBuilder.executeQuery("SELECT * FROM customers ORDER BY \"id\" DESC LIMIT 1");
+                customerResult = QueryBuilder.executeQuery(QueryBuilder.buildGetLastItemFromTableQuery(Customer.tableName));
             }
 
             System.out.println();

@@ -2,41 +2,57 @@ package api;
 
 import db.dbSetup;
 
+import javax.management.Query;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 class QueryBuilder {
+    static Connection conn = null;
+
+    static void openDBConnection() throws SQLException {
+        getDBConnection();
+    }
+
+    static Connection getDBConnection() throws SQLException {
+        if (QueryBuilder.conn == null) {
+            try {
+                //Class.forName("org.postgresql.Driver");
+                QueryBuilder.conn = DriverManager.getConnection(
+                        "jdbc:postgresql://csce-315-db.engr.tamu.edu/db907_group10_project2",
+                        dbSetup.user, dbSetup.pswd);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+                System.exit(0);
+            }
+        }
+
+        return QueryBuilder.conn;
+    }
+
+    static void closeDBConnection() throws SQLException {
+        if (QueryBuilder.conn != null) {
+            try {
+                QueryBuilder.conn.close();
+                System.out.println("Connection Closed.");
+            } catch (Exception e) {
+                System.out.println("Connection NOT Closed.");
+            }
+        }
+    }
 
     static ArrayList<HashMap<String, String>> executeQuery(String sqlStatement) throws SQLException {
-        dbSetup my = new dbSetup();
-        Connection conn = null;
-        try {
-            //Class.forName("org.postgresql.Driver");
-            conn = DriverManager.getConnection(
-                    "jdbc:postgresql://csce-315-db.engr.tamu.edu/db907_group10_project2",
-                    my.user, my.pswd);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
         ResultSet result = null;
+
         try {
             //create a statement object
-            Statement stmt = conn.createStatement();
+            Statement stmt = getDBConnection().createStatement();
             //send statement to DBMS
             result = stmt.executeQuery(sqlStatement);
         } catch (Exception e) {
             System.out.println("Error accessing Database.");
-        }
-        //closing the connection
-        try {
-            conn.close();
-            System.out.println("Connection Closed.");
-        } catch (Exception e) {
-            System.out.println("Connection NOT Closed.");
         }
 
         ArrayList list = new ArrayList(50);
@@ -56,36 +72,15 @@ class QueryBuilder {
     }
 
     static Integer executeUpdate(String sqlStatement) {
-        dbSetup my = new dbSetup();
-        Connection conn = null;
-
-        try {
-            //Class.forName("org.postgresql.Driver");
-            conn = DriverManager.getConnection(
-                    "jdbc:postgresql://csce-315-db.engr.tamu.edu/db907_group10_project2",
-                    my.user, my.pswd);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
-
         Integer result = null;
+
         try {
             //create a statement object
-            Statement stmt = conn.createStatement();
+            Statement stmt = getDBConnection().createStatement();
             //send statement to DBMS
             result = stmt.executeUpdate(sqlStatement);
         } catch (Exception e) {
             System.out.println("Error accessing Database.");
-        }
-
-        //closing the connection
-        try {
-            conn.close();
-            System.out.println("Connection Closed.");
-        } catch (Exception e) {
-            System.out.println("Connection NOT Closed.");
         }
 
         return result;
@@ -139,7 +134,18 @@ class QueryBuilder {
         return stringBuilder.toString();
     }
 
+    static String buildGetLastItemFromTableQuery(String table) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("SELECT * FROM ").append(table);
+
+        stringBuilder.append(" ORDER BY \"id\" DESC LIMIT 1;");
+
+        return stringBuilder.toString();
+    }
+
     public static void main(String[] args) throws SQLException {
+        QueryBuilder.openDBConnection();
+
 //        ArrayList<String> cols = new ArrayList<>();
 //        HashMap<String, String> constraints = new HashMap<>();
 //        constraints.put("id", "5");
@@ -149,12 +155,13 @@ class QueryBuilder {
 
 //        ArrayList<HashMap<String, String>> result = executeQuery("SELECT * FROM entrees");
 //        ArrayList<Item> items = Item.getAllItems("meals");
-//
-        Customer temp = Customer.getCustomerByName("Mays Billy");
-        ArrayList<Item> items = new ArrayList<>();
-        Topping topping = new Topping(5, "Fruit", 10, 200);
-        items.add(topping);
-        Order order = new Order(items, temp, null, false);
-        System.out.println();
+
+//        Customer temp = Customer.getCustomerByName("Mays Billy");
+//        ArrayList<Item> items = new ArrayList<>();
+//        Topping topping = new Topping(5, "Fruit", 10, 200);
+//        items.add(topping);
+//        Order order = new Order(items, temp, null, false);
+
+        QueryBuilder.closeDBConnection();
     }
 }
