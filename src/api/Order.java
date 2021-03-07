@@ -33,7 +33,7 @@ public class Order {
         int updateResult = QueryBuilder.executeUpdate(query);
         ArrayList<HashMap<String, String>> orderResult = null;
         if (updateResult > 0) {
-            orderResult = QueryBuilder.executeQuery("SELECT * FROM customers ORDER BY \"id\" DESC LIMIT 1");
+            orderResult = QueryBuilder.executeQuery("SELECT * FROM orders ORDER BY \"id\" DESC LIMIT 1");
         }
         if (orderResult != null) {
             this.id = Integer.parseInt(orderResult.get(0).get("id"));
