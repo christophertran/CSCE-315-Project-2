@@ -1,3 +1,5 @@
+package db;
+
 import java.sql.*;
 import javax.swing.JOptionPane;
 //import java.sql.DriverManager;
@@ -25,7 +27,7 @@ public class jdbcpostgreSQLGUI {
      //create a statement object
        Statement stmt = conn.createStatement();
        //create an SQL statement
-       String sqlStatement = "SELECT cus_lname FROM customer";
+       String sqlStatement = "SELECT name FROM customers";
        //send statement to DBMS
        ResultSet result = stmt.executeQuery(sqlStatement);
 
@@ -33,8 +35,8 @@ public class jdbcpostgreSQLGUI {
        JOptionPane.showMessageDialog(null,"Customer Last names from the Database.");
        //System.out.println("______________________________________");
        while (result.next()) {
-         //System.out.println(result.getString("cus_lname"));
-         cus_lname += result.getString("cus_lname")+"\n";
+         System.out.println(result.getString("name"));
+         cus_lname += result.getString("name")+"\n";
        }
    } catch (Exception e){
      JOptionPane.showMessageDialog(null,"Error accessing Database.");
