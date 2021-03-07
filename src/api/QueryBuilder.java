@@ -147,11 +147,14 @@ class QueryBuilder {
 //        cols.add("name");
 //        System.out.println(buildSelectionQuery(cols, "beverages", constraints));
 
-        ArrayList<HashMap<String, String>> result = executeQuery("SELECT * FROM entrees");
-        ArrayList<Item> items = Item.getAllItems("meals");
-
+//        ArrayList<HashMap<String, String>> result = executeQuery("SELECT * FROM entrees");
+//        ArrayList<Item> items = Item.getAllItems("meals");
+//
         Customer temp = Customer.getCustomerByName("Mays Billy");
-
+        ArrayList<Item> items = new ArrayList<>();
+        Topping topping = new Topping(5, "Fruit", 10, 200);
+        items.add(topping);
+        Order order = new Order(items, temp, null, false);
         System.out.println();
     }
 }
