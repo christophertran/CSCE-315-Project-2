@@ -39,15 +39,14 @@ class QueryBuilder {
             System.out.println("Connection NOT Closed.");
         }
 
-        ArrayList list = null;
+        ArrayList list = new ArrayList(50);
         if (result != null) {
             ResultSetMetaData md = result.getMetaData();
             int columns = md.getColumnCount();
-            list = new ArrayList(50);
             while (result.next()){
                 HashMap<String, String> row = new HashMap(columns);
                 for(int i=1; i<=columns; ++i){
-                    row.put(md.getColumnName(i), result.getObject(i).toString());
+                    row.put(md.getColumnName(i), result.getString(i));
                 }
                 list.add(row);
             }
@@ -147,8 +146,9 @@ class QueryBuilder {
 //        constraints.put("name", "Joe");
 //        cols.add("name");
 //        System.out.println(buildSelectionQuery(cols, "beverages", constraints));
-//        ArrayList<HashMap<String, String>> result = executeQuery("SELECT * FROM entrees");
-//        ArrayList<Item> items = Item.getAllItems("meals");
+
+        ArrayList<HashMap<String, String>> result = executeQuery("SELECT * FROM entrees");
+        ArrayList<Item> items = Item.getAllItems("meals");
 
         Customer temp = Customer.getCustomerByName("Mays Billy");
 
