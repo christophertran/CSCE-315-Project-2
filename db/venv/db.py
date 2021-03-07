@@ -231,6 +231,63 @@ def add_total_price_to_orders():
     orders_data['total_price'] = orders_total_price
     orders_data.to_csv('../tableData/orders.csv', index = False)
 
+def generate_new_order_data(n):
+    entrees_data = pd.read_csv('../tableData/entrees.csv')
+    sides_data = pd.read_csv('../tableData/sides.csv')
+    beverages_data = pd.read_csv('../tableData/beverages.csv')
+    desserts_data = pd.read_csv('../tableData/desserts.csv')
+    toppings_data = pd.read_csv('../tableData/toppings.csv')
+
+    entree_names = entrees_data['name'].tolist()
+    side_names = sides_data['name'].tolist()
+    beverage_names = beverages_data['name'].tolist()
+    dessert_names = desserts_data['name'].tolist()
+    topping_names = toppings_data['name'].tolist()
+
+    orders_data = pd.read_csv('../tableData/orders.csv')
+
+    customers_data = pd.read_csv('../tableData/customers.csv')
+
+    customer_names = set(customers_data['name'].tolist())
+
+    new_customer_names = set()
+    new_orders_contents = []
+
+    for i in range(n):
+        # Generate new customer name
+        new_customer_name = names.get_last_name() + " " + names.get_first_name()
+
+        while (new_customer_name in customer_names or new_customer_name in new_customer_names):
+            new_customer_name = names.get_last_name() + " " + names.get_first_name()
+
+        new_customer_names.add(new_customer_name)
+
+        # Generate new order contents
+        new_order_contents = []
+        # Randomly decide how many orders are in this one order (1 order is entree + side + drink)
+        for i in range(random.randint(1, 4)):
+            random_entree = random.choice(entree_names)
+            
+            # Between 0-2 customizations to the entree
+            for i in range(random.randint(0, 2)):
+                if (random.randint(0, 1)):
+                    random_entree += "+" + random.choice(topping_names)
+                else:
+                    random_entree += "-" + random.choice(topping_names)
+
+            new_order_contents.append(random_entree)
+            new_order_contents.append(random.choice(side_names))
+            new_order_contents.append(random.choice(beverage_names))
+            if (random.randint(0, 1)):
+                new_order_contents.append(random.choice(dessert_names))
+        
+        new_orders_contents.append(" ".join(item for item in new_order_contents))
+
+    df = pd.DataFrame()
+    df['customer_name'] = list(new_customer_names)
+    df['order_contents'] = new_orders_contents
+    df.to_csv('../tableData/newOrders.csv', index = False)
+
 if __name__ == '__main__':
     # create_customer_and_order_csv()
     # create_employee_csv()
@@ -244,6 +301,8 @@ if __name__ == '__main__':
     # create_entrees_csv()
     # create_meals_csv()
 
-    add_total_price_to_orders()
+    # add_total_price_to_orders()
+
+    generate_new_order_data(1000)
 
     print("Done.")
