@@ -25,7 +25,7 @@ public class Customer {
         constraints.put("name", customerName);
         ArrayList<HashMap<String, String>> customerResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery("customers", constraints));
 
-        if (customerResult == null)
+        if (customerResult == null || customerResult.size() == 0)
         {
             // The customer does NOT exist in the database yet, we need to add them.
             HashMap<String, String> values = new HashMap<>();
@@ -35,7 +35,7 @@ public class Customer {
             Integer updateResult = QueryBuilder.executeUpdate(query);
 
             if (updateResult > 0) {
-                customerResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery("customers", constraints));
+                customerResult = QueryBuilder.executeQuery("SELECT * FROM customers ORDER BY \"id\" DESC LIMIT 1");
             }
 
             System.out.println();
