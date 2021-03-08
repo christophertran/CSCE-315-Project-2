@@ -16,6 +16,7 @@ import java.util.*;
  */
 public class PoSGUI extends javax.swing.JFrame {
     ArrayList<String> currentItems = new ArrayList<String>();
+    ArrayList<String> abbreviatedItems = new ArrayList<String>();
     boolean employeeView = false;
     /**
      * Creates new form PoSGUI
@@ -1486,6 +1487,9 @@ public class PoSGUI extends javax.swing.JFrame {
         currentItems.add(currentMeal.getText() + "," + entreeLabel.getText() + 
                 " " + customizations.getText().replaceAll(", ", " ").replaceAll("<html>|</html>", "") + "," + sideLabel.getText() + ","
                 + beverageLabel.getText());
+        abbreviatedItems.add(currentMeal.getText().charAt(0) + "" + currentMeal.getText().charAt(4) + "," + entreeLabel.getText().charAt(0) + entreeLabel.getText().charAt(6) +
+                "" + customizations.getText().replaceAll(", ", "").replaceAll("<html>|</html>", "").replaceAll("noTopping","-T").replaceAll("addTopping","+T") + "," + sideLabel.getText().charAt(0) + sideLabel.getText().charAt(4) + ","
+                + beverageLabel.getText().charAt(0) + beverageLabel.getText().charAt(8));
         update();
     }//GEN-LAST:event_addItemsMouseClicked
 
@@ -1589,14 +1593,14 @@ public class PoSGUI extends javax.swing.JFrame {
             {
                 if(!topping1Box.isSelected())
                     customText += "noTopping1 ";
-                if(topping2Box.isSelected())
-                    customText += "addTopping2 ";
+                if(!topping2Box.isSelected())
+                    customText += "noTopping2 ";
                 if(topping3Box.isSelected())
                     customText += "addTopping3 ";
                 if(!topping4Box.isSelected())
                     customText += "noTopping4 ";
-                if(!topping5Box.isSelected())
-                    customText += "noTopping5";
+                if(topping5Box.isSelected())
+                    customText += "addTopping5";
             }
             else if(currentEntree.equals("Entree6"))
             {
@@ -1632,7 +1636,7 @@ public class PoSGUI extends javax.swing.JFrame {
             String customText = "<html>";
             String currentEntree = toppingLabel.getText().split(" ")[1];
             if(currentEntree.equals("Entree1"))
-            {//<editor-fold defaultstate="collapsed" desc="Topping Stuff">             
+            {//<editor-fold defaultstate="collapsed" desc="Topping Stuff">
                 if(!topping1Box.isSelected())
                     customText += "noTopping1, ";
                 if(!topping2Box.isSelected())
