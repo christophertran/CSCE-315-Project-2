@@ -1562,7 +1562,7 @@ public class PoSGUI extends javax.swing.JFrame {
                 if(!topping1Box.isSelected())
                     customText += "noTopping1 ";
                 if(topping2Box.isSelected())
-                    customText += "Topping2 ";
+                    customText += "addTopping2 ";
                 if(!topping3Box.isSelected())
                     customText += "noTopping3 ";
                 if(!topping4Box.isSelected())
@@ -1662,7 +1662,7 @@ public class PoSGUI extends javax.swing.JFrame {
                 if(!topping1Box.isSelected())
                     customText += "noTopping1, ";
                 if(topping2Box.isSelected())
-                    customText += "Topping2, ";
+                    customText += "addTopping2, ";
                 if(!topping3Box.isSelected())
                     customText += "noTopping3, ";
                 if(!topping4Box.isSelected())
