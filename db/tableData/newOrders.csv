@@ -1,0 +1,1001 @@
+customer_name,order_contents
+Redmond Brian,E2+T4 S4 B5 E2 S1 B4 E7+T3 S3 B3 D2 E5 S3 B3
+Allen Sonya,E5+T4 S2 B3 D3 E6 S1 B5 E3 S3 B5 D1
+Higa Paul,E4-T3-T1 S4 B4 D3
+Brown Jay,E6 S4 B2 D3
+Murphy Connie,E5-T4 S3 B4 E7 S1 B1 E2-T2 S4 B5 D3 E7 S1 B5 D1
+Nadal Evelyn,E1-T2 S1 B5 E1-T3 S2 B5 D2 E5+T5-T4 S3 B3
+Carter Julia,E7+T5 S4 B3 E2 S4 B5 D1 E4-T5-T5 S2 B2 D3 E3 S1 B2 D3
+Powell Mark,E5+T4 S2 B5 E7+T5+T1 S2 B5 E5 S2 B5
+Slack Paul,E7-T4+T1 S4 B1 D2 E7-T5 S2 B3 D1
+Smith David,E3 S3 B1 E5 S2 B5 D2 E5 S1 B5 D3 E4-T1+T4 S1 B4 D1
+Ramirez Ervin,E1+T3 S1 B1 D1 E6+T3-T2 S2 B2 D3 E7-T5-T4 S3 B5
+Price Dustin,E5+T4 S1 B3 D2 E5+T5 S2 B4
+Plaisted Kimberly,E4 S4 B1 D2
+Crout William,E6-T3 S2 B4 D1
+Pierre Judy,E5 S2 B4 E2 S4 B1 D3 E2 S2 B3 D3
+Difranco Pauline,E2+T4 S4 B2 E6-T3+T3 S2 B4
+Gallegos Deborah,E3-T1+T4 S2 B3 E3+T4 S2 B3 E3-T1 S3 B5 E2+T2 S3 B5 D2
+Pascual Jeremy,E3 S1 B3 D3 E2+T3 S3 B2
+Nucklos Tyra,E6-T4+T1 S3 B3 E1-T1+T1 S4 B1 D2 E2 S4 B4 E4+T2 S3 B4 D3
+Belgarde Sandra,E1 S4 B3 E1-T1-T2 S3 B2 D1 E4 S4 B4
+Chism Larry,E2-T1-T3 S3 B3
+Johnson Terry,E6 S2 B4 D2 E2+T5+T1 S3 B3 D3 E5+T2+T2 S4 B1
+Brandt Edna,E1-T1 S3 B1 E5-T3-T3 S2 B5 D2 E6 S1 B4 D2 E1 S1 B5
+Simons Jennifer,E5 S3 B2 E1+T4 S4 B4 E1+T5-T5 S3 B5 D2 E1+T3+T2 S3 B5
+Beamon Cynthia,E1-T3 S1 B3 D3 E2 S4 B4 E5 S1 B1
+Walsh Christine,E7 S2 B5 D3 E1+T1 S3 B5 E6-T3 S4 B5 E3 S4 B2 D2
+Harris Catherine,E2+T4-T5 S2 B5 D1 E3 S4 B1
+Smialek Joshua,E3 S2 B2 E7-T1+T3 S1 B4 E7 S2 B3 D2
+Morrow Patricia,E1+T3 S1 B5 E2 S2 B2 D1
+Murphy Michael,E2+T4 S3 B2 D1 E7+T1 S1 B1
+Fontana Mel,E1+T1-T4 S1 B2
+Wages Theodora,E7+T1 S3 B5 E3+T5-T3 S4 B2 D3 E6-T3 S3 B2
+Ham Mistie,E5-T2 S3 B5 E6 S1 B5 E6-T3-T3 S4 B4 D3
+Chronis Rashad,E1-T4 S2 B1 D2 E5 S1 B1 D3
+Adams Nicole,E2-T2 S4 B2 D3 E1-T4+T3 S4 B3 E4+T5+T2 S2 B1 D1
+Cornett Christopher,E5 S3 B1 E1-T4-T1 S3 B5 D3 E6 S3 B3
+Hebert Stephen,E5+T1 S4 B2
+Elerson Kimberly,E1-T2-T4 S3 B5 E7-T4-T1 S2 B3 D2
+Leone Marlene,E5-T4 S2 B1 D1 E7-T1 S4 B4 E2+T1-T4 S2 B1
+Rush Evelyn,E3 S3 B5 D2
+Berrier Joseph,E3 S1 B4 D1
+Cushing Catherine,E5-T3+T2 S2 B4 E7+T3 S2 B2
+Ramirez Cecelia,E4-T2 S3 B1 E4 S3 B5 D3 E1-T3-T2 S3 B3 D3 E4+T5 S2 B4
+Gay Paul,E6 S4 B5 D3 E4-T1-T5 S1 B1 D1 E1+T2+T2 S2 B5 E3 S2 B3
+Keith Tony,E5+T4-T5 S3 B1 D3 E4-T4 S2 B3 D2 E2+T3+T1 S2 B5
+Martin Flora,E7-T2+T3 S3 B1 D2 E5+T4 S1 B3 E3+T5-T4 S2 B1
+Talley Amanda,E1-T1 S3 B1 E2+T1 S1 B4 E5 S3 B1 E7 S2 B3
+Walls Gary,E2 S3 B2 D1
+Klein Carroll,E4-T5+T1 S1 B1 D2
+Searcy Alexander,E2 S3 B5 D3 E1+T3 S2 B4 E4 S3 B5
+Mackenzie William,E6-T3+T5 S1 B3 D1 E5-T3 S1 B4 D2
+Smith Marjorie,E7-T3 S4 B5 D1 E4-T4 S2 B3 E4-T1 S4 B3 E1 S3 B1 D2
+Alston Virginia,E6+T1 S4 B5 D2 E6-T5 S3 B3 E1+T5 S1 B4 D2 E6+T3-T2 S4 B3
+Martin Scott,E6 S1 B4 D3 E6-T3-T3 S2 B2
+Mcgill Sheryl,E7+T5 S4 B5
+Lacey Sally,E4+T5 S1 B2 D1 E7-T2 S2 B1 E6+T1+T2 S2 B3 E4 S4 B5 D3
+Munter Eileen,E2-T3-T1 S1 B1 E3 S2 B1 D2 E4+T5 S4 B5 E7+T3 S3 B3 D3
+Goode Lisa,E1-T4 S4 B5 D2 E3 S2 B2 E5-T4 S1 B2
+Greene Timothy,E5-T5-T4 S3 B3 D1 E5+T4 S1 B2 D1
+Rodriguez Jerrell,E3+T5+T2 S1 B4 D3 E3+T2-T2 S4 B1 E2+T4 S1 B3
+Adams Maria,E6 S1 B5 D3 E6 S2 B1 D3 E4 S4 B5 E5 S1 B2 D1
+King Wilma,E4+T1 S2 B4 D2 E4+T2 S3 B3 E1 S2 B5
+Hines Dustin,E7-T5+T5 S3 B1
+Perez Darrell,E6+T4-T1 S3 B4 D3 E6-T1+T3 S1 B2 D3
+Hill Paul,E5+T5 S1 B1 D1
+Winstead Rose,E3-T4-T5 S2 B2 E3+T4-T2 S3 B2 D2 E3 S2 B2 E4-T1-T1 S3 B4 D3
+Gartner Gerry,E2+T1 S4 B1 E2-T3-T1 S3 B1 D2
+Wright Myron,E2+T4 S2 B4 D3 E4+T4-T2 S1 B2 E5 S2 B3 D1
+Hinojosa Diana,E6 S1 B1 E7 S4 B2 D3
+Smith Charles,E5 S3 B2 E1 S2 B4
+Emerald William,E7-T2-T2 S3 B2 D2
+Hayes John,E6-T5-T5 S4 B1 D1
+Cunningham Tracie,E1-T1 S3 B2 E3 S2 B4 E3+T3 S3 B2 D3
+Muller Charlie,E5-T4 S2 B3 D2
+Lehtonen Nadia,E6 S4 B2 E1 S2 B2 E4+T1+T5 S2 B5
+Lee Kelly,E5 S3 B1
+Siemering Edward,E6-T5 S1 B3 E2-T1-T4 S4 B3 D2 E5-T4 S1 B3
+Wicks John,E4-T4+T1 S2 B1 D1 E6+T3+T2 S1 B3 E5 S2 B1 D3 E4 S1 B1 D1
+Mclean Spencer,E6+T3-T3 S4 B5 D2 E1 S1 B3 D2
+Wilmoth Marion,E1-T3+T3 S4 B5 D2 E5+T2 S1 B4 E4-T3 S1 B2 E7 S4 B4 D1
+Mikelson Brenda,E2 S3 B2
+Perry Josephina,E3-T4 S4 B2 E5+T5 S1 B4 E4-T4-T3 S1 B2
+Love Samuel,E1-T2+T4 S2 B3 D3 E2-T2 S1 B5 E7 S2 B1 D3 E6-T2+T5 S2 B4
+Taylor Arnold,E4-T2+T4 S2 B5 D3 E7-T1-T2 S2 B3 E1-T5 S1 B1
+Sparks Carol,E4+T2 S4 B4 E2 S4 B3 E4-T4 S2 B3 D1
+Brown Cecil,E7 S1 B1 D2 E2 S1 B5 D2 E6-T2-T2 S2 B2
+Waldbauer James,E5-T5 S2 B4 D2 E4 S3 B5 D1 E1-T3 S2 B2 E4-T5 S2 B1 D2
+Kennedy Martha,E1+T4 S1 B2 E1-T1 S2 B5 D3 E5 S1 B2 D3 E3 S3 B1 D2
+Mooberry Eric,E2+T5+T4 S4 B3 E7 S3 B4 E7 S1 B4 D2 E7-T1 S2 B5 D1
+Cardenas David,E7-T4 S3 B4 D2 E4+T4-T4 S3 B4 E1+T5-T4 S1 B3 D2
+Moore David,E2 S3 B3 D2
+Bonner Marjorie,E7 S4 B4 D3 E6-T2 S4 B1
+Heath Marjorie,E7+T5-T3 S3 B5 E6 S1 B2
+Gearhart Miesha,E2 S1 B2 E2 S4 B1 E2+T5 S2 B4
+Wiegand Maurice,E5 S1 B2 D1
+Handy Ronnie,E5-T4 S3 B1 E2 S2 B3 E2+T3-T4 S1 B2 E3-T5+T2 S1 B1 D1
+Howard Kevin,E4-T1 S3 B2 D3 E2+T1 S3 B4 D2 E2+T4-T1 S4 B2 E4+T4 S3 B3 D2
+Schmidt Steven,E7-T1+T5 S1 B2 D3 E3+T5 S3 B3 D3 E3+T4-T5 S1 B4 E1-T3-T3 S3 B1 D1
+Small Lenny,E2 S3 B4 D1
+Cobb Logan,E2 S3 B1
+Shields Dustin,E2+T5 S3 B2 D2 E2 S2 B2 D1 E1+T5 S3 B4 E7-T5 S1 B3
+Reeder Guadalupe,E3-T2 S4 B2 D3 E4 S4 B4 D3 E6+T4 S2 B3 D3 E5+T4+T5 S1 B3
+Grimaud Gerald,E6 S2 B3
+Riser Michael,E4-T1 S1 B5 D1 E1+T3+T5 S2 B4 D3
+Byford Martha,E5+T4 S1 B3
+Rosenblatt Kathleen,E1-T5 S1 B4 E4-T3+T5 S4 B1 E7+T1 S1 B1
+King Helen,E1-T2 S4 B2 E2+T4+T2 S1 B3
+Kattner Marie,E4 S1 B3 D3 E7 S3 B4 D2
+Wheeler Catherine,E3-T3+T5 S2 B3 E2+T1 S1 B4 D2 E1-T4-T1 S1 B2 E3 S2 B3
+Snyder Melissa,E5-T5-T5 S1 B1 D1 E3-T2 S2 B4
+Bearden Marilyn,E5+T4-T3 S1 B3 E1-T4+T3 S1 B3
+Smith Georgia,E3 S3 B3 D1 E4+T5+T3 S2 B3 D2 E2 S1 B5 E2 S4 B4
+Birge Stephanie,E7 S1 B4 D3 E3-T4 S2 B3 D2 E1 S3 B3 E6-T4+T5 S4 B3 D1
+Lundin Shawn,E7 S3 B1 D3 E3+T3 S4 B4 D2 E4+T1-T4 S3 B4
+Symons William,E5+T1 S1 B1 E5+T3 S4 B4 E3-T1-T2 S2 B4 E6 S2 B5 D2
+Fagnani Craig,E4-T2 S3 B3 E4-T5-T4 S2 B1 E7-T3 S3 B5 D1
+Burks Michael,E6+T4 S4 B4 D1 E6+T5 S3 B3 E2-T2 S1 B1 D1 E3+T1-T1 S4 B3 D3
+Phelps Marlene,E7-T1 S1 B5
+Quezada Brian,E6 S3 B4 E7+T5 S1 B4 E6+T2-T4 S1 B4 D2
+Caponera Cecelia,E1-T2-T2 S2 B4 E4-T3+T5 S3 B2 E7 S3 B5 D2 E7 S3 B4
+Srour Taylor,E5-T3 S3 B1 E3+T3+T3 S3 B1 D1 E5+T5+T1 S4 B2 D3 E2+T5 S4 B5 D3
+Morris David,E1-T4-T2 S3 B3 D1
+Hedgepeth Monica,E5+T5+T4 S2 B3 D3 E7-T2 S4 B3 D3
+Hendrickson Scott,E5+T2 S2 B4 E6 S3 B4 E6+T2 S4 B2 E7 S1 B4 D1
+Murray Ella,E7-T3-T4 S1 B5 D1 E1 S4 B5 D2 E6 S2 B1 D3
+Saunders Amber,E4 S4 B4 E4+T4 S2 B4 D1 E6 S1 B1 E5 S3 B1 D1
+Thompson William,E5 S4 B5
+Bryant Terry,E4-T4 S2 B5 D3 E2 S3 B3 E4 S3 B2 D1
+Scordato Karen,E3+T1 S3 B2 D2
+Blakey Lawrence,E4 S2 B3 D1 E6 S1 B3 E5 S1 B4 D3
+Barnes Alan,E3 S3 B2 E7+T4-T1 S3 B4 D1 E6+T3-T2 S4 B4 E5 S3 B4
+Kilker Mike,E2-T4 S2 B2 D2 E5 S3 B1 E2 S4 B3 D2
+Cook Sharon,E4+T3 S4 B2 D1
+Clark Marlo,E5 S4 B2 D2
+Roselli Joyce,E1+T3-T4 S4 B3 D3
+Hall Douglas,E2-T2-T2 S2 B2 D3 E3 S2 B5 E4 S1 B4 D3
+Miller James,E3+T1-T2 S2 B2
+Allen Jean,E1-T5 S2 B2 D1 E2+T1+T3 S2 B5 D1
+Khim Colby,E7-T3 S4 B3 D2 E5 S3 B3 E7+T2-T1 S3 B2
+Angelovich Jesusa,E4+T4+T1 S2 B3 D3
+Sanders Andrew,E6 S2 B1 D3 E7 S1 B3 D1 E4 S4 B5
+Oliver Archie,E2-T1 S2 B1 E6+T3-T3 S1 B3
+Jones William,E6-T3+T2 S3 B4 D1 E4 S3 B5 E7 S3 B1 D3
+Deeter Rebecca,E3+T3-T3 S2 B3
+Kissler Noel,E7-T2 S2 B4 E5 S4 B5 D1 E3-T4+T3 S2 B1 E5 S4 B1
+Lachance Victoria,E4-T1+T3 S1 B5 D2 E3-T1-T2 S1 B2 D2
+Silva David,E2+T4+T2 S4 B3 E5 S3 B4 D1 E4+T3 S1 B2 E2-T2 S4 B2 D1
+Boyd Lionel,E1-T5+T3 S4 B4 E6+T2 S2 B2 D1 E3 S1 B5 E1+T2+T1 S1 B2 D1
+Hass Maxwell,E5 S4 B4 D2 E2 S4 B4 D3
+Urie Maria,E7-T3-T5 S2 B3 D3 E6-T1+T4 S4 B5
+Bell Shaquita,E3 S1 B3 E6+T3 S4 B1 E4+T2-T3 S4 B2 E5-T4 S2 B1 D2
+Mcnabb Dorothy,E5 S3 B3 D3 E3 S2 B4 D3 E2 S4 B3
+Brimmage Antonio,E4 S1 B1 D2 E4 S4 B4 D2
+Katz David,E7+T1 S3 B4 E4 S2 B2
+Terry Joseph,E2 S1 B4 E6-T3-T1 S2 B3 E1-T2+T4 S4 B5 D1
+Schneider Andrea,E2-T1 S4 B5 D3 E4+T5+T1 S3 B5 D1
+Crane Nathan,E1 S2 B3 D3 E2 S2 B4
+Hopper Marilyn,E7 S1 B3
+Kwok Kelly,E2-T3-T2 S3 B2 E7+T3+T2 S2 B4
+Sullivan Zachary,E2 S2 B5 D1 E1+T3+T3 S3 B1 E3+T1-T5 S1 B3 D3
+Anderson Katherine,E3 S1 B4 D2 E2-T2+T3 S2 B4 D1 E6-T3-T5 S3 B2 D3
+Bauer Tim,E3-T4-T4 S1 B2
+Giron Sam,E5-T3 S4 B3 D1 E7-T1 S4 B5
+Gonzales Lisa,E6-T5+T4 S1 B3 E6 S2 B5 E6+T2 S4 B1 D2 E1+T2+T5 S2 B2
+Weller Angel,E3 S2 B2 E4 S1 B3 D1 E2-T4 S2 B2 D3
+Poage Christopher,E1+T2 S1 B4 D3 E4+T2-T3 S2 B3 D1
+Kelly Derek,E3 S2 B3 E2-T5 S4 B4 D2 E6-T4 S1 B5 D3 E1+T4 S2 B2 D2
+Magdaleno Vickey,E3 S2 B3 D2
+Robinson Alice,E4 S2 B2 D3 E4 S2 B3 D2 E5-T4+T1 S3 B4
+Mitchell Donald,E7+T5-T3 S1 B1 D1
+Prosser Carma,E2-T5+T4 S4 B4 D2 E5 S3 B4 E3+T3+T3 S4 B3 E7-T2 S4 B2
+Padilla Crystal,E4-T1 S2 B1 E4 S3 B5 E3+T1+T5 S4 B3
+Hall Alton,E6 S1 B2 D1
+Goldtrap Emmanuel,E7-T5+T5 S1 B2 D2
+Bates Pauline,E5 S1 B1 E6+T2+T4 S2 B3 E1 S4 B2
+Schenck William,E4+T5 S4 B1 D1 E4+T5 S2 B4 D1 E3-T3 S3 B1 D2 E4+T2 S2 B2 D1
+Kimbrough Mary,E2 S4 B3 D3 E4+T4+T5 S3 B1 E5+T2+T3 S3 B2
+Dye Toni,E3-T4+T2 S2 B4 E6-T4 S4 B5
+Rutledge William,E6 S3 B1 E1+T2 S3 B4 D3 E7+T2+T2 S2 B2 D2
+Williams Christopher,E1 S2 B2
+Callison Maxine,E1 S1 B4 E2 S2 B5 E6+T3 S1 B2
+Mcadams Ronald,E4-T3-T2 S4 B2 D3 E3+T5+T3 S3 B4
+Harris Emma,E4 S4 B5 D2
+Shelpman Alecia,E2 S4 B3 E3-T1-T1 S3 B3 D1 E2+T3 S1 B1
+Kuboushek Kenneth,E5 S2 B5 D1 E3 S1 B1 D3 E7+T4-T4 S4 B3 D1
+Melo Richard,E2 S2 B2 D3 E3-T5-T3 S1 B5 E1 S2 B4 E1 S1 B4 D3
+Burris Sarah,E2 S3 B5 D1
+Gonzalez John,E6+T2 S2 B2 E1-T2 S2 B1 D3
+Nelson Jeff,E4 S1 B1 E7 S4 B5 E3+T2-T3 S1 B1 E6 S3 B2 D3
+Woolf Jerome,E1 S1 B1 E4+T2-T5 S2 B5 D2 E4 S3 B4
+Alonzo William,E7 S2 B4 E6 S2 B2
+Arrowood Kerrie,E2+T1 S1 B4 D1 E3-T2 S4 B4 D2
+Bledsoe Audra,E6-T1-T5 S2 B5
+Smith Donald,E2+T3 S1 B1
+Amaral Sophie,E3+T4 S2 B1 E5-T4-T5 S3 B3 E4+T2 S2 B4 D1 E1+T5+T2 S1 B4 D1
+Brock Paul,E2 S2 B1 D3
+Fritz Jason,E6-T4+T5 S3 B1 E6+T1 S2 B3 D3 E3+T3+T3 S2 B4 D1
+Lemieux Bettye,E1+T3 S1 B4 E6 S4 B4 D3 E3-T3 S1 B1
+Romero Brittany,E2-T2 S1 B1 D1 E6-T5-T3 S1 B4 D3
+Stanley Bessie,E1 S2 B5 E4 S3 B2 D1
+Alvarado Gail,E3-T3 S2 B3 D1
+Brady Michael,E3+T3 S1 B5 E3 S4 B2 E7-T3 S1 B5
+Kelly Jose,E7 S4 B5 E3 S1 B3 E1+T3 S2 B3 D2 E1+T1+T3 S1 B3
+Burns Shirley,E7 S4 B2 E3+T2-T2 S3 B1 D2 E1-T5+T5 S2 B5
+Santana Rafael,E4-T1+T5 S3 B4 D3
+Chon Peter,E1+T3+T2 S3 B2 D1 E5+T1-T5 S1 B3 E4-T1 S4 B1 D3
+Tichenor Nathan,E5+T5 S1 B5 E6+T4+T1 S4 B2
+Turner Louis,E4-T3 S1 B5 D3
+Barker Michael,E2+T4+T4 S2 B5 D1
+Bryant Peggy,E6+T2 S1 B1 E1-T1+T5 S3 B2
+Richardson Benny,E3-T3-T5 S4 B3 E2+T1-T1 S2 B5 D2 E6-T1 S4 B5
+Elliott Bret,E3+T3 S1 B1 D3 E3 S2 B4
+Maddox Alex,E2-T3-T1 S2 B5 E4 S3 B4 D2 E4 S4 B2 E3+T1-T4 S4 B2 D2
+Bullock Willie,E6+T2+T4 S3 B5 D1 E6+T3+T4 S4 B1 E1+T4 S4 B4 D2
+Rogers Elsie,E4+T5 S3 B5 D2
+Gravelle Derek,E2 S4 B4
+Langton Henry,E1+T3-T2 S2 B5 D2 E2+T3+T4 S2 B4 E1+T2+T2 S4 B2 D2 E3+T5 S3 B2
+Hallman Edward,E1-T1 S3 B3 D3
+Leggett Karen,E7 S3 B3 E1 S1 B5 E4-T5-T4 S1 B1 D3 E6-T2 S3 B5
+Watkins Douglas,E2-T3+T2 S2 B1
+Bluma Marianne,E5-T4-T5 S2 B3 E4-T4-T4 S4 B2 E4-T4 S3 B1 D3
+Ahart Kelly,E2+T1+T3 S2 B5 D2 E1-T2 S4 B5 D3
+Bressler Scott,E5-T3+T4 S3 B4 D2
+Phillips Dorothy,E6+T3 S4 B5 E2-T3+T2 S3 B1
+Carathers Brendan,E7-T5 S2 B2 D1 E7 S2 B4 E5-T5-T1 S1 B4 E5-T2 S1 B4 D1
+Volz Jason,E4 S1 B5
+Sipp Kevin,E5-T5 S3 B4 D2 E6 S1 B3 D1 E7 S3 B3 D1
+Schrecongost Clarence,E6+T2-T4 S3 B4 D3
+Brett Blake,E7+T1 S4 B2 E3-T1 S3 B3 E3-T2 S1 B2 D1
+Thomas Chuck,E2-T2+T2 S2 B4 D2 E6 S4 B4 E2+T2 S4 B3 E6+T3 S3 B5
+Pritchett Joshua,E4-T5 S4 B3 E2+T1-T5 S3 B1
+Harding Robert,E7+T1+T5 S1 B4 E4 S4 B3 D3 E6-T2 S4 B2 E6+T5 S3 B1 D3
+Mcallen Nicole,E2+T1 S2 B4 D1 E5-T2 S3 B3 E6-T1 S1 B1 E6+T1+T4 S1 B5
+Jones Christopher,E4+T2+T5 S2 B3
+Smith Donna,E2 S2 B2 D2 E6 S2 B2 D2 E6-T5 S3 B1
+Ross Sandra,E3+T5-T4 S4 B1 D2 E2-T5 S3 B3 D3 E2+T1+T5 S1 B2 E7-T1-T1 S4 B2 D1
+Nichols Rick,E5+T3 S1 B1 D1 E7-T5 S2 B1 E6 S1 B3 E7+T2-T3 S3 B1
+Fernandez Crystal,E4+T1 S2 B3 D3 E2-T5-T1 S3 B4 D1
+Hilburn Stephen,E2+T5 S3 B5 E3-T5 S1 B5 D2 E4-T2 S3 B3
+Rhymer Jeffery,E6 S2 B2
+Nunes Shirley,E3-T5 S2 B2 D1 E7 S3 B1 D1 E1 S1 B1 D1 E2 S4 B2
+Cobb Jane,E5 S1 B2 D2
+Cox Kenny,E6-T1+T5 S4 B5 D1
+Epps Judy,E7-T2 S1 B2 E4 S3 B2 D1
+Benett Diana,E7 S1 B1 D2 E1+T2 S4 B3 E5+T5 S2 B3 D3 E2 S2 B3
+Breault Gerard,E5 S3 B3
+Landing Jeremiah,E3+T1+T2 S1 B4 D3 E2+T5-T1 S1 B4 D1 E4 S2 B2
+Smith Susan,E5+T1 S3 B5 D3
+Cox Dorothy,E1-T3+T5 S1 B3 D3 E5-T5 S2 B4 D1 E4 S2 B3 D2
+Bay Virgil,E3-T5 S4 B4 D1 E1+T4 S2 B2 D2 E7-T5+T4 S2 B2 D2
+Thompson Patsy,E7+T2-T4 S3 B1 D2 E3+T1 S4 B3 D1 E1+T4 S1 B2 D2
+Newsome Alicia,E7+T1+T1 S1 B3 E7 S2 B4
+Adler Diana,E3-T4 S3 B1 D2 E3+T1 S1 B4 D3 E6+T4 S1 B5
+Maughan Nicholas,E4-T3 S3 B2 D1
+Mincy Joshua,E7-T1+T3 S2 B1 E1+T1 S1 B4 D3 E1+T1-T2 S1 B5
+Anderson Steven,E4-T1+T4 S2 B3 D1 E5-T1 S3 B1 D1
+Davis Patricia,E6 S2 B1 E3+T3-T1 S3 B2 E1+T2+T2 S4 B2 D2 E2-T2+T1 S1 B5
+Suddreth Manuel,E5+T3-T4 S3 B1 E2-T4-T2 S2 B5 D2
+Mccurdy Arthur,E3+T2+T5 S3 B2 E5 S2 B3 D1
+Obrien Connie,E1+T1 S4 B3 E6 S2 B2 D2 E7-T1 S4 B3
+Coppin Felix,E5+T3+T4 S3 B2 E2+T1 S4 B1 E5 S2 B3 D3
+Shaner Ronald,E3+T3 S1 B4 D2
+Lowery Latonya,E3 S1 B2 E2-T3-T2 S2 B2
+Horner Robert,E6+T1-T3 S3 B4 D1
+Smith Samuel,E3 S1 B2 D3 E2 S1 B4 D2 E2-T3+T2 S4 B4 E4 S3 B2
+Hillis Jerry,E6-T4-T3 S1 B5 D1 E6 S3 B3
+Michael Tameka,E6 S4 B3
+Shelley Arthur,E1-T4 S2 B2
+Shiring Charlie,E6+T3-T3 S3 B2 D1 E5+T3+T1 S2 B4 E4-T2 S1 B5 E2 S2 B4 D2
+Kinney Carlos,E1 S4 B4 D2 E2+T2 S4 B1 D3
+Tinsley Keith,E6-T1 S4 B1 E5+T5 S3 B1 E1+T5 S1 B2 E3 S4 B5 D3
+Adams Derrick,E1+T3 S4 B5 D2 E7 S2 B4 E5 S3 B1 D2 E3+T2+T3 S3 B1
+Quintana Olive,E4+T3+T5 S1 B5 D3 E2+T4 S2 B3 D1
+Naughton Donnie,E4+T4-T2 S3 B2 E5-T2 S3 B5 E4+T4 S4 B4 E6-T5 S4 B5
+Jenkins Frank,E7-T3+T1 S3 B3 D2 E7-T3 S2 B1 D3 E5-T3-T2 S4 B2 D1
+Booker Matthew,E4+T2 S4 B3 E7 S4 B2
+Summers Franklin,E4 S3 B4 E3+T1 S2 B4 D1 E6+T2-T3 S4 B3 E2+T1-T4 S2 B5
+Bulter Kristopher,E2-T1 S4 B1 E6 S4 B3 E2-T4+T1 S1 B4 D1
+Mckinzie Ida,E3-T4+T4 S2 B2 E6+T5+T5 S2 B3 E2+T2-T5 S2 B5 E6+T5+T4 S1 B3 D1
+Hunt Kimberly,E4 S3 B3
+Cross Robert,E6-T4-T2 S3 B2 E7+T4+T1 S2 B3
+Silva Maria,E5-T1+T1 S2 B5 E5+T2 S4 B4 E5 S1 B2
+Barksdale Linda,E4-T4 S1 B5 D2 E2 S3 B4 D1 E2-T2 S4 B2 E6 S1 B2 D3
+Garcia Kenneth,E6+T2+T5 S4 B4 E1+T5-T3 S3 B1 D3
+Christensen Tasha,E6-T5-T4 S1 B5 D1 E6-T1+T3 S4 B1 E7-T2+T1 S1 B4 D2
+Williams Terrence,E5-T4+T2 S4 B4 D1 E6 S4 B2
+Basile Diana,E7+T5 S3 B2 E4+T1-T1 S1 B4 E1+T1-T4 S4 B2 D1 E2 S4 B3 D1
+Jacobson Jorge,E1 S4 B3 D1
+Ferguson Margaret,E6+T3-T1 S1 B3 E1+T5-T5 S3 B4 D1 E4-T4+T2 S2 B1
+Barajas Diane,E2 S2 B1 D3
+Goddard Maria,E1-T3 S3 B1 D1 E2+T1 S1 B1 D2 E3+T1 S1 B3
+Bryant Betty,E4+T2 S2 B5 D1 E5-T5-T4 S2 B2 D3 E4+T5+T4 S3 B3 D3 E6 S4 B5
+Mcconnell Janet,E1+T5-T4 S3 B2 D1
+Littlejohn Jaqueline,E7+T2-T4 S3 B2
+Straub Jacklyn,E4-T5+T2 S2 B5
+Castle Johnny,E7+T2-T5 S2 B5 D1 E4 S3 B2
+Bordner Rodney,E1 S1 B5 D1
+Bermeo Christine,E6+T2+T5 S1 B2 D3 E4+T4 S2 B5 D3 E5 S3 B5
+Perez Bryan,E7-T1 S3 B3 E7-T5 S3 B1 D3
+Mccarthy Timothy,E4 S2 B2 D3 E7+T1 S4 B5 D3
+Jackson Lisa,E4-T4+T5 S3 B3
+Ortiz Brandon,E6 S4 B5 E3 S3 B3 E2 S2 B4 D1 E1-T5 S1 B5 D2
+Stokes Gordon,E6-T1-T2 S2 B1
+Davenport Thomas,E4+T5+T2 S2 B4 D2 E7-T3-T3 S4 B1 D3
+Sterling Steven,E6 S2 B5
+Henson Marguerite,E6 S1 B1 E4+T1-T1 S1 B4 E3 S3 B5
+Johnson Willie,E1+T5 S4 B4 D3 E7-T3+T1 S4 B4 D2 E2+T1-T4 S3 B3 D2
+Hospelhorn Charles,E7+T2-T2 S3 B4
+Stiff Betty,E7+T1 S1 B2
+Woolfolk Louise,E1-T4+T4 S4 B1 D2
+Mercer Rhett,E2-T4+T3 S4 B5 E6 S2 B5 D2
+Diggs Denise,E4+T1 S1 B3 D1
+Harden Jason,E1-T5-T3 S4 B3 D1 E2 S1 B5 E2 S1 B3 D3
+Ibarra Jeremiah,E2-T1 S2 B2 E7+T5-T2 S1 B3 D1
+Hornlein Peter,E7+T4+T5 S3 B2 E4-T2+T3 S2 B3 E5+T4+T5 S3 B4 E1-T4 S2 B4 D3
+Lowe Carolyn,E5-T4 S3 B1 E3 S3 B2 D1 E7-T5-T3 S2 B2 E5-T2 S4 B5 D2
+Schott Christina,E4-T3 S3 B3 D3 E4-T2 S4 B3 E4+T4+T1 S4 B4 E7+T4+T5 S3 B5 D2
+Rivera Michael,E2-T2+T1 S4 B2
+Bell Conrad,E3+T1-T3 S2 B3 D3
+Martz Cleopatra,E7 S2 B2 E6-T1 S1 B3 E6+T5-T4 S1 B4 D1
+Keim Marie,E2+T1 S3 B2 D3 E7 S3 B3 D2
+Flowers Allison,E5 S3 B5 E1 S4 B5 E2 S1 B2 E3 S4 B4
+Harkins Kate,E7 S4 B1 D2
+Batiz Janet,E1-T4+T5 S1 B3 D1
+Brown Bobby,E6-T4+T5 S3 B5 E5+T4 S2 B4 E7+T4 S3 B1 D3 E4 S1 B3
+Babin Ramon,E7+T2 S1 B2 E6 S4 B2 E1-T3+T2 S2 B1 D2
+Posey Rosalie,E4 S4 B4 D1
+Camacho Otis,E3+T3+T1 S3 B1 D2 E6 S1 B3 D3
+Evans Troy,E4+T4-T2 S1 B4 E6-T1 S4 B2 D1
+Anderson Darrin,E2 S1 B2 D3
+Gimbel Gary,E1+T4+T4 S3 B1 E4+T2-T1 S3 B2 E1+T5 S1 B3
+Gardella Wendy,E2+T5-T3 S1 B1 D1
+Kittrell Virginia,E4-T3 S1 B3 E5-T5+T4 S2 B4 D1
+Thompson Michael,E7+T5+T4 S4 B4 D2 E3-T3+T5 S4 B3 D2 E7 S1 B3
+Ryan Sonny,E6 S1 B2 E6 S3 B5 E4+T1 S3 B3 D3 E3 S3 B4
+Keeler Bruce,E4-T3+T3 S1 B3 E1 S4 B5 D2
+Calcote Jeanette,E5+T2+T1 S3 B2 E5+T4 S3 B2 D2
+Craner Ronald,E2 S3 B4
+Elizondo Jo,E4+T4-T3 S3 B3 D3 E2+T5-T5 S4 B5
+Ericksen Eldon,E1 S2 B4 D2
+Amador John,E6-T3-T3 S4 B4 D3 E4 S1 B5 E1 S3 B4 D1
+Nissen Mary,E6-T2 S2 B5
+Oliver Nelson,E3-T2+T5 S3 B5 D1 E6+T1-T4 S2 B3 E4-T1+T3 S3 B2 D2 E6 S2 B2
+Martin Walter,E5 S4 B3 D2 E4 S2 B3 E2-T5 S1 B2 D2 E2+T4+T3 S1 B4 D1
+Huguenin Velma,E6+T4+T1 S4 B4
+Goodman Kelly,E6-T4 S3 B1 E7+T4+T1 S2 B2
+Christensen Robin,E6 S1 B1
+Hoagland Pablo,E5 S4 B2 E1 S3 B4 E3+T1-T4 S4 B5 D2
+Wilson Stuart,E2-T5+T5 S1 B1 E3-T5+T4 S2 B1 E2+T2+T1 S2 B2
+Cookson Peter,E1 S4 B5 E3-T1-T5 S4 B5 E4 S4 B5 D1 E7-T2-T5 S3 B5
+Kelly Adele,E7-T3-T3 S2 B2 D2 E4+T5 S2 B5 D2 E5-T4 S2 B2 D2 E6 S1 B3
+Salas Deborah,E7+T1+T3 S2 B4 D3 E6+T1 S4 B3 D2 E3 S4 B2
+Cary Melvin,E4+T3-T4 S1 B5 E6 S1 B1
+Brown Stacie,E4-T4 S1 B1 D3 E1 S3 B3 D1
+Draper Clara,E6+T1 S3 B1 D3 E5-T4+T4 S1 B2 D2
+Liu Elaine,E1+T1+T3 S4 B5 E3 S4 B1 D2
+Wolfe Reginald,E4+T2 S3 B1 D3 E4-T1 S2 B2 D3 E1 S3 B5
+Weiss Kristen,E2 S2 B4 E4 S4 B1 D3
+Svec Martin,E1-T1-T1 S2 B4 D1 E6-T3 S1 B1 D3 E4-T3 S3 B5 E7+T1 S4 B2
+Gray David,E7-T5-T1 S4 B1 D1
+Dunn Steven,E4+T4 S3 B5 D1 E2 S4 B4 E4+T4-T5 S3 B5 D2 E3-T1+T3 S3 B2
+Steele James,E3+T2 S1 B5 D3 E3 S2 B5 E7-T4-T4 S4 B1 D2 E7 S4 B3
+Mcclelland Craig,E3 S1 B3 E4+T3 S2 B3 D3 E3+T3-T2 S2 B5 D3 E4 S4 B3 D3
+Shay Lisa,E6+T5-T2 S4 B4 D1 E7+T2 S2 B5 E3-T1-T4 S2 B2 D2
+Frausto Connie,E1 S1 B1 E3-T1+T1 S4 B1 D1 E1 S3 B1 D1
+Wilson Daisy,E3 S1 B2 D2 E4+T1 S3 B5 D1 E3+T5 S2 B2 E6 S3 B3 D1
+Wesley Alyssa,E4+T3 S2 B5 D1 E2 S3 B2 D1
+Sanchez James,E5+T4 S4 B4 E2-T3 S4 B4 D3
+Weichbrodt Patricia,E5 S3 B3 D1 E5-T4 S2 B1 D1 E7 S3 B1
+Turner William,E7+T3+T3 S2 B4 D1 E6-T1 S3 B3
+Brown Genoveva,E6+T4 S1 B2 D2 E5 S4 B5 D3 E5 S3 B2
+Turton Darlene,E4-T5 S2 B2
+Fuselier Verna,E3 S2 B4 D3 E6 S3 B1 E7 S3 B2 D3 E6+T4-T5 S2 B2
+Moreno Mark,E4+T3-T3 S4 B5
+Reno Lawrence,E6-T1 S2 B1 D2
+Phonharath Raul,E7+T2-T5 S3 B2
+Zordan Joshua,E3+T1 S2 B1 E4-T2 S1 B1 D2
+Mulloy Nigel,E5+T4-T2 S3 B4 D3 E6+T2 S2 B1
+Stokes Doris,E5+T1 S2 B1
+Williams James,E7 S2 B5 E7-T5+T3 S1 B4 D2
+Nunes Marilyn,E6-T1 S1 B4 D3
+Robinson Lee,E4+T4 S1 B5 D2
+Piper Jennifer,E3 S2 B1 E2-T5 S2 B3 E7 S2 B1 D3 E6-T1 S4 B1 D1
+Shappell Leona,E4 S3 B2 D1 E2+T2 S1 B5 D3
+Thornton Ralph,E6+T1 S4 B4 E5 S2 B4 D2
+Bergmann Larraine,E2-T5 S4 B1 E2 S3 B1
+Smith Kyle,E1+T1 S1 B1 D2
+Terry Melissa,E7-T1-T3 S1 B3 E5-T1 S1 B4 D3 E2+T3 S4 B3 E2+T2 S1 B4
+Neu Clifford,E6 S4 B5 D2 E2 S2 B4 D2 E3-T1+T2 S4 B1 D2
+Wilson Erika,E5+T5 S3 B4 E4 S3 B5
+Webster Michelle,E1-T5+T3 S2 B2 E7+T1 S4 B2 D3 E3+T4+T2 S4 B1
+Henry Betty,E7+T1-T2 S2 B4 E4-T1+T3 S1 B1 E6-T2 S4 B2 E3+T2 S2 B3 D3
+House Jerry,E7-T5-T2 S4 B5 D1
+Brown Chery,E1+T3+T4 S4 B2 D1 E3+T5+T1 S2 B1 E5+T4 S1 B1 D2 E5-T4+T1 S1 B3 D1
+Lacroix Shawna,E2-T1 S3 B5 E2-T1 S1 B3
+Gutierrez Jean,E2 S4 B4 D1 E6+T3 S4 B5 D3 E7+T1-T5 S3 B3
+Schweitzer Brian,E7 S2 B4
+Giles Sabrina,E7-T4 S4 B3 D2 E6-T1-T4 S2 B3 D3 E5 S4 B1 D1
+Perez Fabian,E1-T4+T2 S4 B2 E3 S4 B4 E4-T1-T5 S3 B3 D1
+Carr Kathleen,E5 S1 B1 E2-T2-T2 S3 B3 E7-T3 S3 B4 D3 E3+T3 S2 B3
+Chu Helen,E3+T3 S2 B1 D3 E5-T1 S3 B4 E5-T5-T5 S4 B3 E3+T1-T4 S4 B1 D1
+Ramirez Paul,E3+T4+T1 S1 B5
+Owens Sara,E7+T4 S3 B1 D2 E3 S3 B1 D3 E1 S2 B4
+Caputo Erin,E6-T1 S3 B3 D2 E4 S3 B3 D3
+Moore Joseph,E7-T4-T2 S3 B4 E1 S4 B3 E5-T5 S3 B4 D2
+Morris Fred,E3 S1 B5 E1 S2 B2 D3 E7 S4 B5
+Grace Lisa,E4 S3 B3
+Ayers Joseph,E3+T3+T2 S1 B5 D1 E3 S4 B1 E7+T1-T2 S4 B1
+Crittenden Helen,E7-T2-T4 S2 B5
+James James,E4-T2 S2 B3 E6+T5-T2 S1 B2 D3
+Roberson Ruben,E1 S4 B3 E2+T2 S3 B2 D2 E1 S2 B5
+Hopfensperger Glenn,E4 S4 B5 D1
+Hart John,E7-T2+T4 S2 B2 D2 E5 S4 B3 E3-T3 S4 B1 E4 S4 B1 D1
+Dobbs Maria,E7 S2 B5
+Murphy John,E3 S2 B4 E7-T3 S1 B1 D1 E1-T2 S2 B5 E2+T2 S4 B1 D3
+Hunter James,E7+T4 S1 B3 D1 E4-T1 S3 B2 E5+T2 S1 B2 D2
+Woolery Patricia,E6-T5 S4 B5 E5+T2+T3 S4 B1 D2
+Larsen James,E2 S1 B1 D2 E4 S2 B5 E3-T4-T4 S2 B3 D1 E4 S4 B2
+Watson Duane,E5+T5-T4 S1 B4 E4 S4 B3 D3 E1 S1 B3 E6-T5 S1 B2
+Lalley Richard,E7+T1-T1 S3 B1 D2 E5-T2-T4 S3 B1 D3 E7-T4+T4 S1 B3 D2 E5 S3 B3
+Baltz Juan,E5+T2 S4 B4 E7 S4 B3 D2 E6 S4 B1
+Trela Ruth,E4+T5 S2 B5 D2 E3+T2-T3 S2 B5 E7 S3 B4 D1 E2+T1 S3 B2
+Williams Ruth,E4+T3-T2 S1 B5 D1 E1 S2 B2 D2 E5-T5 S4 B2 E5-T1-T2 S2 B4
+Derry Nancy,E6+T2-T5 S1 B5 D1 E2-T2+T4 S1 B3
+Lindsley Clara,E2+T1 S3 B1 D2
+Walker Kathleen,E4+T4+T3 S4 B2 E1 S3 B1
+Dobkowski Glenn,E3-T4-T2 S3 B4 D1 E5+T3-T4 S3 B3 D3 E2 S4 B4
+Tarvin Christopher,E6 S2 B3 E2 S4 B2
+Gerwig Frances,E7+T3-T3 S1 B3 D1 E3-T5 S1 B4
+Fritz Randall,E2 S2 B2 D2 E7+T5-T3 S2 B3 D1
+Seaberry Richard,E4+T5 S2 B2 D1 E3 S1 B2
+Combs Carmen,E1+T2-T1 S1 B4 E4+T4+T1 S3 B2 D2 E4+T3+T2 S3 B5 D2 E1 S3 B2
+Callis William,E5 S3 B5 D3 E6-T5 S2 B2 E5 S2 B1 E7 S1 B1
+Gifford Maria,E1 S1 B4 D2 E4 S1 B3
+Hughes Helen,E5-T2 S3 B3 D1 E2+T2+T5 S1 B3 D2 E5-T4 S2 B2 D1
+Witten Carmen,E6 S4 B4 D1
+Sutton Robin,E7+T3 S3 B4 D1 E7-T4+T5 S3 B3 D2 E7 S3 B2 D2 E6+T5 S1 B5 D2
+Chancey Eleanor,E7 S3 B3 E6-T3-T5 S3 B5 D2
+Matthews Jane,E5 S4 B5 E6+T2 S3 B1 D3 E2-T2 S2 B5 D1 E1+T4 S1 B5 D1
+Rios Jason,E6-T4+T4 S4 B3 D3 E5 S3 B2
+Goldman Carlos,E3 S2 B5
+Whitener Frances,E3 S2 B2 E7-T3 S2 B4 D2 E4 S4 B4 D2 E6-T3 S2 B5
+Ansari Michael,E4+T5 S4 B5 D3 E1-T3 S3 B2 D2 E5-T3-T3 S3 B3 D2 E3+T2+T1 S4 B4 D3
+Bridges Lyle,E4-T5-T4 S2 B5 E2+T5 S1 B5 D2
+Gullett Grover,E5-T5 S4 B4 D2 E4-T4+T1 S4 B1 E5+T4 S3 B4 D2 E3 S4 B5 D1
+Walter Joe,E7 S1 B3 D1 E4-T5 S3 B5
+Dowlin Leonard,E5 S3 B4 D1
+Mcomber James,E1 S3 B5
+Thompson James,E7+T5 S1 B5 E5-T5 S2 B1 E3 S2 B2 D1 E5 S1 B1 D2
+Ramirez Jessica,E2-T4 S2 B5 D1 E7 S1 B4 E7 S4 B5
+Bratton Jeremy,E7 S2 B3 E5+T4-T5 S3 B4
+Gebauer Betty,E7+T2 S4 B4 E3 S2 B3 D1 E3 S4 B2 D2
+Boyd Daniel,E6+T2-T1 S4 B2
+Rodriguez Kristen,E5 S1 B3 E1-T5 S3 B5 D1 E1+T2+T5 S1 B2 E6 S2 B2
+Spice Stormy,E5 S3 B5 D3 E7+T2 S4 B3
+Quashie Diane,E7+T4 S2 B5 E1+T4+T5 S4 B2
+Clay Kristi,E5-T3-T1 S2 B3 D3 E1+T4 S2 B4 D2 E3-T5 S1 B1
+Campbell David,E7 S2 B2 E3+T1 S1 B5 D2 E6-T2 S1 B2 E5+T5-T5 S1 B3 D2
+Robinson Derrick,E5-T5 S4 B1 D3 E6 S2 B5 D2 E2 S3 B3 D3
+Heffernan Cory,E5 S2 B1 D1
+Sanders Brandon,E2+T2+T5 S2 B3 D3 E5-T3 S1 B2 D1
+Szymansky Sparkle,E3+T4+T2 S1 B1 E6+T1 S2 B5 D2
+Krapp Kim,E2-T3-T2 S3 B4 D2 E4+T1 S3 B2 D2
+Fenwick Ralph,E6-T1-T2 S2 B4 D1
+Perkins David,E4-T3 S4 B1 D1
+Hicks Gwendolyn,E5 S3 B5 D2 E5 S1 B1 D2 E2+T4+T5 S4 B2 D3 E1-T4 S3 B5
+Weber Shawna,E1-T1-T5 S2 B2 E6 S3 B4 E4 S2 B3 E5 S3 B3 D1
+Dodd Johnny,E5 S4 B4
+Love Angela,E5+T3-T3 S4 B2 E4-T1 S2 B4
+Kreisher Norma,E4 S2 B5 E5 S1 B1 E5 S3 B3
+Loyd Arthur,E6 S2 B3 E6 S4 B1 D1
+Sipriano Marcia,E1 S3 B1 E3 S1 B2 E3 S2 B4 D1
+Lopez Mae,E2+T4 S4 B2 D3 E6 S4 B2 D3 E1+T5+T1 S4 B5 E4 S4 B4
+Winegarden James,E7-T2 S4 B5 E3+T2-T4 S4 B5 D3 E4-T2+T2 S4 B4 D1
+Nelson Luciano,E1 S2 B3
+Hunter Wilbert,E7 S1 B4 D3 E1-T3+T5 S4 B4 D3
+Davie Peggy,E2+T3-T1 S2 B5
+Toney Alice,E2-T2-T2 S2 B1 D2
+Carson Kathy,E6-T3 S2 B1 D3 E3-T4 S3 B3 D1 E5-T2 S4 B3
+Felder Clark,E5-T2-T3 S2 B4 D2
+West Sheryl,E5-T1+T2 S1 B1 D2 E3 S3 B2 D1 E1-T4+T1 S1 B5 E7-T3-T5 S2 B4 D3
+Ungar Luis,E4-T3 S3 B4 D2 E2+T3 S2 B1 E6-T2 S4 B2 D1 E4+T3+T4 S1 B4
+Sikes Stephen,E6+T5-T4 S1 B4 D1 E5+T4 S1 B5 D1 E6+T5+T1 S3 B4 E7 S4 B4
+Palacios Cornell,E1-T4 S1 B2 D1 E6 S4 B5
+Stanley Timothy,E1+T3 S3 B3 D1
+Harris Robert,E6-T5 S1 B3 D3 E1+T2-T4 S4 B2 D3
+Lyons Amy,E5+T5+T1 S1 B4 D1
+Baker Beverly,E3 S4 B3 D2 E6-T5 S3 B1 D1 E6+T3 S3 B2
+Moorehead Stephen,E5-T2 S1 B4 E7+T1 S2 B4 D3 E5-T2+T5 S3 B1 E4+T3-T1 S4 B1
+Butcher Lillian,E2 S4 B5 D3 E2 S4 B1 D1
+Williams Lindsay,E4 S3 B3
+Little Myrtle,E6 S3 B5 D1 E6-T5 S4 B3 E5-T4 S4 B2
+Parker Keith,E5 S1 B1 E7 S2 B1 D2
+Knox Kimberly,E5 S3 B5 D2 E6 S2 B5 E5+T5 S2 B4
+Helton Myrtle,E7+T1+T3 S2 B3
+Lake Dave,E5-T5 S4 B1 D1 E7+T3+T2 S2 B3
+Yelton Beatrice,E1+T1+T3 S4 B1 D1
+Dale Donald,E5+T1-T4 S3 B2 E7-T4-T3 S2 B4
+Nichols James,E1-T3-T1 S3 B1 E7+T2 S4 B2 E3 S1 B3
+Holcombe Clark,E5-T3 S1 B2 E3 S1 B4 D3
+Dacruz Ola,E2+T3-T5 S4 B5
+Gonzalez Jeremy,E6+T5 S2 B2 D2
+Dickey Carrie,E1+T2 S2 B5
+Bracy Jack,E1-T4-T2 S1 B1 D1 E5+T1 S1 B4 E5 S3 B2 D3 E5-T5+T1 S4 B3
+Bethel Christina,E3 S2 B4 E6 S3 B1 D3 E6 S2 B5 D2
+Green Sean,E1+T5 S2 B4 D2 E5-T3 S4 B1 E1-T4 S3 B3
+Navarro Harry,E2-T3-T4 S3 B1 E6 S4 B5 E6 S1 B2 E3 S1 B3
+Johnson Jon,E3-T2-T1 S4 B5 E5 S3 B5 D3
+Fulk Michael,E5+T3+T3 S1 B4 D1
+Ussery Lauren,E4+T5 S3 B1 D1 E1 S2 B1
+Olsen Troy,E3-T3+T4 S4 B2 D1 E3+T3+T3 S3 B4
+Hughes Kenneth,E2+T2 S3 B2 D3
+Ide Gail,E6-T3 S3 B5 D2
+Stinnett Gloria,E5+T4 S4 B1 E4 S3 B2
+Reynolds Deanna,E1 S2 B5 D3 E2 S2 B5 E7 S1 B4
+Serenil Todd,E2+T1-T2 S2 B5
+Lillard Shane,E6 S1 B4 D1 E5+T4-T5 S2 B4 D1 E4 S4 B2 D1 E2+T5-T5 S4 B3
+Adam Ana,E5-T5+T5 S3 B5 D3 E3+T1-T1 S2 B4 D3
+Smith Lorriane,E5+T4+T4 S3 B1 E2 S3 B4
+Gosch James,E6 S2 B4 E7-T2 S4 B5
+Henderson Joan,E1+T1+T4 S2 B3 D1 E3-T3 S3 B1 D2
+Kabat Millard,E5 S1 B3
+Wilkes Alvin,E6-T2+T3 S4 B2 D2 E2 S2 B5 E2 S2 B5 D3 E4-T2-T2 S3 B1 D3
+Pena Richard,E1 S4 B3 E2+T4-T4 S3 B3 D2
+Ray Conrad,E7+T5-T3 S3 B3 E5-T3-T2 S2 B1 E2+T4 S3 B5
+Maicus Martin,E5 S4 B3 D2 E7 S1 B4 D3
+Perry Dorothy,E7-T4 S1 B3
+Berry Melissa,E2+T4+T1 S2 B3 E1 S1 B1
+Martin Darren,E6+T4+T1 S4 B3 D2
+Clutter Velma,E3 S3 B4
+Moser John,E1 S2 B2 D3 E2-T1 S3 B5 D2 E1+T5 S1 B1
+Parks Samantha,E7+T1 S4 B1 E4-T5-T5 S1 B3 D3
+Wint John,E6-T4+T5 S3 B2 D2
+Ness Lindsey,E1+T3+T1 S2 B1 E4 S2 B3 D2
+Ashbrook James,E7+T2+T4 S1 B1 D1 E6-T3 S3 B3 D2 E5-T3 S1 B2 D2
+Brewer William,E2 S2 B2 D3 E4 S3 B5
+Donald Allie,E1+T4 S1 B2 E2-T3-T4 S1 B1 D2
+Stewart Linda,E7+T1-T1 S3 B3
+Mattos William,E5-T1-T5 S1 B1 D1 E1-T3+T4 S3 B2
+King Rebecca,E1-T1 S3 B2 E7+T1 S1 B5
+Dobbins Laura,E2-T4+T2 S1 B4
+Burnett Angela,E6 S1 B1 D1 E5+T4+T1 S4 B5
+Zaiser Helen,E7-T4+T5 S3 B1 D2 E1 S4 B3
+Kokoska Linda,E3-T1+T2 S3 B4
+Henry Ross,E2+T1 S1 B3 D2 E2-T5 S1 B5 D2 E7+T4-T3 S3 B1 D2
+Swoager Krystyna,E5 S1 B2 D1 E6-T2 S4 B2 D2 E3-T2+T4 S1 B5
+Crowe Patricia,E5+T1+T5 S2 B1 E7 S4 B5 D2
+Harris Nancy,E7 S4 B5 E5-T2 S3 B3 E4-T3 S1 B4
+Sabala Heather,E4+T3 S1 B4 D2 E1-T3-T3 S2 B2
+Bogart Maggie,E4-T5 S3 B2 E1-T2+T1 S4 B1 D1 E6-T4+T5 S2 B5
+Singleton James,E4-T3 S4 B1 E6+T1+T3 S4 B1 D2 E5+T5 S2 B1 D1
+Wells Scott,E3+T4 S4 B4 E3-T3+T2 S3 B5 E4 S3 B5 D1
+Campbell Richie,E5+T2-T2 S2 B1 D2
+Fish Mark,E1+T3 S2 B1 D1 E7-T2-T4 S1 B4 D1 E2 S3 B1 D2 E3 S3 B4 D3
+Feld Tyrone,E4+T1 S2 B1 D3 E1-T3+T5 S1 B1 E7-T3-T5 S3 B4
+Harton John,E3 S1 B2 E5-T5-T5 S4 B3 D2
+Garland Rosa,E3 S3 B4 D1 E7+T3+T1 S3 B3
+Clay William,E4-T4+T4 S4 B1 E2-T1 S2 B4
+Edson Bonnie,E4 S4 B1 E1+T4-T1 S4 B3 D3 E7 S4 B4 D1 E5+T3 S3 B3 D3
+Yokley Miriam,E6 S1 B3 D3 E2-T4-T5 S2 B1 E6 S4 B2
+Whitley Martina,E3-T3 S3 B5 D3 E2-T5+T1 S4 B3 E6-T5 S2 B3
+Boday Joanne,E1+T5 S3 B4 E1 S1 B4 E2-T3-T4 S2 B5 D2 E5+T3 S1 B1
+Young Audrey,E3-T4+T2 S4 B3 D2
+Macon Stuart,E2+T3 S4 B3 E5-T3 S2 B2
+Denson Daniel,E2-T4-T3 S3 B1 E1 S2 B3 E7-T3 S3 B5
+Cox Jimmy,E6+T2 S4 B1
+Mifflin Christina,E2+T5-T5 S1 B2 D2 E7 S4 B4 D1
+Moyer Maria,E5 S1 B2
+Walthall Sharon,E6-T5+T4 S3 B1
+Anthony Robert,E5+T3-T4 S1 B3 E4 S3 B1 D2 E3+T4+T2 S3 B5 D3 E5+T5-T5 S4 B4 D2
+Brown Amy,E1-T1 S2 B1 D2
+Moreno Harold,E5-T1 S2 B4 D1 E2-T3+T5 S2 B2 D3 E7 S2 B3
+Hellwig Johanne,E3-T1 S2 B2
+Perisho Donna,E7 S4 B4
+Riley Ralph,E1 S3 B3
+Newport Randy,E1+T5-T1 S4 B2 D1 E7-T1 S1 B1 D1 E4-T2+T5 S2 B5
+Miller Patricia,E1 S4 B3 D1 E3+T3 S1 B1
+Brown Robert,E1-T2 S1 B1 D1 E3-T2 S1 B1 D2 E3+T5+T1 S4 B5 E3 S1 B2 D3
+Yankey Sara,E6+T4-T1 S2 B3 D3
+Rhoads Larry,E6-T2+T4 S3 B4 E6+T1-T1 S3 B1
+Avila Beverly,E4-T2+T3 S3 B4 D3 E2 S4 B5
+Bailey Irene,E6-T1-T4 S1 B3 D3 E1-T5 S3 B1 E1+T1+T1 S3 B3 D2
+Garcia Brian,E5-T1+T3 S1 B4 D3 E6+T3 S4 B1 D3 E5+T4 S3 B1 D3
+John Antonio,E5-T5 S4 B5 E1 S3 B4 D1
+Anderson Chi,E7+T4 S4 B2
+Obrien Bryan,E6-T4+T4 S1 B5 D3 E5+T2 S3 B2 E4 S1 B3 E4-T3+T4 S1 B3 D2
+Scott Natalie,E5+T1+T5 S3 B3 E4-T3+T1 S1 B5
+Mcafee Ethel,E5-T3+T1 S3 B1 D3 E2 S2 B2 E5+T1 S3 B5 D2
+Lange Wendy,E6 S1 B3 D3 E5+T3+T4 S3 B5 D3 E6 S3 B5 E7+T5+T4 S2 B2 D3
+Monty Kim,E2 S2 B4 D1 E5+T4-T3 S4 B3 D3 E3-T5+T3 S4 B1
+Porada Aaron,E5 S2 B3 D2 E3-T1 S1 B2 E4 S3 B5 D1 E3 S1 B1
+Larson John,E6+T1 S4 B1 D3 E5 S1 B2 D3 E4-T5-T2 S1 B2 D2
+Sheppard Dawn,E2 S2 B3 D3 E7 S1 B4 D1 E2-T1-T1 S1 B2 D1
+Stewart Joan,E6+T2-T5 S4 B2 E5+T1 S1 B2 D2
+Barnett Paula,E5-T5-T3 S1 B5 E7-T1 S4 B5
+Harris Gloria,E3+T5+T5 S2 B4 E3+T4 S4 B4 D3
+Johnson Jean,E5 S1 B1
+Burnette Jose,E7-T4+T4 S3 B3 E7-T1-T4 S2 B5 D3
+Baker Matthew,E6 S3 B1 D2
+Melton Nigel,E3+T5 S3 B1 E4 S3 B3 D3
+Power Barbara,E4+T2+T1 S2 B5 D1
+Gibbons Eunice,E5+T1 S3 B1 E2+T2-T4 S4 B5 E5-T2-T4 S3 B5 E3 S3 B3
+Yi Gordon,E6 S2 B2
+Richardson Thelma,E5-T4 S1 B1
+Laumbach John,E5-T1 S4 B3 E6 S2 B5 E5 S4 B1 E5+T1-T1 S3 B5 D2
+Johnson Odis,E5+T3 S1 B4 E3+T3+T5 S2 B4 D2 E5 S4 B4 D3
+Clanton Michael,E7 S4 B2 D3 E4 S2 B5 D3 E4-T3 S3 B4 D3 E5-T2+T5 S4 B1 D3
+Craig Louann,E6 S2 B3 E3 S3 B1 D3 E4+T3 S1 B4 D2 E1+T5+T4 S2 B4
+Anderson Edna,E4-T5 S1 B2
+Belcher Albert,E6+T4 S4 B3 E7-T2+T1 S1 B3
+Elias Addie,E1 S2 B4 D1 E6-T4 S4 B2
+Maple Joseph,E6-T5 S4 B4 D2 E3+T1 S4 B2 D1 E4 S1 B2 D2
+Horner Toni,E7 S2 B5 D2 E6 S2 B1 D3
+Mcdonald Shawn,E7+T1 S3 B2 E7 S2 B5 E6+T3-T4 S4 B2 D2
+Stone Allison,E7 S3 B5 E3 S4 B4 D3
+Mcnabb Audrey,E4+T3+T2 S2 B1 D3
+Butts Don,E3 S1 B2 D2 E1 S1 B3 D3
+Barrera Daniel,E1+T1-T4 S1 B5 D2 E3+T1+T5 S3 B1 D1 E6+T5 S3 B4 D1
+Barnes Kelly,E6+T4 S2 B2 E4 S4 B1 D1 E4+T1+T3 S3 B3 D3
+Smith Raymond,E4+T5-T5 S2 B5
+Cummins Cheryl,E5 S1 B4 E7+T3 S4 B1 D1
+Moore Faye,E3+T2 S3 B2
+Bravo Allan,E2+T1 S4 B3 E4+T5 S4 B1 D2
+Sigg Allen,E6+T2-T3 S2 B2 D3 E5+T5+T5 S4 B2 E3 S4 B4 E4+T5-T3 S2 B1
+Connors Belinda,E7-T5-T4 S1 B2 D2
+Friday Victor,E3-T1 S4 B4 E6-T5-T5 S3 B1
+Gahan Edna,E3 S4 B3 E3-T4-T2 S2 B5 D2 E3-T3-T5 S4 B3 D1
+Price Kyle,E1-T5-T4 S1 B5 D2
+Lajoie Willie,E7 S4 B3 D2 E1+T3 S3 B2 D2 E1+T5-T2 S2 B4 D3
+Jacobsen Eunice,E3-T5 S1 B2
+Coletti Brian,E3 S1 B3 E1+T3 S2 B4 E2 S4 B1 E3-T2+T4 S1 B3 D2
+Thomas Frank,E2-T2 S2 B3 E1-T2+T4 S4 B1 D3 E7 S2 B5 D3
+Israels William,E1+T3 S4 B5 D1 E2+T4-T2 S3 B1 E3 S1 B1 D1
+Boyd Christian,E2 S3 B1 D3 E3+T5+T5 S1 B1 D1 E4+T3 S2 B4 D3
+Rodriguez Melinda,E1 S4 B3 E6+T2-T5 S1 B5 D1
+Guerrero Jordan,E4 S2 B5 D3
+Walsh Gregg,E7+T2-T5 S4 B4 D2 E1 S1 B5 E6-T2 S4 B1
+Woodside Nancy,E3+T3+T2 S2 B5 E3+T4 S2 B1 D2 E4-T1 S1 B3
+Fulcher Gina,E3+T2-T1 S4 B1 D3 E2 S3 B1 D2 E4+T3+T2 S2 B1 D1 E2+T2+T1 S2 B1
+Hopkins Heather,E5+T2-T2 S1 B5 E2+T1-T1 S1 B3 D3
+Williams Cassandra,E1-T3-T5 S4 B2
+Dockery John,E2+T1 S1 B2 E6-T1 S1 B2 D1 E6-T1+T3 S1 B1 D3
+Gilreath Rudy,E1-T4 S2 B5 D2 E7+T4 S2 B2
+Smith Cynthia,E4+T2 S1 B3
+Griffith John,E6+T4+T4 S2 B4 E2-T2 S4 B5
+Law Helen,E6 S4 B2 D1 E6 S3 B1 D2 E2-T3+T2 S3 B4 E2-T5+T2 S3 B4 D2
+Mohabir Andrew,E7+T4 S1 B3 D3 E1 S4 B3 D2
+Russo Betty,E3+T2+T3 S1 B3 D1 E1 S3 B3 D2 E4-T3+T1 S1 B1 D3 E2+T4 S3 B1
+Mccrossen Shirley,E3+T4 S1 B2 D2 E1-T3 S3 B4 D3 E2-T3-T2 S4 B3 E5-T3 S1 B2
+Hamm Nancy,E2 S3 B5 E4-T2+T3 S3 B2
+White Clara,E1+T3-T2 S3 B4 D2 E4 S2 B1 D3 E3-T4 S4 B2 D3
+Nelson Dominick,E5+T5 S1 B3 E4+T2+T5 S3 B5 D3 E3 S4 B1 D3
+Blake George,E1-T1+T5 S3 B2 E5 S1 B2
+Palmer Tamara,E3+T1+T5 S4 B5 D2 E5+T3+T3 S2 B1 E2 S1 B4
+Avery Amber,E5-T1 S1 B2 E1+T4-T2 S2 B2 D1 E4+T2 S4 B5 D1 E2+T2-T5 S2 B4
+Strapp Aaron,E6+T1-T4 S3 B2 D3 E1 S1 B5 E1 S1 B1
+Garner Stephen,E7+T3-T3 S1 B2 D3 E7+T1 S2 B5 D1 E5-T5 S3 B2
+Taylor Nina,E7+T5 S4 B1 E4+T1+T1 S3 B1 E5+T2+T2 S2 B2
+Campbell Sherman,E3+T1-T4 S3 B4 D3 E3 S1 B1 D3
+Morris Manuel,E6-T4+T4 S4 B5 D3 E3 S1 B3
+Hagan Leora,E3-T1 S1 B4
+Bartelson Jean,E3 S3 B4 E3 S2 B2
+Essary Benjamin,E3 S3 B3 E3 S4 B2
+Jacoby Kenneth,E3 S1 B4
+Queen Amy,E5+T2+T3 S2 B2 D3 E2+T1 S2 B1 D1 E7-T3 S3 B5 D1
+Bailey Duane,E5+T1 S2 B1
+Lewis Sandra,E6+T1 S4 B3 E5-T4 S4 B5 E4+T1+T2 S4 B4 D2 E5 S4 B5 D2
+Salas Connie,E5+T3-T1 S1 B3 D1 E2+T2-T4 S2 B4 D3 E3+T4 S2 B4 D3
+Koopman Stephanie,E4+T1 S4 B5 E7 S1 B2 E3 S1 B4
+Lesher Kathleen,E7 S1 B1 E6+T1 S3 B5 D3
+Ruhl Stephen,E3 S2 B3 E4 S2 B3 D3 E2+T3 S4 B1
+Tobar Ida,E5 S1 B3 D1 E2+T5 S4 B3 E7-T2+T2 S4 B2 D2 E3+T1-T5 S3 B5 D1
+Rowland Jane,E5+T5 S2 B5 E6-T3 S2 B5 D1 E1+T3 S2 B5 D1
+Dixon Ruby,E2 S3 B2 D2 E5 S4 B4 D2 E4-T1 S1 B3
+Demarco Rosetta,E7 S2 B4
+Washington Amy,E6-T3 S3 B2 D2 E4 S1 B3 E3+T4-T3 S3 B3 D1
+Waldron Melissa,E7+T1 S2 B3 D3 E2+T1 S3 B2 D2 E1+T4-T4 S2 B2 D2
+Williams William,E7+T2 S3 B4
+Conway Constance,E6+T5-T3 S4 B4 D2 E6-T1 S2 B2 E7 S1 B3 E6+T5 S3 B4 D2
+Colley Jewell,E6+T2+T4 S1 B4 E2+T4+T2 S3 B2 D3 E2 S3 B5 D3 E2-T2 S2 B1
+Trott Jackie,E7+T3-T3 S2 B2 E1-T1-T4 S1 B4 E2-T2 S2 B4 D3 E4+T5+T4 S2 B1
+Lomasney Katherine,E2-T1 S4 B4 D2
+Czech Dawn,E1+T3 S2 B2 E4+T4+T3 S1 B1 E5+T3 S3 B4 E5-T4+T3 S2 B1
+Crandall Steven,E4-T4 S4 B4 E2 S1 B1
+Rauth Marjorie,E3+T3-T4 S3 B2 D3 E2 S1 B3 D2 E4 S2 B1 E4 S3 B3 D1
+Kingsbury Stephen,E5+T5 S4 B5 E6-T5-T4 S1 B5 E5-T3 S4 B3 D2
+Trongone Michael,E7+T4 S2 B1 E7 S2 B3 D1 E4-T4+T4 S1 B2
+Mills Jody,E5-T1 S3 B5 E6-T2-T2 S1 B5
+Freeman Amanda,E1 S4 B1 D1 E5 S4 B4 D1
+Vanhorne Jennifer,E6-T2 S1 B5 E4+T3 S4 B2 E6+T3+T5 S2 B5 E1 S1 B5
+Petruzzelli Heather,E4+T3 S1 B5 E2-T5-T2 S1 B2 E2+T3-T1 S2 B3
+Franks Alan,E3+T4 S4 B4 E6-T5-T3 S4 B2 D2
+Tillman Ignacio,E2 S1 B3 D1
+Lambert Pedro,E2-T5 S2 B3 E5+T4 S4 B3 E6-T5+T4 S2 B1
+Scott Roger,E3-T4-T4 S2 B2 D3 E6+T4 S4 B4 E4 S4 B4
+Boyd Larry,E3+T5+T5 S3 B5 E4 S4 B1 D1 E4+T2+T3 S3 B1
+Kirby Sheryl,E2-T1-T3 S3 B5 D1 E7 S4 B2 D1 E1-T5 S1 B3 D3 E4-T5 S4 B2
+Curry Catherine,E5-T1 S2 B1
+Kelsheimer Brittany,E6+T4 S2 B5 D3 E2-T2 S1 B5 D3 E5 S4 B4 E4+T1 S1 B3
+Camire Jason,E7-T4 S2 B1 D2
+Wilson Lawrence,E1-T3+T1 S2 B4
+Tatum Christopher,E4+T5 S1 B3 E2+T4 S1 B1 E5+T1-T5 S4 B2 D2
+Farfaglia Sandra,E2 S2 B2 D1 E7+T5 S3 B3
+Gibson Mike,E5 S4 B2 E1-T3 S1 B4 E2-T2 S4 B5 D2
+Phillips Linda,E2+T5 S4 B3 D2 E1 S3 B2 E5+T1+T2 S2 B1 D3
+Hernandez James,E3+T1 S4 B5 D3 E2-T3 S4 B1 D3 E3+T3 S4 B1
+Chitwood Bryan,E2 S1 B2 E7-T5+T5 S1 B4 D2 E5+T5+T2 S4 B3 D3
+Meade Angel,E1 S4 B5 E5+T1 S1 B1 D3 E7+T1 S3 B3 D3
+Sheldon Judy,E4 S1 B3 E6-T1+T3 S1 B2 E5+T2 S3 B5 E6-T2-T5 S2 B5
+Berry Ronald,E5 S3 B1 E3+T2 S1 B2
+Wilcox Cristopher,E4 S1 B2 D1 E6+T4 S3 B5 D3 E1 S2 B3 D2
+Norrick Mary,E3+T5+T2 S4 B4 D2 E1 S4 B1 D2 E4 S2 B3 D1 E6-T1 S3 B2 D1
+Lopez Edward,E4 S1 B4 D3 E6 S4 B2 D1 E2 S1 B3 D2 E2+T5-T1 S4 B4
+Lewis Kevin,E7+T3 S4 B5 D1
+Baker Frank,E7 S4 B1 E1 S1 B5 E6 S4 B2 D2 E6 S3 B4
+Trimble Samuel,E4 S4 B1 E2+T3+T4 S2 B5
+Ruby Jeffrey,E6-T5 S4 B3
+Schmelz Matthew,E6+T4-T2 S1 B5 D1 E2-T5-T2 S1 B3
+Huey Jeffrey,E1 S4 B5 D3 E2-T4+T1 S4 B4 D3
+Reis Nancy,E4 S4 B5 D1
+Wright Annie,E6 S4 B3 E2-T3 S3 B3 D2 E1-T2-T5 S1 B4 D2
+Hubbard Scott,E4-T4 S2 B5 E4-T1-T2 S1 B3 E1+T4 S1 B3
+Mcclanahan Jeffrey,E4-T1 S4 B2 E5-T1-T3 S3 B5 D3 E6+T2 S1 B4 D1 E5+T5+T4 S2 B5 D3
+Gallagher Robert,E3+T3+T1 S1 B5 E4-T3+T1 S3 B4
+Slater Olive,E1+T1+T3 S1 B4 D1 E4-T3+T4 S3 B3 E6+T3 S2 B1
+Schultz Robert,E7+T3 S2 B5 E7 S4 B1 E7-T1-T2 S1 B4 E2-T3 S2 B3
+Sherrard William,E4-T1 S1 B2 D1 E2-T4+T5 S2 B4 D2 E3 S4 B2
+Wyrick Carolyn,E7+T3-T1 S3 B1
+Bailey Emilio,E1+T2 S3 B4
+Dewing David,E6 S4 B1 E5+T5 S3 B4 D1 E1-T2 S3 B3 D3 E7+T3 S2 B3
+Klingensmith Willie,E1 S2 B5
+Phillips Betty,E2 S2 B5 D2
+Fuller Janet,E1+T1 S4 B1
+Edsall Eric,E2+T5-T5 S2 B3 E7+T2+T4 S3 B4
+Mcmullen Tyrone,E3+T4 S2 B5
+Seymore Conrad,E3 S3 B1 D3 E3-T1+T3 S3 B1 E2 S2 B1 E7 S3 B1
+Hayes Martha,E3-T1 S3 B5 D2
+Moberly Megan,E6 S2 B1 D3 E4+T4+T4 S1 B2 D3 E1+T4-T4 S2 B1
+Johnson Christopher,E7+T4+T5 S2 B4 D3
+Moore John,E4 S3 B4 D1 E5-T5 S2 B3 E5-T3-T3 S4 B4 D3
+Koerner Julie,E2 S2 B5 E5+T5+T5 S3 B1 E1 S3 B5 D3 E1+T4-T5 S4 B1 D3
+Walker Robert,E2+T2-T4 S3 B4 E1-T5 S2 B1 E7 S1 B3
+Ward Travis,E5+T5 S1 B4 D1 E1+T2 S1 B3 E3+T5 S4 B3 D1
+Holt Gerald,E5-T3+T2 S2 B1
+Dozier James,E7+T4 S1 B4 D2 E2 S4 B5
+Matlock Jenna,E6 S3 B3 D2 E2-T1+T4 S3 B4 E7 S4 B2 D3
+Sato Kenneth,E6 S3 B4 D3
+Stern Katie,E6-T1 S2 B1 D2 E2+T5 S4 B2 D3 E7+T2+T5 S2 B4 D2
+Watson Scott,E7+T5 S2 B5
+Ostrom Emanuel,E7 S2 B2
+Sherman Harold,E7 S1 B1 E4 S2 B2 D2
+Lorraine Carl,E3-T1 S2 B5 D1 E3-T4-T2 S2 B2 D3
+Vaca Lucile,E6+T3 S3 B5 E2-T5 S4 B1 D3 E5+T3+T5 S1 B4
+Beaulieu Linda,E4+T3 S1 B1
+Coach Dorene,E6 S1 B5
+Gerth Evelyn,E4-T5 S1 B2 D3 E5-T5+T3 S2 B4
+Tinker Nancy,E7 S4 B4 E4+T4-T1 S3 B3 D3 E6 S4 B4 D3
+Wingate Georgia,E1+T2-T2 S3 B3 E4-T4 S2 B1 D1 E2-T1 S3 B2 D3
+Surber Willis,E5-T5+T2 S3 B4 D2
+Perez Phyllis,E4-T4+T5 S2 B3 D2 E6-T4-T4 S1 B1 E6-T3-T4 S3 B4 E6 S2 B4 D2
+Ganong Robert,E7-T1-T1 S3 B4 D3 E3+T3 S3 B4 D3 E6-T3 S2 B1 D1
+Sarate Eleanor,E1 S3 B2 E1-T2 S2 B4
+Fortunato Edward,E1+T2 S1 B2 E2 S2 B5 D2 E3-T4 S2 B5 D2
+Taylor Gerald,E3+T5+T1 S3 B5 D2 E6-T2+T1 S2 B2
+Jones Kevin,E2 S1 B2 D1
+Dorsey Willie,E3 S1 B2 D2 E6-T1 S3 B4 D3 E1-T2 S1 B5 E4 S3 B3
+Bosworth Eric,E4 S2 B3 D2 E1+T4+T5 S2 B1 E6 S2 B5 D2
+Springer James,E2 S2 B1 E7 S4 B4 D2
+Jeffers Celestina,E2 S3 B1 D2 E7+T1 S3 B2
+Browning Lois,E4 S2 B4 E6-T5+T2 S4 B4 D3
+Ashlock Tina,E5 S3 B5 D2 E7 S2 B3 D1 E4 S2 B1 E7-T2-T5 S4 B1
+Jolley Aaron,E2+T5 S1 B3 E5+T1 S2 B4 D1 E1 S1 B3 E6 S1 B4
+Akins Jane,E5 S3 B1 E6 S4 B2 E4-T5 S1 B1
+Miller Larry,E1 S1 B2
+Buie Joan,E5+T1+T2 S4 B3 D2 E3-T2-T1 S3 B2 E6+T2 S4 B1 D1 E2-T4-T3 S2 B1
+Malcolm Walter,E1+T2-T3 S4 B1
+Bindel Vicki,E5+T2+T2 S1 B2 D3 E6-T4+T5 S1 B4 D1 E7+T2 S4 B4 D3
+Alonzo Zena,E3+T4+T1 S2 B1 D3 E6-T2 S2 B1 D1
+Reyes Theresa,E1 S3 B5
+Andrews Robert,E4 S1 B4 E4-T2+T5 S2 B4 D1 E7+T1+T4 S3 B5
+Price Mamie,E1+T1-T5 S4 B5 D2 E3+T3 S4 B1
+Watlington Elizabeth,E1+T4+T1 S4 B5 D1 E3-T1 S3 B5 D2 E2+T5 S4 B4 D3 E5-T4+T5 S3 B4
+Shu Wayne,E2-T1+T1 S2 B1 E1-T5 S3 B3
+Webb Olga,E6-T3 S2 B5 E3 S4 B4 E7 S4 B4
+Ewald William,E4 S2 B2 D2 E7+T5 S2 B4 D1 E1 S3 B4 D2 E1-T5 S1 B4
+Alexander Deborah,E1 S3 B1 E4-T1-T5 S3 B4
+Burdick Margaret,E5 S1 B3 E7 S2 B3 E6-T5 S2 B1 E6 S1 B4
+Hegyi Mary,E6-T2 S3 B4 D3
+Covington Mary,E3+T4+T3 S1 B4
+Rodriguez Matthew,E5+T1 S1 B5 E5-T4 S4 B4 D3 E6-T1+T4 S4 B4 D2
+Singleton Angela,E1-T2-T1 S3 B3 D1 E2 S4 B5 D2
+Hoskins Peggy,E4-T1 S3 B2 E5-T4-T1 S3 B4 E3+T4 S2 B4 D1 E5+T3 S3 B1 D1
+Kim Marcus,E4-T3 S1 B1 D2 E5+T4-T1 S3 B4 E5+T3 S4 B5 E3+T1 S1 B5
+Fitzgerald Angela,E1+T1 S4 B1
+Tippets Tom,E7-T1-T2 S3 B4 D2
+Magner David,E6 S2 B5 D1 E3+T4 S2 B1 D2 E1 S2 B4 D1
+Glover Gary,E7-T1+T5 S2 B2
+Kimmel Robert,E7-T5-T4 S1 B4 E1 S4 B5 E3 S1 B1 E3 S3 B5
+Delmoro Patricia,E4 S3 B2 D3 E6+T1 S4 B1
+Tryon Heidi,E4+T2 S2 B2 E7 S2 B2 E5 S3 B2 D1 E3 S3 B5 D3
+Brewer Julie,E2 S3 B5 E4+T5+T1 S1 B3 D3 E5-T2+T4 S2 B2
+Berry Louise,E3-T1 S1 B1 D2 E2-T1-T4 S2 B4 D2 E5 S3 B4 E7+T3 S1 B4
+Yates Jeffery,E4 S1 B2 E7 S3 B3 D1 E7-T4 S4 B3 E1-T5-T2 S3 B4 D3
+Pierson Corey,E7 S3 B1 D2 E6-T4 S1 B3
+Boles William,E1+T4 S1 B4
+Teichmann Audrey,E4+T3-T3 S4 B3 E6+T4 S2 B2 D2 E4-T1-T2 S3 B5 D1
+Smith Gladys,E5 S2 B2 D1 E2+T2+T3 S1 B3 D2 E6 S4 B3 D2
+Rogers Rita,E1-T1 S3 B2 E4-T4-T1 S2 B2 D3 E1-T4 S2 B1 E1+T3+T5 S4 B1 D3
+Blake Jonathan,E7+T5-T5 S3 B5 D2 E6-T5 S1 B3
+Alvarez Janet,E5-T3+T2 S3 B3 D2 E4 S2 B3
+Rameau Cody,E4-T4 S3 B5 E4+T1 S1 B3 D2 E7-T3 S2 B4 E1 S2 B5
+Johnson James,E1-T2 S1 B2 E5 S3 B1 E6 S3 B5 D3
+Nieto Charlotte,E7-T2 S4 B5 D1
+Dugue Mason,E5+T5 S1 B4 E5-T2-T2 S2 B3 D1 E5+T4+T5 S3 B4
+Gorman Claudette,E2+T4+T3 S3 B3 E6 S1 B1 E4+T5+T4 S3 B2 D1 E2 S1 B4
+Greenman John,E3 S3 B5 E5+T5 S2 B3 E2+T3-T4 S2 B3
+Price Robbin,E2 S4 B4
+Westberry Kenneth,E3-T5-T3 S4 B1 E4+T5 S4 B2
+Domingo Sandra,E7 S4 B2 E1-T1 S1 B4 D3 E7-T2-T5 S3 B1 D1
+Hobbins Charles,E6 S3 B3 D3
+Burrell Eddie,E6-T4 S4 B3 D1 E5+T4-T3 S4 B4 D1 E4 S4 B1 E1-T5-T3 S2 B1 D2
+Hazen Lynn,E5+T4 S2 B3 D1 E6 S3 B5 D3 E4-T4-T5 S4 B2
+Moore Rebecca,E2 S4 B5 D3 E2-T1+T2 S3 B2
+Daniels Trisha,E6 S3 B1 D3
+Porter Delma,E6 S1 B2 E1+T1 S4 B2 E2 S4 B2 D3
+Sappington Keneth,E5-T4+T5 S3 B5 D2 E5+T3-T4 S2 B4 D2 E3+T2+T1 S1 B1
+Saddler Jose,E2+T2-T1 S4 B4 E6-T2+T2 S3 B3 D3 E6-T5+T5 S1 B4 E7-T1-T2 S4 B5
+Crews Kayleen,E5 S1 B1 D3 E2+T3-T1 S2 B5 D1
+Hilliard Micki,E2+T1 S2 B2 E5-T3-T1 S2 B5
+Thayer James,E5 S4 B5 E5+T2+T5 S4 B1 D2 E4+T4+T1 S3 B5 E5-T1 S3 B3 D3
+Chatman Roxanne,E4 S3 B3 D3 E3+T1-T1 S3 B4 D2
+Shininger John,E1+T2 S4 B1 E1+T1-T5 S4 B2 D2
+Hernandez Leann,E3-T3+T1 S1 B5 E5+T4 S4 B4
+Holliday Jennie,E2+T2+T5 S2 B5 E4+T2 S2 B1 D2 E7+T5+T2 S2 B3 D1 E5-T5-T1 S3 B4 D2
+Gioia Sheila,E7+T4 S3 B3 E3 S3 B2 E6+T1 S1 B5
+Tracy Phyllis,E7 S3 B4 D1 E5-T2-T2 S2 B4 E4 S1 B2 D1
+Waddle Alphonso,E4 S1 B4 D1 E7 S4 B5 E3 S3 B3 D3
+Hansen Gloria,E2+T1-T5 S2 B1 E1-T3-T4 S4 B2
+Allard David,E1 S3 B2 D3 E5-T2 S1 B2 D2 E6 S2 B3 E2+T2 S1 B4
+Hottinger Suzanne,E6+T3 S1 B3 E3-T1+T3 S2 B5 D2 E2-T1-T3 S3 B2 E3-T2 S2 B3
+Hoffman Rodolfo,E2+T3 S3 B5
+Schumpert Natalie,E4-T5 S2 B2 D2
+Allgood Eric,E7+T2 S2 B1 E6-T4 S2 B2
+Steppe Willie,E2+T5 S2 B3 D3 E7+T1 S1 B5 D2
+Kline Timothy,E1+T1-T2 S3 B2 E2+T1-T1 S4 B4 E2-T1 S2 B2 D2 E4-T3+T5 S1 B3 D1
+Lever Anna,E4-T4+T3 S3 B5 D3 E4+T4+T3 S1 B5 E3-T5 S3 B2 D1
+Catalano Darius,E1-T5-T2 S3 B2 D1 E5-T4 S2 B2
+Cox Devorah,E6+T3 S2 B3
+Gregory Jane,E6+T3 S3 B4 E4-T4 S4 B1 E7 S2 B5
+Mcdiarmid Marcus,E2 S4 B3 D2
+Penrod Linnea,E6+T1-T5 S1 B4 E7+T5 S2 B2 E4 S2 B3 E6-T4-T3 S1 B4
+Wilson Martha,E3 S3 B1 E4+T3 S1 B5 D2 E7-T5 S3 B4 E6+T1-T1 S3 B2 D1
+Plotkin Bette,E4+T2 S2 B2
+Garcia Pedro,E4+T2+T5 S4 B2 D1 E5 S2 B3 D1 E7-T3 S2 B2 D1
+Whitty Barbara,E2+T1+T5 S3 B3 E7 S4 B4
+Scott Lois,E7 S2 B5 D3 E5+T3 S3 B3 D1 E5+T3+T4 S1 B4
+Miller Frank,E3+T3+T5 S4 B5 D3 E3+T3 S3 B4 D1
+Patton Bonnie,E7+T3 S3 B3 D1 E5+T2 S1 B3
+Rosenfeld Corine,E2+T5+T4 S4 B4 D3 E4 S3 B1 D2
+Lyons Philip,E5+T1 S4 B1 D3
+Clear Javier,E3-T3 S3 B2 D3 E7 S4 B5
+Colvin Josephine,E3-T3-T1 S4 B1 D1 E1 S3 B5 E5 S1 B3 D1 E6+T5-T3 S4 B1
+Thomas Ronald,E1+T4 S1 B3
+Bridges Karen,E6-T4+T3 S3 B2
+Beckett Lourdes,E4+T2 S2 B2 D2 E2-T3 S4 B1 D2
+Weideman Leonard,E5 S2 B5 D3
+Mendez Mary,E1+T5-T3 S2 B1 D1
+Endicott George,E6-T2 S4 B2 D1 E7+T1-T2 S1 B1 D3 E1 S4 B1 E6-T4-T5 S1 B2 D3
+Johnson Tina,E2 S2 B1 D3
+Walz Norman,E2-T3-T1 S3 B4 E4 S1 B1 E5 S4 B5 D3 E5 S2 B3 D1
+Miller Herbert,E1-T3 S4 B1 D1 E1+T3+T4 S2 B5
+White Tomas,E6+T2+T4 S4 B1 D2 E5-T1 S1 B3
+Carpenter David,E2 S2 B4 D3 E6-T4+T4 S1 B1 E2+T3-T2 S3 B3 D2
+Finney Heather,E6 S3 B1 D2 E2 S4 B1
+Craver Prince,E2+T5+T2 S3 B5 D2 E4 S3 B2 E6 S1 B2 D1 E5 S3 B4
+Winkelpleck Ricardo,E4 S3 B4 D3
+Sterling William,E3+T4-T2 S3 B3 D1 E6 S1 B4 D2 E4+T4+T5 S2 B3 D1
+Coleman James,E1 S2 B1 D1 E1+T3 S3 B3 E3-T4 S1 B3 E7 S2 B2 D3
+Headley Kris,E2 S2 B5
+Moreno Angela,E3-T2 S4 B5
+Draper Julie,E1-T1 S4 B1 D2 E6-T4+T4 S1 B2 E2-T5-T3 S1 B3 D3 E1 S1 B3 D3
+Wimberly Kenneth,E4+T5+T2 S1 B5 E3+T1 S3 B1 D2
+Michael Claudia,E3-T4 S3 B4 E2 S2 B3 D1 E1+T1+T1 S3 B1 D2
+Glazer Donald,E6 S3 B5 D2
+Robertson Leanne,E4-T1 S4 B1 E4+T1 S1 B3 E1 S3 B3 D1 E3+T2-T5 S3 B2
+Mallin Sarah,E1-T3 S1 B4
+Salazar Edwin,E5 S1 B2 D1 E7+T3+T5 S4 B4 D1 E4+T1-T4 S4 B5 E6-T5 S4 B4 D1
+Barnett James,E2-T4+T3 S3 B5 D3
+Seveney Cindy,E4 S1 B3
+Lingenfelter Bridgett,E4 S4 B1 E7 S3 B2
+Wilson Doris,E3-T5 S3 B2 E3+T4-T5 S2 B2
+Lawson Alfred,E2 S3 B3 D3 E5+T1-T4 S4 B5 E4 S4 B1 E7 S4 B3
+Livingston Louis,E2-T5 S2 B1 D3 E1+T3+T3 S2 B3 D2 E4 S1 B5 D2
+Devine Ashley,E4 S2 B3 E1-T4 S4 B1
+Jones Jessica,E2-T3-T3 S1 B3 D3 E6+T1 S2 B5 D3 E2-T1 S4 B4
+Markee Richard,E1 S4 B1 E2 S2 B5 D3 E5 S2 B1 D2 E5+T5 S4 B5
+Blind Kenneth,E6-T2 S1 B1 E7 S3 B3 D1
+Golka Mark,E4+T5-T4 S2 B4 D1 E7-T3+T1 S3 B1 D3 E1 S4 B4
+Evins Susan,E1 S3 B3 D1 E7+T2 S2 B4 E5+T5 S2 B3 E4+T3 S3 B2 D1
+Shah Elsie,E1 S3 B1 E1-T4 S1 B2 D2
+Keefe Joann,E5-T3-T4 S2 B2 D2
+Piles David,E4+T2 S1 B5 D1 E2-T3+T4 S2 B3 D2
+Hill Greg,E4+T3 S1 B4 E7 S4 B2 D2 E2 S4 B4
+Mayers Walter,E1+T3 S4 B3 D2 E2+T4-T1 S3 B5 D1 E1-T3 S2 B3 E6 S3 B3 D1
+Harris Bertha,E2+T2 S3 B4 E4-T3-T5 S1 B1 E2 S3 B4 D2 E3 S1 B3
+Bender Brandon,E7-T3 S4 B1 D1 E6-T5 S4 B3 D2 E7+T2 S2 B1 D1
+Blake Luz,E7 S2 B4 D3 E3+T2 S2 B2 D1 E6+T2+T4 S3 B5
+Rison Michael,E4+T1 S4 B4 D1 E6+T1-T5 S2 B1 D2
+Bell Jennie,E5-T4+T5 S4 B1
+Knudtson Mary,E6+T1-T2 S2 B3 D3
+Ohmen Cheri,E2-T1-T4 S3 B3 D2
+Stoney Blanca,E4-T3-T1 S4 B5
+Vargas Kimberly,E1+T5 S1 B3 E7 S3 B1
+Tweedie Dianne,E7+T4 S2 B3
+Egbert Kenneth,E1-T4-T5 S4 B2 E3+T5 S3 B2 D3 E7+T3-T1 S4 B2
+Sutton Harold,E6 S3 B5 E5+T3+T1 S4 B5 D2 E4+T4+T5 S4 B2 D1 E6 S1 B3 D2
+Brown Janet,E1-T1 S2 B1 D2 E6 S3 B1 D3 E7+T4-T2 S3 B5 E5 S4 B3 D3
+Kelly John,E5 S1 B2 D2
+Smith Naomi,E2-T2-T5 S4 B2 E6+T3-T4 S4 B4 E4 S1 B1
+Lopez Gladys,E5-T2 S2 B1 D2
+Hall James,E6 S1 B2 D1 E2-T1 S2 B2 D3 E2+T1-T1 S2 B2 E2-T5+T3 S4 B1
+Shook Joel,E7-T4+T4 S1 B1 E3-T2 S2 B2 E5+T3 S4 B2 D2
+Barnes Eric,E2 S1 B4 E1 S2 B3 E5-T2 S4 B5
+Morales Beatrice,E2+T3+T2 S3 B1 E1 S2 B2 E3 S2 B5 D2 E7+T2 S3 B3 D1
+Hollis Robert,E3+T4 S1 B5
+Kozlowski Irene,E2 S4 B1 E2 S4 B3 D3
+Puente Mike,E5-T3 S2 B2
+Atkin Beverly,E7 S1 B1 D3 E7-T5+T1 S3 B4 D3
+Reynolds Bruna,E5+T4 S1 B4 D2 E2-T5-T4 S4 B5 E4-T3 S1 B2 D2 E1+T4 S1 B2
+Peral Jennifer,E3 S4 B5 E1-T3 S2 B4 E3+T5-T3 S1 B5
+Desmond Mamie,E5-T3 S1 B3 E2 S2 B1 D1 E4+T1-T2 S4 B4 D3 E6-T2-T5 S3 B3
+Pommer Nannie,E7+T1-T3 S4 B3 D2 E3+T4 S4 B1 E4 S4 B2 E1 S4 B2
+Reynolds Edward,E2+T1-T5 S2 B4 D2
+Atkinson Charles,E4-T2 S4 B3 D2 E7+T4-T1 S3 B2 D2 E5+T1 S2 B5 D1
+Jones Raul,E5 S3 B2 D2 E7-T1 S4 B5 E4-T4-T2 S4 B4 D2
+Robinson Patricia,E1+T5+T4 S4 B4 D1
+Turcotte Kenneth,E6 S3 B4 E7+T1 S2 B3 E3 S3 B4
+Robinson William,E6 S3 B1 D1 E5+T3 S2 B1 D2 E3-T1+T2 S4 B3 D1 E2+T1 S3 B1 D1
+Bercier Lynnette,E1-T3-T5 S3 B5 D2 E1+T5 S3 B5 E2 S2 B4 D3
+Hawkins Jose,E3-T3 S2 B1 D1 E6-T1-T4 S1 B3 E6 S1 B2 E3+T5-T5 S3 B5
+Cowley Deanna,E2+T2-T3 S1 B2 D3
+Rios Larry,E3 S4 B4 E3-T1 S3 B3
+Charles Andrew,E1 S3 B1 D2 E5+T2-T2 S1 B5 D3
+Mills Gregory,E5 S4 B1 D1 E5+T4-T4 S2 B4 E4-T2-T4 S1 B2 E6-T2-T2 S4 B1 D1
+Searby Eric,E6+T1 S3 B2 D3
+Freeman Todd,E6-T3+T2 S1 B2 D3 E3-T3 S2 B4 D3
+Howard David,E2 S3 B5 D2
+Dudley Timothy,E7-T3 S1 B2 D1
+Feldmann Christina,E1 S2 B5 D2 E2+T3+T3 S1 B3 E7+T3 S2 B5 E6+T5-T3 S2 B1 D2
+Hudgins William,E1+T4 S4 B3 D3 E3+T5+T3 S2 B1 E6 S3 B3 E4-T3-T3 S2 B5
+Hassan Harold,E1-T1 S1 B4 E1 S4 B4 E5-T3 S1 B4 D2 E1-T2 S1 B2 D1
+Rogers Melanie,E2-T5 S1 B5 D2 E2 S2 B2
+Duane David,E6 S3 B3 D1 E2+T5-T3 S2 B4 D3 E2-T2-T1 S2 B5 D2
+Soren Claudia,E3-T5 S4 B5 D3 E7+T2-T1 S4 B2 E5 S3 B4 E2-T1+T4 S2 B3 D1
+Walson Nathan,E4-T1 S2 B2 D2 E7+T2 S4 B2
+Rice Patricia,E4-T5-T4 S1 B5 E4+T5-T3 S1 B4 D3 E7 S2 B3
+Doty Jorge,E1 S1 B2 D1 E5+T5+T5 S2 B4 D3
+Brown Richard,E6 S4 B5 D1 E5+T3 S2 B4 D2
+Anderson John,E2 S2 B4 D1
+Haynes Roger,E6+T1 S4 B2 D3 E5-T3+T4 S2 B4 D3 E2-T5-T2 S1 B5
+Salazar Trina,E2-T5 S3 B1 D2 E3-T1-T1 S1 B3 D1
+Haynes Grace,E7 S2 B3 E5+T2 S2 B5 E1+T3 S1 B2 E4-T3 S2 B3
+Fielding Christina,E1+T1-T1 S3 B3 D3 E1+T2-T1 S3 B4 D3 E1+T4-T1 S3 B5 D3
+Jordan Ruben,E5-T2-T5 S3 B4 D3
+Sell James,E1-T5 S1 B4
+William Gertrude,E2-T3 S1 B2 E7 S2 B2 D3 E5+T1-T4 S1 B5 E7 S2 B1
+Washington Mark,E7+T4 S2 B1 D2 E3 S1 B1 E5-T5 S3 B3 D2
+Iacobelli Lisa,E7 S2 B3 E1+T1+T5 S1 B1
+Moncrief James,E1-T5 S3 B4
+Perona Tina,E3+T3-T5 S3 B2 D1 E7+T1-T4 S1 B1 D2
+Alli Sandra,E3+T5-T1 S2 B2 D2 E5+T3 S1 B3
+Davenport Amber,E3 S4 B2 E3-T2 S2 B4 D3 E3+T1+T2 S2 B4
+Baranoski Robert,E7+T4 S4 B3
+Granata Linda,E7-T4-T5 S4 B2 E7-T3 S4 B1 E7-T4+T5 S3 B1
+Miles Brian,E1-T4 S2 B2 D2
+Twehous Edwardo,E6-T3 S3 B5
+Johnson Rochelle,E6+T5+T3 S1 B5
+Johnson Xuan,E4 S1 B1 D3
+Johnson David,E3 S3 B2 D3 E5+T2-T3 S2 B1 E6-T3+T2 S3 B3 D2 E2 S3 B3 D1
+Harting Kathryn,E6-T2 S2 B1 D1 E7 S1 B3
+Tyler Janice,E5+T1+T5 S2 B3 D1 E7-T2 S3 B3 D2 E4-T3 S3 B4
+Allums April,E7-T1-T1 S3 B2
+Ross Stacie,E2+T1-T1 S4 B5 D2
+Goodermote Aaron,E1 S3 B2 D3
+Williams Darnell,E4-T2+T4 S4 B2 E3 S2 B1 E7-T4-T2 S1 B5 D3 E3+T2 S3 B1
+Huddleston Kevin,E4 S2 B3 D1
+Pugh Josephine,E7 S1 B5
+Thompson Carol,E2-T1 S2 B1 E3 S4 B1
+Cundiff Rita,E4 S4 B1 D3 E2 S2 B3
+Richards Brittany,E2-T2+T5 S1 B3
+Sparks Jesse,E6-T2+T3 S1 B3 E2-T5 S2 B4
+Bryan Billie,E7-T2+T1 S1 B3 E2 S1 B1 D1 E7+T2 S1 B3
+French Elizabeth,E1-T2 S1 B2 E6-T4-T4 S2 B2 E4 S3 B1 E5+T1-T5 S2 B4
+Harbach Lindsay,E1+T2+T3 S4 B1 D2
+Benjamin Kristin,E3-T2 S4 B5 E4 S3 B5 E1-T4+T3 S4 B4 E2-T3+T5 S4 B4 D1
+Martin Shawn,E3-T4 S1 B4 E6 S2 B4 D2 E3-T3 S4 B2 D3 E7+T5 S4 B1
+Seeds Melina,E4+T5 S1 B2 E5 S4 B5 E1+T4 S1 B5 D1
+Garcia Esther,E4 S4 B1 D1 E1-T2 S4 B5 E6 S2 B4 E1+T2+T3 S3 B5
+Quincel Christopher,E3+T5+T4 S3 B3 E4-T2 S1 B5 E3 S4 B5 D2
+Menard Mark,E3-T2 S2 B4 E3+T2 S2 B5 D2 E7 S3 B3 E2+T5-T3 S1 B1 D3
