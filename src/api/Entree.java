@@ -39,7 +39,7 @@ public class Entree extends Item {
         this.toppings = toppings;
     }
 
-    static ArrayList<Entree> getAllItems() throws SQLException {
+    public static ArrayList<Entree> getAllItems() throws SQLException {
         ArrayList<Entree> items = new ArrayList<>();
         ArrayList<HashMap<String, String>> itemsDict = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Entree.tableName, null));
         for (HashMap h : itemsDict) {

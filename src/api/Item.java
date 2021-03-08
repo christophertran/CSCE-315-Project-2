@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-class Item {
+public class Item {
     static final String id_column = "id";
     static final String name_column = "name";
     static final String price_column = "price";
@@ -14,6 +14,22 @@ class Item {
     String name;
     float price;
     int calories;
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public int getCalories() {
+        return calories;
+    }
 
     Item(int id, String name, float price, int calories) {
         this.id = id;

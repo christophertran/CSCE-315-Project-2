@@ -11,7 +11,7 @@ public class Beverage extends Item{
         super(id, name, price, calories);
     }
 
-    static ArrayList<Beverage> getAllItems() throws SQLException {
+    public static ArrayList<Beverage> getAllItems() throws SQLException {
         ArrayList<Beverage> items = new ArrayList<>();
         ArrayList<HashMap<String, String>> itemsDict = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Beverage.tableName, null));
         for (HashMap h : itemsDict) {

@@ -6,11 +6,22 @@ import java.io.*;
 import java.util.*;
 import java.sql.*;
 
-class QueryBuilder {
+public class QueryBuilder {
     static Connection conn = null;
 
-    static void openDBConnection() throws SQLException {
+    public static void openDBConnection() throws SQLException {
         getDBConnection();
+    }
+
+    public static void closeDBConnection() throws SQLException {
+        if (QueryBuilder.conn != null) {
+            try {
+                QueryBuilder.conn.close();
+                System.out.println("Connection Closed.");
+            } catch (Exception e) {
+                System.out.println("Connection NOT Closed.");
+            }
+        }
     }
 
     static Connection getDBConnection() throws SQLException {
@@ -31,21 +42,10 @@ class QueryBuilder {
         return QueryBuilder.conn;
     }
 
-    static void closeDBConnection() throws SQLException {
-        if (QueryBuilder.conn != null) {
-            try {
-                QueryBuilder.conn.close();
-                System.out.println("Connection Closed.");
-            } catch (Exception e) {
-                System.out.println("Connection NOT Closed.");
-            }
-        }
-    }
-
     static ArrayList<HashMap<String, String>> executeQuery(String sqlStatement) throws SQLException {
         ResultSet result = null;
 
-//        System.out.println(sqlStatement);
+        System.out.println(sqlStatement);
 
         try {
             //create a statement object
@@ -75,7 +75,7 @@ class QueryBuilder {
     static Integer executeUpdate(String sqlStatement) {
         Integer result = null;
 
-//        System.out.println(sqlStatement);
+        System.out.println(sqlStatement);
 
         try {
             //create a statement object
@@ -144,56 +144,56 @@ class QueryBuilder {
         return stringBuilder.toString();
     }
 
-    public static void main(String[] args) throws SQLException, FileNotFoundException {
-        QueryBuilder.openDBConnection();
-
-//        ArrayList<String> cols = new ArrayList<>();
-//        HashMap<String, String> constraints = new HashMap<>();
-//        constraints.put("id", "5");
-//        constraints.put("name", "Joe");
-//        cols.add("name");
-//        System.out.println(buildSelectionQuery(cols, "beverages", constraints));
-
-//        ArrayList<HashMap<String, String>> result = executeQuery("SELECT * FROM entrees");
-//        ArrayList<Item> items = Item.getAllItems("meals");
-
-//        Customer temp = Customer.getCustomerByName("Mays Billy");
-//        ArrayList<Item> items = new ArrayList<>();
-//        Topping topping = new Topping(5, "Fruit", 10, 200);
-//        items.add(topping);
-//        Order order = new Order(items, temp, null, false);
-
-//        Code to insert csv file data into database.
-//        Scanner sc = new Scanner(new File("db/tableData/newOrders.csv"));
+//    public static void main(String[] args) throws SQLException, FileNotFoundException {
+//        QueryBuilder.openDBConnection();
 //
-//        Integer count = 0;
-//        while (sc.hasNextLine()) {
-//            String row = sc.nextLine();
+////        ArrayList<String> cols = new ArrayList<>();
+////        HashMap<String, String> constraints = new HashMap<>();
+////        constraints.put("id", "5");
+////        constraints.put("name", "Joe");
+////        cols.add("name");
+////        System.out.println(buildSelectionQuery(cols, "beverages", constraints));
 //
-//            if (count > 0) {
-//                Scanner rowScanner = new Scanner(row);
-//                rowScanner.useDelimiter(",");
+////        ArrayList<HashMap<String, String>> result = executeQuery("SELECT * FROM entrees");
+////        ArrayList<Item> items = Item.getAllItems("meals");
 //
-//                ArrayList<String> values = new ArrayList<>();
-//                while (rowScanner.hasNext()) {
-//                    values.add(rowScanner.next());
-//                }
+////        Customer temp = Customer.getCustomerByName("Mays Billy");
+////        ArrayList<Item> items = new ArrayList<>();
+////        Topping topping = new Topping(5, "Fruit", 10, 200);
+////        items.add(topping);
+////        Order order = new Order(items, temp, null, false);
 //
-//                Order temp = new Order(values.get(1), Customer.getCustomerByName(values.get(0).toUpperCase()), null, true);
-//            }
+////        Code to insert csv file data into database.
+////        Scanner sc = new Scanner(new File("db/tableData/newOrders.csv"));
+////
+////        Integer count = 0;
+////        while (sc.hasNextLine()) {
+////            String row = sc.nextLine();
+////
+////            if (count > 0) {
+////                Scanner rowScanner = new Scanner(row);
+////                rowScanner.useDelimiter(",");
+////
+////                ArrayList<String> values = new ArrayList<>();
+////                while (rowScanner.hasNext()) {
+////                    values.add(rowScanner.next());
+////                }
+////
+////                Order temp = new Order(values.get(1), Customer.getCustomerByName(values.get(0).toUpperCase()), null, true);
+////            }
+////
+////            count++;
+////        }
+////
+////        sc.close();
 //
-//            count++;
-//        }
+//        ArrayList<Beverage> allBeverages = Beverage.getAllItems();
+//        ArrayList<Dessert> allDesserts = Dessert.getAllItems();
+//        ArrayList<Entree> allEntrees = Entree.getAllItems();
+//        ArrayList<Meal> allMeals = Meal.getAllItems();
+//        ArrayList<Side> allSides = Side.getAllItems();
+//        ArrayList<Topping> allToppings = Topping.getAllItems();
 //
-//        sc.close();
-
-        ArrayList<Beverage> allBeverages = Beverage.getAllItems();
-        ArrayList<Dessert> allDesserts = Dessert.getAllItems();
-        ArrayList<Entree> allEntrees = Entree.getAllItems();
-        ArrayList<Meal> allMeals = Meal.getAllItems();
-        ArrayList<Side> allSides = Side.getAllItems();
-        ArrayList<Topping> allToppings = Topping.getAllItems();
-
-        QueryBuilder.closeDBConnection();
-    }
+//        QueryBuilder.closeDBConnection();
+//    }
 }

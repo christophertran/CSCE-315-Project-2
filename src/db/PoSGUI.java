@@ -3,7 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import api.*;
+
+import javax.management.Query;
 import javax.swing.JOptionPane;
+import java.sql.Array;
+import java.sql.SQLException;
 import java.util.*;
 /**
  *
@@ -558,7 +563,11 @@ public class PoSGUI extends javax.swing.JFrame {
         checkoutButton.setText("Proceed to Checkout >>");
         checkoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkoutButtonActionPerformed(evt);
+                try {
+                    checkoutButtonActionPerformed(evt);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
         });
 
@@ -1186,9 +1195,60 @@ public class PoSGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_meal5ActionPerformed
 
-    private void checkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutButtonActionPerformed
+    private void checkoutButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_checkoutButtonActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Order in process!");
+
+        String customerName = enterName.getText();
+
+        if (!customerName.equals("Enter Customer Name")) {
+            JOptionPane.showMessageDialog(this, "Order in process!");
+
+            ArrayList<Item> orderContents = new ArrayList<>();
+
+            for (String items : currentItems) {
+                if (items.contains("Meal")) {
+                    String mealName = String.valueOf(items.charAt(0)) + items.charAt(4);
+                    for (Meal m : allMeals) {
+                        if (m.getName().equals(mealName)) {
+                            orderContents.add(m);
+                        }
+                    }
+                }
+                else if(items.contains("Entree")) {
+                    String entreeName = String.valueOf(items.charAt(0)) + items.charAt(6);
+                    for (Entree e : allEntrees) {
+                        if (e.getName().equals(entreeName)) {
+                            orderContents.add(e);
+                        }
+                    }
+                }
+                else if(items.contains("Side")) {
+                    String sideName = String.valueOf(items.charAt(0)) + items.charAt(4);
+                    for (Side s : allSides) {
+                        if (s.getName().equals(sideName)) {
+                            orderContents.add(s);
+                        }
+                    }
+
+                }
+                else if(items.contains("Beverage")) {
+                    String beverageName = String.valueOf(items.charAt(0)) + items.charAt(8);
+                    for (Beverage b : allBeverages) {
+                        if (b.getName().equals(beverageName)) {
+                            orderContents.add(b);
+                        }
+                    }
+                }
+            }
+
+            Order temp = new Order(orderContents, Customer.getCustomerByName(customerName), null, false);
+
+            enterName.setText("Enter Customer Name");
+            currentItems.clear();
+            update();
+        } else {
+            JOptionPane.showMessageDialog(this, "Please enter a customer name!");
+        }
     }//GEN-LAST:event_checkoutButtonActionPerformed
 
     private void entreesButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entreesButtonMouseClicked
@@ -1910,12 +1970,17 @@ public class PoSGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_employeeButtonMouseClicked
 
-    
+    public static ArrayList<Beverage> allBeverages = null;
+    public static ArrayList<Dessert> allDesserts = null;
+    public static ArrayList<Entree> allEntrees = null;
+    public static ArrayList<Meal> allMeals = null;
+    public static ArrayList<Side> allSides = null;
+    public static ArrayList<Topping> allToppings = null;
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws SQLException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1938,6 +2003,15 @@ public class PoSGUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(PoSGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+
+        QueryBuilder.openDBConnection();
+
+        allBeverages = Beverage.getAllItems();
+        allDesserts = Dessert.getAllItems();
+        allEntrees = Entree.getAllItems();
+        allMeals = Meal.getAllItems();
+        allSides = Side.getAllItems();
+        allToppings = Topping.getAllItems();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

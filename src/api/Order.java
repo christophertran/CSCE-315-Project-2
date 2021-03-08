@@ -37,13 +37,9 @@ public class Order {
         HashMap<String, String> values = new HashMap<>();
         if (this.customer != null) {
             values.put(Order.customer_id_column, this.customer.id.toString());
-        } else {
-            values.put(Order.customer_id_column, null);
         }
         if (this.employee != null) {
             values.put(Order.employee_id_column, this.employee.id.toString());
-        } else {
-            values.put(Order.employee_id_column, null);
         }
         values.put(Order.date_column, this.date);
         values.put(Order.time_column, this.time);
@@ -104,9 +100,10 @@ public class Order {
     static String makeItemListString(ArrayList<Item> items) {
         StringBuilder stringBuilder = new StringBuilder();
         for (Item item : items) {
-            String typeCode = item.getClass().getName().substring(0, 1);
-            stringBuilder.append(typeCode).append(item.id).append(" ");
+            stringBuilder.append(item.getName() + " ");
         }
+        stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
+
         return stringBuilder.toString();
     }
 }

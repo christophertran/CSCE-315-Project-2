@@ -74,7 +74,7 @@ public class Meal extends Item{
         this.contents = contents;
     }
 
-    static ArrayList<Meal> getAllItems() throws SQLException {
+    public static ArrayList<Meal> getAllItems() throws SQLException {
         ArrayList<Meal> items = new ArrayList<>();
         ArrayList<HashMap<String, String>> itemsDict = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Meal.tableName, null));
         for (HashMap h : itemsDict) {

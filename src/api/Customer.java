@@ -4,6 +4,7 @@ import javax.management.Query;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class Customer {
     static final String tableName = "customers";
@@ -28,7 +29,7 @@ public class Customer {
         Customer ret = null;
 
         HashMap<String, String> constraints = new HashMap<>();
-        constraints.put(Customer.name_column, customerName);
+        constraints.put(Customer.name_column, customerName.toUpperCase());
         ArrayList<HashMap<String, String>> customerResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Customer.tableName, constraints));
 
         if (customerResult == null || customerResult.size() == 0)
@@ -36,7 +37,7 @@ public class Customer {
             // The customer does NOT exist in the database yet, we need to add them.
             HashMap<String, String> values = new HashMap<>();
 
-            values.put(Customer.name_column, customerName);
+            values.put(Customer.name_column, customerName.toUpperCase());
             String query = QueryBuilder.buildInsertionQuery(Customer.tableName, values);
             Integer updateResult = QueryBuilder.executeUpdate(query);
 
