@@ -1,3 +1,4 @@
+package db;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -1173,87 +1174,60 @@ public class PoSGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void meal2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meal2ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_meal2ActionPerformed
 
     private void meal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meal3ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_meal3ActionPerformed
 
     private void meal4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meal4ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_meal4ActionPerformed
 
     private void meal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meal1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_meal1ActionPerformed
 
     private void mealsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mealsButtonActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_mealsButtonActionPerformed
 
     private void meal5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meal5ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_meal5ActionPerformed
 
     private void checkoutButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_checkoutButtonActionPerformed
-        // TODO add your handling code here:
-
         String customerName = enterName.getText();
 
         if (!customerName.equals("Enter Customer Name")) {
-            JOptionPane.showMessageDialog(this, "Order in process!");
+            StringBuilder orderContents = new StringBuilder();
+            for (String items : abbreviatedItems) {
+                boolean isMeal = false;
+                for (Meal m : allMeals) {
+                    if (items.substring(0, 2).equals(m.getName())) {
+                        isMeal = true;
+                    }
+                }
+                if (isMeal) {
+                    // Remove the meals tag in front of the items
+                    items = items.substring(3);
+                }
 
-            ArrayList<Item> orderContents = new ArrayList<>();
-
-            for (String items : currentItems) {
-                if (items.contains("Meal")) {
-                    String mealName = String.valueOf(items.charAt(0)) + items.charAt(4);
-                    for (Meal m : allMeals) {
-                        if (m.getName().equals(mealName)) {
-                            orderContents.add(m);
-                        }
-                    }
-                }
-                else if(items.contains("Entree")) {
-                    String entreeName = String.valueOf(items.charAt(0)) + items.charAt(6);
-                    for (Entree e : allEntrees) {
-                        if (e.getName().equals(entreeName)) {
-                            orderContents.add(e);
-                        }
-                    }
-                }
-                else if(items.contains("Side")) {
-                    String sideName = String.valueOf(items.charAt(0)) + items.charAt(4);
-                    for (Side s : allSides) {
-                        if (s.getName().equals(sideName)) {
-                            orderContents.add(s);
-                        }
-                    }
-
-                }
-                else if(items.contains("Beverage")) {
-                    String beverageName = String.valueOf(items.charAt(0)) + items.charAt(8);
-                    for (Beverage b : allBeverages) {
-                        if (b.getName().equals(beverageName)) {
-                            orderContents.add(b);
-                        }
-                    }
-                }
+                orderContents.append(items.replace(',', ' '));
+                orderContents.append(" ");
             }
+            orderContents.delete(orderContents.length() - 1, orderContents.length());
 
-            Order temp = new Order(orderContents, Customer.getCustomerByName(customerName), null, false);
+            Order temp = new Order(orderContents.toString(), Customer.getCustomerByName(customerName), null, true);
 
             enterName.setText("Enter Customer Name");
+            abbreviatedItems.clear();
             currentItems.clear();
             update();
+
+            JOptionPane.showMessageDialog(this, "Order in process!");
         } else {
             JOptionPane.showMessageDialog(this, "Please enter a customer name!");
         }
     }//GEN-LAST:event_checkoutButtonActionPerformed
 
     private void entreesButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entreesButtonMouseClicked
-        //JOptionPane.showMessageDialog(this, "Hi");// TODO add your handling code here:
+        //JOptionPane.showMessageDialog(this, "Hi")
         mealsPanel.setVisible(false);
         entreesPanel.setVisible(true);
         sidesPanel.setVisible(false);
@@ -1265,7 +1239,7 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_entreesButtonMouseClicked
 
     private void entreesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entreesButtonActionPerformed
-        //JOptionPane.showMessageDialog(this, "Hi2");// TODO add your handling code here:
+        //JOptionPane.showMessageDialog(this, "Hi2")
     }//GEN-LAST:event_entreesButtonActionPerformed
 
     private void mealsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mealsButtonMouseClicked
@@ -1279,7 +1253,6 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_mealsButtonMouseClicked
 
     private void sidesButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidesButtonMouseClicked
-        // TODO add your handling code here:
         mealsPanel.setVisible(false);
         entreesPanel.setVisible(false);
         sidesPanel.setVisible(true);
@@ -1291,7 +1264,6 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_sidesButtonMouseClicked
 
     private void dessertsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dessertsButtonMouseClicked
-        // TODO add your handling code here:
         mealsPanel.setVisible(false);
         entreesPanel.setVisible(false);
         sidesPanel.setVisible(false);
@@ -1303,7 +1275,6 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_dessertsButtonMouseClicked
 
     private void beverageButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverageButtonMouseClicked
-        // TODO add your handling code here:
         mealsPanel.setVisible(false);
         entreesPanel.setVisible(false);
         sidesPanel.setVisible(false);
@@ -1315,79 +1286,60 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_beverageButtonMouseClicked
 
     private void entree1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_entree1ActionPerformed
 
     private void entree2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree2ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_entree2ActionPerformed
 
     private void entree3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree3ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_entree3ActionPerformed
 
     private void entree4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree4ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_entree4ActionPerformed
 
     private void entree5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree5ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_entree5ActionPerformed
 
     private void entree6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree6ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_entree6ActionPerformed
 
     private void entree7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree7ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_entree7ActionPerformed
 
     private void side1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_side1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_side1ActionPerformed
 
     private void side2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_side2ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_side2ActionPerformed
 
     private void side3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_side3ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_side3ActionPerformed
 
     private void side4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_side4ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_side4ActionPerformed
 
     private void beverage1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beverage1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_beverage1ActionPerformed
 
     private void beverage2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beverage2ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_beverage2ActionPerformed
 
     private void beverage3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beverage3ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_beverage3ActionPerformed
 
     private void beverage4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beverage4ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_beverage4ActionPerformed
 
     private void beverage5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beverage5ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_beverage5ActionPerformed
 
     private void dessert1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dessert1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_dessert1ActionPerformed
 
     private void dessert2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dessert2ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_dessert2ActionPerformed
 
     private void meal1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_meal1MouseClicked
-        // TODO add your handling code here:
         mealFrame.setVisible(true);
         toppingFrame.setVisible(false);
         currentMeal.setText("Meal1");
@@ -1398,7 +1350,6 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_meal1MouseClicked
 
     private void meal5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_meal5MouseClicked
-        // TODO add your handling code here:
         mealFrame.setVisible(true);
         toppingFrame.setVisible(false);
         currentMeal.setText("Meal5");
@@ -1409,10 +1360,9 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_meal5MouseClicked
 
     private void meal4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_meal4MouseClicked
-        // TODO add your handling code here:
         mealFrame.setVisible(true);
         toppingFrame.setVisible(false);
-        currentMeal.setText("M4eal");
+        currentMeal.setText("Meal4");
         entreeLabel.setText("Entree1");
         sideLabel.setText("Side2");
         beverageLabel.setText("Beverage1");
@@ -1420,7 +1370,6 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_meal4MouseClicked
 
     private void meal3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_meal3MouseClicked
-        // TODO add your handling code here:
         mealFrame.setVisible(true);
         toppingFrame.setVisible(false);
         currentMeal.setText("Meal3");
@@ -1431,7 +1380,6 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_meal3MouseClicked
 
     private void meal2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_meal2MouseClicked
-        // TODO add your handling code here:
         mealFrame.setVisible(true);
         toppingFrame.setVisible(false);
         currentMeal.setText("Meal2");
@@ -1442,11 +1390,9 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_meal2MouseClicked
 
     private void entreeCustomizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entreeCustomizeMouseClicked
-        // TODO add your handling code here:
     }//GEN-LAST:event_entreeCustomizeMouseClicked
 
     private void entreeCustomizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entreeCustomizeActionPerformed
-        // TODO add your handling code here:
         toppingFrame.setVisible(true);
         toppingLabel.setText("Customizing " + entreeLabel.getText());
         switch(entreeLabel.getText())
@@ -1477,11 +1423,9 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_entreeCustomizeActionPerformed
 
     private void addItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addItemsActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_addItemsActionPerformed
 
     private void addItemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addItemsMouseClicked
-        // TODO add your handling code here:
         if(customizations.getText().equals("No Customizations"))
             customizations.setText("");
         currentItems.add(currentMeal.getText() + "," + entreeLabel.getText() + 
@@ -1494,28 +1438,22 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_addItemsMouseClicked
 
     private void enterNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterNameActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_enterNameActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        // TODO add your handling code here:
     }//GEN-LAST:event_formMouseClicked
 
     private void enterNameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enterNameMouseEntered
-        // TODO add your handling code here:
     }//GEN-LAST:event_enterNameMouseEntered
 
     private void enterNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enterNameMouseClicked
-        // TODO add your handling code here:
         enterName.setText("");
     }//GEN-LAST:event_enterNameMouseClicked
 
     private void entreeCustomizeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_entreeCustomizeFocusLost
-        // TODO add your handling code here:
     }//GEN-LAST:event_entreeCustomizeFocusLost
 
     private void entree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree1MouseClicked
-        // TODO add your handling code here:
         toppingFrame.setVisible(true);
         toppingLabel.setText("Adding Entree1");
         addCommitButton.setText("Add");
@@ -1532,7 +1470,6 @@ public class PoSGUI extends javax.swing.JFrame {
     }
     
     private void addCommitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCommitButtonActionPerformed
-        // TODO add your handling code here:
         if(addCommitButton.getText().equals("Add"))
         {
             String customText = "";
@@ -1732,7 +1669,6 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_addCommitButtonActionPerformed
 
     private void entree2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree2MouseClicked
-        // TODO add your handling code here:
         toppingFrame.setVisible(true);
         toppingLabel.setText("Adding Entree2");
         addCommitButton.setText("Add");
@@ -1749,7 +1685,6 @@ public class PoSGUI extends javax.swing.JFrame {
     }
     
     private void entree3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree3MouseClicked
-        // TODO add your handling code here:
         toppingFrame.setVisible(true);
         toppingLabel.setText("Adding Entree3");
         addCommitButton.setText("Add");
@@ -1765,7 +1700,6 @@ public class PoSGUI extends javax.swing.JFrame {
         topping5Box.setSelected(true);
     }
     private void entree4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree4MouseClicked
-        // TODO add your handling code here:
         toppingFrame.setVisible(true);
         toppingLabel.setText("Adding Entree4");
         addCommitButton.setText("Add");
@@ -1780,7 +1714,6 @@ public class PoSGUI extends javax.swing.JFrame {
         topping5Box.setSelected(false);
     }
     private void entree5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree5MouseClicked
-        // TODO add your handling code here:
         toppingFrame.setVisible(true);
         toppingLabel.setText("Adding Entree5");
         addCommitButton.setText("Add");
@@ -1796,7 +1729,6 @@ public class PoSGUI extends javax.swing.JFrame {
         topping5Box.setSelected(false);
     }
     private void entree6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree6MouseClicked
-        // TODO add your handling code here:
         toppingFrame.setVisible(true);
         toppingLabel.setText("Adding Entree6");
         addCommitButton.setText("Add");
@@ -1812,7 +1744,6 @@ public class PoSGUI extends javax.swing.JFrame {
         topping5Box.setSelected(true);
     }
     private void entree7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree7MouseClicked
-        // TODO add your handling code here:
         toppingFrame.setVisible(true);
         toppingLabel.setText("Adding Entree7");
         addCommitButton.setText("Add");
@@ -1829,40 +1760,31 @@ public class PoSGUI extends javax.swing.JFrame {
     }
     
     private void topping2BoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topping2BoxActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_topping2BoxActionPerformed
 
     private void topping3BoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topping3BoxActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_topping3BoxActionPerformed
 
     private void topping4BoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topping4BoxActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_topping4BoxActionPerformed
 
     private void topping5BoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topping5BoxActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_topping5BoxActionPerformed
 
     private void topping1BoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topping1BoxActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_topping1BoxActionPerformed
 
     private void quantityAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantityAddActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_quantityAddActionPerformed
 
     private void quantityButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantityButtonActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_quantityButtonActionPerformed
 
     private void quantityAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quantityAddMouseClicked
-        // TODO add your handling code here:
         quantityAdd.setText("");
     }//GEN-LAST:event_quantityAddMouseClicked
 
     private void quantityButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quantityButtonMouseClicked
-        // TODO add your handling code here:
         if(quantityAdd.getText().matches("[+1234567890]"))
         {
             for(int i = 0; i < Integer.parseInt(quantityAdd.getText()); i++)
@@ -1881,83 +1803,69 @@ public class PoSGUI extends javax.swing.JFrame {
         quantityAdd.setText("1");
     }
     private void side1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side1MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Side1");
     }//GEN-LAST:event_side1MouseClicked
 
     private void side2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side2MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Side2");
     }//GEN-LAST:event_side2MouseClicked
 
     private void side3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side3MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Side3");
     }//GEN-LAST:event_side3MouseClicked
 
     private void side4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side4MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Side4");
     }//GEN-LAST:event_side4MouseClicked
 
     private void beverage1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverage1MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Beverage1");
     }//GEN-LAST:event_beverage1MouseClicked
 
     private void beverage2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverage2MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Beverage2");
     }//GEN-LAST:event_beverage2MouseClicked
 
     private void beverage3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverage3MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Beverage3");
     }//GEN-LAST:event_beverage3MouseClicked
 
     private void beverage4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverage4MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Beverage4");
     }//GEN-LAST:event_beverage4MouseClicked
 
     private void beverage5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverage5MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Beverage5");
     }//GEN-LAST:event_beverage5MouseClicked
 
     private void dessert1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dessert1MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Dessert1");
     }//GEN-LAST:event_dessert1MouseClicked
 
     private void dessert2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dessert2MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Dessert2");
     }//GEN-LAST:event_dessert2MouseClicked
 
     private void clearOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearOrderMouseClicked
-        // TODO add your handling code here:
         currentItems.clear();
         update();
     }//GEN-LAST:event_clearOrderMouseClicked
 
     private void employeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeButtonActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_employeeButtonActionPerformed
 
     private void employeeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeButtonMouseClicked
-        // TODO add your handling code here:
         employeeView = !employeeView;
         if(employeeView)
         {

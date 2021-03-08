@@ -71,13 +71,10 @@ public class Order {
         HashMap<String, String> values = new HashMap<>();
         if (this.customer != null) {
             values.put(Order.customer_id_column, this.customer.id.toString());
-        } else {
-            values.put(Order.customer_id_column, null);
         }
+
         if (this.employee != null) {
             values.put(Order.employee_id_column, this.employee.id.toString());
-        } else {
-            values.put(Order.employee_id_column, null);
         }
         values.put(Order.date_column, this.date);
         values.put(Order.time_column, this.time);
