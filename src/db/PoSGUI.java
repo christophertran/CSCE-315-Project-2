@@ -1144,6 +1144,11 @@ public class PoSGUI extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
+        sidesPanel.setVisible(false);
+        entreesPanel.setVisible(false);
+        beveragePanel.setVisible(false);
+        dessertsPanel.setVisible(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1566,6 +1571,8 @@ public class PoSGUI extends javax.swing.JFrame {
                     customText += "addTopping5";
             }//</editor-fold>
             currentItems.add(currentEntree + " " + customText);
+            abbreviatedItems.add(currentEntree.charAt(0) + "" + currentEntree.charAt(6) +
+                    "" + customText.replaceAll(" ", "").replaceAll("<html>|</html>", "").replaceAll("noTopping","-T").replaceAll("addTopping","+T"));
             update();
         }
         else if(addCommitButton.getText().equals("Save Changes"))
