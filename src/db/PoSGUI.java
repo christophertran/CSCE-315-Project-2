@@ -1628,14 +1628,14 @@ public class PoSGUI extends javax.swing.JFrame {
             {
                 if(!topping1Box.isSelected())
                     customText += "noTopping1, ";
-                if(topping2Box.isSelected())
-                    customText += "addTopping2, ";
+                if(!topping2Box.isSelected())
+                    customText += "noTopping2, ";
                 if(topping3Box.isSelected())
                     customText += "addTopping3, ";
                 if(!topping4Box.isSelected())
                     customText += "noTopping4, ";
-                if(!topping5Box.isSelected())
-                    customText += "noTopping5";
+                if(topping5Box.isSelected())
+                    customText += "addTopping5";
             }
             else if(currentEntree.equals("Entree6"))
             {
@@ -1790,6 +1790,8 @@ public class PoSGUI extends javax.swing.JFrame {
             for(int i = 0; i < Integer.parseInt(quantityAdd.getText()); i++)
             {
                 currentItems.add(othersLabel.getText().split(" ")[1]);
+                String item = othersLabel.getText().split(" ")[1];
+                abbreviatedItems.add(item.charAt(0) + "" + item.charAt(item.length()-1));
             }
         }
         update();
