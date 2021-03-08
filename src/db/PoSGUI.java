@@ -144,6 +144,7 @@ public class PoSGUI extends javax.swing.JFrame {
 
         mealFrame.setMinimumSize(new java.awt.Dimension(500, 600));
         mealFrame.setPreferredSize(new java.awt.Dimension(500, 600));
+        mealFrame.setResizable(false);
 
         currentMeal.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         currentMeal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -267,6 +268,7 @@ public class PoSGUI extends javax.swing.JFrame {
         toppingFrame.setAlwaysOnTop(true);
         toppingFrame.setMinimumSize(new java.awt.Dimension(500, 600));
         toppingFrame.setPreferredSize(new java.awt.Dimension(500, 600));
+        toppingFrame.setResizable(false);
 
         toppingLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         toppingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -384,6 +386,7 @@ public class PoSGUI extends javax.swing.JFrame {
         othersFrame.setMaximumSize(new java.awt.Dimension(400, 350));
         othersFrame.setMinimumSize(new java.awt.Dimension(400, 350));
         othersFrame.setPreferredSize(new java.awt.Dimension(400, 350));
+        othersFrame.setResizable(false);
 
         othersLabel.setAlignment(java.awt.Label.CENTER);
         othersLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -1140,12 +1143,12 @@ public class PoSGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
