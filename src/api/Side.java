@@ -11,6 +11,11 @@ public class Side extends Item{
         super(id, name, price, calories);
     }
 
+    /**
+     * Return all items from sides table in the database
+     * @return ArrayList of all side items in database
+     * @throws SQLException Throws SQLException
+     */
     public static ArrayList<Item> getAllItems() throws SQLException {
         ArrayList<HashMap<String, String>> queryResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Side.tableName, null, null));
         return Item.getItemsFromQueryResult(queryResult);

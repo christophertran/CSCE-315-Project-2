@@ -10,12 +10,12 @@ public class Item {
     static final String price_column = "price";
     static final String calories_column = "calories";
 
-    int id;
+    Integer id;
     String name;
-    float price;
-    int calories;
+    Float price;
+    Integer calories;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -23,15 +23,53 @@ public class Item {
         return name;
     }
 
-    public float getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public int getCalories() {
+    public Integer getCalories() {
         return calories;
     }
 
-    Item(int id, String name, float price, int calories) {
+    /**
+     * Set the price of the current item. This will also update the item's information in the database
+     *
+     * @param price New price of item
+     * @return Integer representing success of database update. > 0 is success.
+     */
+    public Integer setPrice(float price) {
+        this.price = price;
+
+        HashMap<String, String> values = new HashMap<>();
+        HashMap<String, String> constraints = new HashMap<>();
+
+        values.put(Item.price_column, this.price.toString());
+
+        constraints.put(Item.name_column, this.name);
+
+        return QueryBuilder.executeUpdate(QueryBuilder.buildUpdateQuery(Item.getTableNameFromItemName(this.name), values, constraints));
+    }
+
+    /**
+     * Set the calories of the current item. This will also update the item's information in the database
+     *
+     * @param calories New price of item
+     * @return Integer representing success of database update. > 0 is success.
+     */
+    public Integer setCalories(int calories) {
+        this.calories = calories;
+
+        HashMap<String, String> values = new HashMap<>();
+        HashMap<String, String> constraints = new HashMap<>();
+
+        values.put(Item.calories_column, this.calories.toString());
+
+        constraints.put(Item.name_column, this.name);
+
+        return QueryBuilder.executeUpdate(QueryBuilder.buildUpdateQuery(Item.getTableNameFromItemName(this.name), values, constraints));
+    }
+
+    Item(Integer id, String name, Float price, Integer calories) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -156,14 +194,32 @@ public class Item {
         return ret;
     }
 
+    /**
+     * Returns string that is the full name of the item. This is meant for it you have "E1+T2-T3". This will return E1.
+     *
+     * @param str String that contains the full name of an item at the beginning
+     * @return String that represents the full name of an item
+     */
     public static String getFullItemNameFromString(String str) {
         return str.substring(0, 2).toUpperCase();
     }
 
+    /**
+     * Returns a char that is the item code from the item name given. If given "E1", this returns "E".
+     *
+     * @param itemName Full name of an item
+     * @return char that is the item code
+     */
     public static char getItemCodeFromItemName(String itemName) {
         return itemName.charAt(0);
     }
 
+    /**
+     * Returns the name of the table associated with an item
+     *
+     * @param itemName Name of item that table is needed
+     * @return String that is the name of a table
+     */
     public static String getTableNameFromItemName(String itemName) {
         switch (Item.getItemCodeFromItemName(itemName)) {
             case 'B':
@@ -183,14 +239,22 @@ public class Item {
         return "";
     }
 
+    /**
+     * Return an item created from data in the database given the name of the item
+     *
+     * @param itemName Name of the item wanted
+     * @return Item object that has data from the database
+     * @throws SQLException Throws SQLException
+     */
     public static Item getItemFromDatabaseByName(String itemName) throws SQLException {
+        Item ret = null;
+
         HashMap<String, String> constraints = new HashMap<>();
         constraints.put(Item.name_column, itemName);
 
         ArrayList<HashMap<String, String>> result = QueryBuilder.executeQuery(
                 QueryBuilder.buildSelectionQuery(Item.getTableNameFromItemName(itemName), constraints, null));
 
-        Item ret = null;
         if (result.size() > 0) {
             switch (Item.getItemCodeFromItemName(itemName)) {
                 case 'B':
@@ -237,6 +301,34 @@ public class Item {
         return ret;
     }
 
+    /**
+     * Gets an ArrayList of Items from the database parsed from the given string
+     *
+     * @param items String of items that are wanted, space deliminated.
+     * @return ArrayList of items created from data in database
+     * @throws SQLException Throws SQLException
+     */
+    public static ArrayList<Item> getItemsFromString(String items) throws SQLException {
+        ArrayList<Item> ret = new ArrayList<>();
+
+        Scanner sc = new Scanner(items);
+        sc.useDelimiter(" ");
+
+        while (sc.hasNext()) {
+            String contentName = Item.getFullItemNameFromString(sc.next());
+            ret.add(Item.getItemFromDatabaseByName(contentName));
+        }
+
+        return ret;
+    }
+
+    /**
+     * Gets ArrayList of items given the result dictionary that is returned from an executeQuery call.
+     *
+     * @param result Result dictionary returned from an executeQuery call
+     * @return ArrayList of items in provided result param
+     * @throws SQLException Throws SQLException
+     */
     public static ArrayList<Item> getItemsFromQueryResult(ArrayList<HashMap<String, String>> result) throws SQLException {
         ArrayList<Item> ret = new ArrayList<>();
 
@@ -284,5 +376,22 @@ public class Item {
         }
 
         return ret;
+    }
+
+    /**
+     * Gets a stringified version of the names of the items provided
+     *
+     * @param items ArrayList of items whose names you want turned into a single string
+     * @return String with names of items
+     */
+    public static String getItemsAsString(ArrayList<Item> items) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Item i : items) {
+            stringBuilder.append(i.getName()).append(" ");
+        }
+        stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
+
+        return stringBuilder.toString();
     }
 }

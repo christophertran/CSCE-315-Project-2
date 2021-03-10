@@ -3,16 +3,23 @@ package api;
 import db.dbSetup;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.*;
 import java.sql.*;
 
 public class QueryBuilder {
     static Connection conn = null;
 
+    /**
+     * Explicitly open the connection to the SQL database
+     */
     public static void openDBConnection() {
         getDBConnection();
     }
 
+    /**
+     * Explicitly close the connection to the SQL database
+     */
     public static void closeDBConnection() {
         if (QueryBuilder.conn != null) {
             try {
@@ -24,6 +31,11 @@ public class QueryBuilder {
         }
     }
 
+    /**
+     * Get a Connection object that is linked to the SQL database
+     *
+     * @return Connection object
+     */
     static Connection getDBConnection() {
         if (QueryBuilder.conn == null) {
             try {
@@ -42,6 +54,13 @@ public class QueryBuilder {
         return QueryBuilder.conn;
     }
 
+    /**
+     * Executes a regular SQL query
+     *
+     * @param sqlStatement SQL query that is meant to be executed
+     * @return Returns and ArrayList of HashMaps that contains information from the result set
+     * @throws SQLException Throws SQLExceptions
+     */
     static ArrayList<HashMap<String, String>> executeQuery(String sqlStatement) throws SQLException {
         ResultSet result = null;
 
@@ -72,6 +91,11 @@ public class QueryBuilder {
         return list;
     }
 
+    /**
+     * Executes a update SQL Query
+     * @param sqlStatement SQL query that is meant to be executed
+     * @return Integer that represents how many rows were changed in the database
+     */
     static Integer executeUpdate(String sqlStatement) {
         Integer result = null;
 
@@ -89,6 +113,14 @@ public class QueryBuilder {
         return result;
     }
 
+    /**
+     * Creates a SQL Select * query, where constraints is the mapping of key to value
+     *
+     * @param table Name of table in database
+     * @param constraints "WHERE" constraints of query
+     * @param limit Add the "LIMIT" clause to the query
+     * @return String that represents the SQL selection query created
+     */
     static String buildSelectionQuery(String table, HashMap<String, String> constraints, Integer limit) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("SELECT * FROM ").append(table);
@@ -117,42 +149,87 @@ public class QueryBuilder {
         return stringBuilder.toString();
     }
 
+    /**
+     * Creates a SQL "INSERT INTO" statement
+     *
+     * @param table Name of table to be inserted into
+     * @param values Map of column name to values in those columns
+     * @return String that represents the SQL insertion query created
+     */
     static String buildInsertionQuery(String table, HashMap<String, String> values) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("INSERT INTO ").append(table).append(" (");
+        stringBuilder.append(String.format("INSERT INTO \"%s\" ( "));
 
         for (Map.Entry<String, String> entry : values.entrySet()) {
-            String key = entry.getKey();
-            stringBuilder.append(String.format("\"%s\", ", key));
+            stringBuilder.append(String.format(" \"%s\", ", entry.getKey()));
         }
         stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
 
-        stringBuilder.append(") VALUES (");
+        stringBuilder.append(" ) VALUES ( ");
 
         for (Map.Entry<String, String> entry : values.entrySet()) {
-            String value = entry.getValue();
-            stringBuilder.append(String.format("'%s', ", value));
+            stringBuilder.append(String.format(" '%s', ", entry.getValue()));
         }
         stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
 
-        stringBuilder.append(");");
+        stringBuilder.append(" ); ");
 
         return stringBuilder.toString();
     }
 
+    /**
+     * Creates a SQL "UPDATE" query
+     *
+     * @param table Name of table to be inserted into
+     * @param values Map of old value to new value
+     * @param constraints "WHERE" constraints of query
+     * @return String that represents the SQL update query created
+     */
+    static String buildUpdateQuery(String table, HashMap<String, String> values, HashMap<String, String> constraints) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(String.format("UPDATE \"%s\" SET ", table));
+
+        for (Map.Entry<String, String> entry : values.entrySet()) {
+            stringBuilder.append(String.format(" \"%s\" = '%s' ", entry.getKey(), entry.getValue()));
+        }
+
+        if (constraints != null) {
+            stringBuilder.append(" WHERE ");
+            for (Map.Entry<String, String> entry : constraints.entrySet()) {
+                stringBuilder.append(String.format(" \"%s\" = '%s' ", entry.getKey(), entry.getValue()));
+            }
+        }
+        stringBuilder.append(";");
+
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Creates a SQL query to get the last item from the specified table
+     *
+     * @param table Name of table to have last item taken from
+     * @return String that represents the SQL query created
+     */
     static String buildGetLastItemFromTableQuery(String table) {
         return "SELECT * FROM " + table +
                 " ORDER BY \"id\" DESC LIMIT 1;";
     }
 
+    /**
+     * Creates a SQL selection query that takes a BETWEEN clause for the "date" column
+     *
+     * @param date1 Start of date range
+     * @param date2 End of date range
+     * @param customerID ID of customers to find range of, if null the clause is ignored
+     * @param limit Limit the number of orders returned, if null the clause is ignored
+     * @return String that represents the SQL query created
+     */
     static String buildGetOrdersFromDateRangeQuery(String date1, String date2, Integer customerID, Integer limit) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("SELECT * FROM \"").append(Order.tableName).append("\" WHERE \"")
-                .append(Order.date_column).append("\" BETWEEN '").append(date1)
-                .append("' AND '").append(date2);
+        stringBuilder.append(String.format("SELECT * FROM \"%s\" WHERE \"%s\" BETWEEN '%s' AND '%s' ", Order.tableName, Order.date_column, date1, date2));
 
         if (customerID != null) {
-            stringBuilder.append("' AND \"").append(Order.customer_id_column).append("\" = ").append(customerID);
+            stringBuilder.append(String.format(" AND \"%s\" = %s", Order.customer_id_column, customerID.toString()));
         } else {
             stringBuilder.append("'");
         }
@@ -168,14 +245,23 @@ public class QueryBuilder {
     public static void main(String[] args) throws SQLException, FileNotFoundException {
         QueryBuilder.openDBConnection();
 
-        ArrayList<Item> allBeverages = Beverage.getAllItems();
-        ArrayList<Item> allDesserts = Dessert.getAllItems();
-        ArrayList<Item> allEntrees = Entree.getAllItems();
-        ArrayList<Item> allMeals = Meal.getAllItems();
-        ArrayList<Item> allSides = Side.getAllItems();
-        ArrayList<Item> allToppings = Topping.getAllItems();
+//        ArrayList<Item> allBeverages = Beverage.getAllItems();
+//        ArrayList<Item> allDesserts = Dessert.getAllItems();
+//        ArrayList<Item> allEntrees = Entree.getAllItems();
+//        ArrayList<Item> allMeals = Meal.getAllItems();
+//        ArrayList<Item> allSides = Side.getAllItems();
+//        ArrayList<Item> allToppings = Topping.getAllItems();
 
-        ArrayList<Item> recommendations = Customer.getCustomerRecommendations(Customer.getCustomerByName("Brennan"), 3);
+//        ArrayList<Item> recommendations = Customer.getCustomerRecommendations(Customer.getCustomerByName("Brennan"), 3);
+
+//        HashMap<String, String> values = new HashMap<>();
+//        HashMap<String, String> constraints = new HashMap<>();
+//        values.put(Meal.name_column, "M5");
+//        constraints.put(Meal.name_column, "M6");
+//        Integer res = QueryBuilder.executeUpdate(QueryBuilder.buildUpdateQuery(Meal.tableName, values, constraints));
+
+//        Meal m5 = (Meal) Item.getItemFromDatabaseByName("M5");
+//        m5.setContents("E5 S2 B5");
 
         QueryBuilder.closeDBConnection();
     }

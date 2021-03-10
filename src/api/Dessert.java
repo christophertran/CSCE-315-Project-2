@@ -11,6 +11,11 @@ public class Dessert extends Item {
         super(id, name, price, calories);
     }
 
+    /**
+     * Return all items from desserts table in the database
+     * @return ArrayList of all dessert items in database
+     * @throws SQLException Throws SQLException
+     */
     public static ArrayList<Item> getAllItems() throws SQLException {
         ArrayList<HashMap<String, String>> queryResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Dessert.tableName, null, null));
         return Item.getItemsFromQueryResult(queryResult);

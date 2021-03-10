@@ -59,14 +59,4 @@ public class Order {
             this.id = Integer.parseInt(orderResult.get(0).get(Order.id_column));
         }
     }
-
-    public Order(int id, Customer customer, Employee employee, String date, String time, String contents, boolean fulfilled) {
-        this.id = id;
-        this.customer = customer;
-        this.employee = employee;
-        this.date = date;
-        this.time = time;
-        this.contents = contents;
-        this.fulfilled = fulfilled;
-    }
 }

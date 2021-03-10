@@ -15,6 +15,22 @@ public class Customer {
     String address;
     String email;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     public Customer(Integer id, String name, String address, String email) {
         this.id = id;
         this.name = name;
@@ -22,6 +38,14 @@ public class Customer {
         this.email = email;
     }
 
+    /**
+     * Returns a customer given their name using data from the database. If customer does not exist then an entry
+     * will be created in the database and the new customer will be returned.
+     *
+     * @param customerName Name of customer that is wanted
+     * @return Customer object containing customer information
+     * @throws SQLException Throws SQLException
+     */
     public static Customer getCustomerByName(String customerName) throws SQLException {
         HashMap<String, String> constraints = new HashMap<>();
         constraints.put(Customer.name_column, customerName.toUpperCase());
@@ -41,9 +65,17 @@ public class Customer {
             }
         }
 
-        return new Customer (Integer.parseInt(customerResult.get(0).get(Customer.id_column)), customerResult.get(0).get(Customer.name_column), customerResult.get(0).get(Customer.address_column), customerResult.get(0).get(Customer.email_column));
+        return new Customer(Integer.parseInt(customerResult.get(0).get(Customer.id_column)), customerResult.get(0).get(Customer.name_column), customerResult.get(0).get(Customer.address_column), customerResult.get(0).get(Customer.email_column));
     }
 
+    /**
+     * Gets ArrayList of items that were from the specified customer's previous order
+     *
+     * @param customer Customer object representing current customer
+     * @param limit Limit how many items you want returned in ArrayList
+     * @return ArrayList of items that are recommended for specified user
+     * @throws SQLException Throw SQLException
+     */
     public static ArrayList<Item> getCustomerRecommendations(Customer customer, Integer limit) throws SQLException {
         HashMap<String, String> constraints = new HashMap<>();
         constraints.put(Order.customer_id_column, customer.getId().toString());
@@ -62,21 +94,5 @@ public class Customer {
         }
 
         return previousOrder;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getEmail() {
-        return email;
     }
 }
