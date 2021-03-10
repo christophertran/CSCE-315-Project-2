@@ -144,12 +144,23 @@ public class QueryBuilder {
         return stringBuilder.toString();
     }
 
-    static String buildGetOrdersFromDateRangeQuery(String date1, String date2, int limit) {
+    static String buildGetOrdersFromDateRangeQuery(String date1, String date2, Integer customerID, Integer limit) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("SELECT * FROM \"").append(Order.tableName).append("\" WHERE \"")
                 .append(Order.date_column).append("\" BETWEEN '").append(date1)
-                .append("' AND '").append(date2).append("' LIMIT ").append(limit);
+                .append("' AND '").append(date2);
 
+        if (customerID != null) {
+            stringBuilder.append("' AND \"").append(Order.customer_id_column).append("\" = ").append(customerID);
+        } else {
+            stringBuilder.append("'");
+        }
+
+        if (limit != null) {
+            stringBuilder.append(" LIMIT ").append(limit);
+        }
+
+        stringBuilder.append(";");
         return stringBuilder.toString();
     }
 
@@ -203,9 +214,9 @@ public class QueryBuilder {
 //        ArrayList<Side> allSides = Side.getAllItems();
 //        ArrayList<Topping> allToppings = Topping.getAllItems();
 
-        String date1 = "2020";
-        String date2 = "2021";
-        ArrayList<HashMap<String,String>> temp = QueryBuilder.executeQuery(QueryBuilder.buildGetOrdersFromDateRangeQuery(date1, date2, 10));
+//        ArrayList<Item> recommendations = Customer.getCustomerRecommendations(Customer.getCustomerByName("Brennan"));
+
+        ArrayList<Item> trendingUp = Item.getTrendingUpAndDownItems();
 
         QueryBuilder.closeDBConnection();
     }
