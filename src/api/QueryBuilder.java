@@ -39,7 +39,7 @@ public class QueryBuilder {
     static Connection getDBConnection() {
         if (QueryBuilder.conn == null) {
             try {
-                //Class.forName("org.postgresql.Driver");
+                // Class.forName("org.postgresql.Driver");
                 QueryBuilder.conn = DriverManager.getConnection(
                         "jdbc:postgresql://csce-315-db.engr.tamu.edu/db907_group10_project2",
                         dbSetup.user, dbSetup.pswd);
@@ -64,12 +64,12 @@ public class QueryBuilder {
     static ArrayList<HashMap<String, String>> executeQuery(String sqlStatement) throws SQLException {
         ResultSet result = null;
 
-        System.out.println(sqlStatement);
+        // System.out.println(sqlStatement);
 
         try {
-            //create a statement object
+            // create a statement object
             Statement stmt = getDBConnection().createStatement();
-            //send statement to DBMS
+            // send statement to DBMS
             result = stmt.executeQuery(sqlStatement);
         } catch (Exception e) {
             System.out.println("Error accessing Database.");
@@ -99,12 +99,12 @@ public class QueryBuilder {
     static Integer executeUpdate(String sqlStatement) {
         Integer result = null;
 
-        System.out.println(sqlStatement);
+        // System.out.println(sqlStatement);
 
         try {
-            //create a statement object
+            // create a statement object
             Statement stmt = getDBConnection().createStatement();
-            //send statement to DBMS
+            // send statement to DBMS
             result = stmt.executeUpdate(sqlStatement);
         } catch (Exception e) {
             System.out.println("Error accessing Database.");
@@ -230,8 +230,6 @@ public class QueryBuilder {
 
         if (customerID != null) {
             stringBuilder.append(String.format(" AND \"%s\" = %s", Order.customer_id_column, customerID.toString()));
-        } else {
-            stringBuilder.append("'");
         }
 
         if (limit != null) {
@@ -245,23 +243,13 @@ public class QueryBuilder {
     public static void main(String[] args) throws SQLException, FileNotFoundException {
         QueryBuilder.openDBConnection();
 
-//        ArrayList<Item> allBeverages = Beverage.getAllItems();
-//        ArrayList<Item> allDesserts = Dessert.getAllItems();
-//        ArrayList<Item> allEntrees = Entree.getAllItems();
-//        ArrayList<Item> allMeals = Meal.getAllItems();
-//        ArrayList<Item> allSides = Side.getAllItems();
-//        ArrayList<Item> allToppings = Topping.getAllItems();
+        HashMap<String, ArrayList<Item>> trendingItems = Item.getTrendingItems(3);
 
-//        ArrayList<Item> recommendations = Customer.getCustomerRecommendations(Customer.getCustomerByName("Brennan"), 3);
+        System.out.println("Trending Up: ");
+        System.out.println(Item.getItemsAsString(trendingItems.get(Item.trending_up_key)));
 
-//        HashMap<String, String> values = new HashMap<>();
-//        HashMap<String, String> constraints = new HashMap<>();
-//        values.put(Meal.name_column, "M5");
-//        constraints.put(Meal.name_column, "M6");
-//        Integer res = QueryBuilder.executeUpdate(QueryBuilder.buildUpdateQuery(Meal.tableName, values, constraints));
-
-//        Meal m5 = (Meal) Item.getItemFromDatabaseByName("M5");
-//        m5.setContents("E5 S2 B5");
+        System.out.println("Trending Down: ");
+        System.out.println(Item.getItemsAsString(trendingItems.get(Item.trending_down_key)));
 
         QueryBuilder.closeDBConnection();
     }
