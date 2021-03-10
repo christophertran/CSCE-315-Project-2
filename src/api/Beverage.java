@@ -11,16 +11,8 @@ public class Beverage extends Item{
         super(id, name, price, calories);
     }
 
-    public static ArrayList<Beverage> getAllItems() throws SQLException {
-        ArrayList<Beverage> items = new ArrayList<>();
-        ArrayList<HashMap<String, String>> itemsDict = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Beverage.tableName, null));
-        for (HashMap h : itemsDict) {
-            Beverage i = new Beverage(Integer.parseInt((String) h.get(Beverage.id_column)),
-                    (String) h.get(Beverage.name_column),
-                    Float.parseFloat((String) h.get(Beverage.price_column)),
-                    Integer.parseInt((String) h.get(Beverage.calories_column)));
-            items.add(i);
-        }
-        return items;
+    public static ArrayList<Item> getAllItems() throws SQLException {
+        ArrayList<HashMap<String, String>> queryResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Beverage.tableName, null, null));
+        return Item.getItemsFromQueryResult(queryResult);
     }
 }

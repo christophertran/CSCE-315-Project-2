@@ -11,16 +11,8 @@ public class Dessert extends Item {
         super(id, name, price, calories);
     }
 
-    public static ArrayList<Dessert> getAllItems() throws SQLException {
-        ArrayList<Dessert> items = new ArrayList<>();
-        ArrayList<HashMap<String, String>> itemsDict = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Dessert.tableName, null));
-        for (HashMap h : itemsDict) {
-            Dessert i = new Dessert(Integer.parseInt((String) h.get(Dessert.id_column)),
-                    (String) h.get(Dessert.name_column),
-                    Float.parseFloat((String) h.get(Dessert.price_column)),
-                    Integer.parseInt((String) h.get(Dessert.calories_column)));
-            items.add(i);
-        }
-        return items;
+    public static ArrayList<Item> getAllItems() throws SQLException {
+        ArrayList<HashMap<String, String>> queryResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Dessert.tableName, null, null));
+        return Item.getItemsFromQueryResult(queryResult);
     }
 }

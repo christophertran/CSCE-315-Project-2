@@ -9,11 +9,11 @@ import java.sql.*;
 public class QueryBuilder {
     static Connection conn = null;
 
-    public static void openDBConnection() throws SQLException {
+    public static void openDBConnection() {
         getDBConnection();
     }
 
-    public static void closeDBConnection() throws SQLException {
+    public static void closeDBConnection() {
         if (QueryBuilder.conn != null) {
             try {
                 QueryBuilder.conn.close();
@@ -24,7 +24,7 @@ public class QueryBuilder {
         }
     }
 
-    static Connection getDBConnection() throws SQLException {
+    static Connection getDBConnection() {
         if (QueryBuilder.conn == null) {
             try {
                 //Class.forName("org.postgresql.Driver");
@@ -56,12 +56,12 @@ public class QueryBuilder {
             System.out.println("Error accessing Database.");
         }
 
-        ArrayList list = new ArrayList(50);
+        ArrayList<HashMap<String, String>> list = new ArrayList<>();
         if (result != null) {
             ResultSetMetaData md = result.getMetaData();
             int columns = md.getColumnCount();
             while (result.next()) {
-                HashMap<String, String> row = new HashMap(columns);
+                HashMap<String, String> row = new HashMap<>(columns);
                 for (int i = 1; i <= columns; ++i) {
                     row.put(md.getColumnName(i), result.getString(i));
                 }
@@ -89,7 +89,7 @@ public class QueryBuilder {
         return result;
     }
 
-    static String buildSelectionQuery(String table, HashMap<String, String> constraints) {
+    static String buildSelectionQuery(String table, HashMap<String, String> constraints, Integer limit) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("SELECT * FROM ").append(table);
 
@@ -107,6 +107,11 @@ public class QueryBuilder {
                 i++;
             }
         }
+
+        if (limit != null) {
+            stringBuilder.append(" LIMIT ").append(limit);
+        }
+
         stringBuilder.append(";");
 
         return stringBuilder.toString();
@@ -136,12 +141,8 @@ public class QueryBuilder {
     }
 
     static String buildGetLastItemFromTableQuery(String table) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("SELECT * FROM ").append(table);
-
-        stringBuilder.append(" ORDER BY \"id\" DESC LIMIT 1;");
-
-        return stringBuilder.toString();
+        return "SELECT * FROM " + table +
+                " ORDER BY \"id\" DESC LIMIT 1;";
     }
 
     static String buildGetOrdersFromDateRangeQuery(String date1, String date2, Integer customerID, Integer limit) {
@@ -167,56 +168,14 @@ public class QueryBuilder {
     public static void main(String[] args) throws SQLException, FileNotFoundException {
         QueryBuilder.openDBConnection();
 
-//        ArrayList<String> cols = new ArrayList<>();
-//        HashMap<String, String> constraints = new HashMap<>();
-//        constraints.put("id", "5");
-//        constraints.put("name", "Joe");
-//        cols.add("name");
-//        System.out.println(buildSelectionQuery(cols, "beverages", constraints));
-//
-//        ArrayList<HashMap<String, String>> result = executeQuery("SELECT * FROM entrees");
-//        ArrayList<Item> items = Item.getAllItems("meals");
-//
-//        Customer temp = Customer.getCustomerByName("Mays Billy");
-//        ArrayList<Item> items = new ArrayList<>();
-//        Topping topping = new Topping(5, "Fruit", 10, 200);
-//        items.add(topping);
-//        Order order = new Order(items, temp, null, false);
+        ArrayList<Item> allBeverages = Beverage.getAllItems();
+        ArrayList<Item> allDesserts = Dessert.getAllItems();
+        ArrayList<Item> allEntrees = Entree.getAllItems();
+        ArrayList<Item> allMeals = Meal.getAllItems();
+        ArrayList<Item> allSides = Side.getAllItems();
+        ArrayList<Item> allToppings = Topping.getAllItems();
 
-//        Code to insert csv file data into database.
-//        Scanner sc = new Scanner(new File("db/tableData/newOrders.csv"));
-//
-//        Integer count = 0;
-//        while (sc.hasNextLine()) {
-//            String row = sc.nextLine();
-//
-//            if (count > 0) {
-//                Scanner rowScanner = new Scanner(row);
-//                rowScanner.useDelimiter(",");
-//
-//                ArrayList<String> values = new ArrayList<>();
-//                while (rowScanner.hasNext()) {
-//                    values.add(rowScanner.next());
-//                }
-//
-//                Order temp = new Order(values.get(1), Customer.getCustomerByName(values.get(0).toUpperCase()), null, true);
-//            }
-//
-//            count++;
-//        }
-//
-//        sc.close();
-
-//        ArrayList<Beverage> allBeverages = Beverage.getAllItems();
-//        ArrayList<Dessert> allDesserts = Dessert.getAllItems();
-//        ArrayList<Entree> allEntrees = Entree.getAllItems();
-//        ArrayList<Meal> allMeals = Meal.getAllItems();
-//        ArrayList<Side> allSides = Side.getAllItems();
-//        ArrayList<Topping> allToppings = Topping.getAllItems();
-
-//        ArrayList<Item> recommendations = Customer.getCustomerRecommendations(Customer.getCustomerByName("Brennan"));
-
-        ArrayList<Item> trendingUp = Item.getTrendingUpAndDownItems();
+        ArrayList<Item> recommendations = Customer.getCustomerRecommendations(Customer.getCustomerByName("Brennan"), 3);
 
         QueryBuilder.closeDBConnection();
     }

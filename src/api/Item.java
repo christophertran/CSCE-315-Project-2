@@ -1,6 +1,5 @@
 package api;
 
-import java.sql.Array;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
@@ -39,25 +38,7 @@ public class Item {
         this.calories = calories;
     }
 
-    static ArrayList<Item> getAllItems(String itemType) throws SQLException {
-        ArrayList<Item> items = new ArrayList<>();
-        ArrayList<HashMap<String, String>> itemsDict = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(itemType, null));
-        for (HashMap h : itemsDict) {
-            Item i = new Item(Integer.parseInt((String) h.get(Item.id_column)),
-                    (String) h.get(Item.name_column),
-                    Float.parseFloat((String) h.get(Item.price_column)),
-                    Integer.parseInt((String) h.get(Item.calories_column)));
-            items.add(i);
-        }
-        return items;
-    }
-
-    /**
-     * Returns an ArrayList of 4 items, the first two items are the trending up items and the last two items are the trending down items.
-     * @return
-     * @throws SQLException
-     */
-    static ArrayList<Item> getTrendingUpAndDownItems() throws  SQLException {
+    public static ArrayList<Item> getTrendingUpAndDownItems() throws  SQLException {
         ArrayList<Item> ret = new ArrayList<>();
 
         String currentDate = LocalDate.now().toString();
@@ -80,7 +61,7 @@ public class Item {
                 previousOrderContentsNames.add(contentName);
                 constraints.put(Item.name_column, contentName);
 
-                ArrayList<HashMap<String, String>> result = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Item.getTableNameFromItemName(contentName), constraints));
+                ArrayList<HashMap<String, String>> result = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Item.getTableNameFromItemName(contentName), constraints, null));
 
                 if (result.size() > 0) {
                     char itemCode = contentName.charAt(0);
@@ -148,8 +129,6 @@ public class Item {
 
         frequencies.remove(minEntry1.getKey());
 
-
-
         Map.Entry<String, Integer> maxEntry2 = null;
         Map.Entry<String, Integer> minEntry2 = null;
 
@@ -177,9 +156,16 @@ public class Item {
         return ret;
     }
 
-    static String getTableNameFromItemName(String itemName) {
-        char itemCode = itemName.charAt(0);
-        switch (itemCode) {
+    public static String getFullItemNameFromString(String str) {
+        return str.substring(0, 2).toUpperCase();
+    }
+
+    public static char getItemCodeFromItemName(String itemName) {
+        return itemName.charAt(0);
+    }
+
+    public static String getTableNameFromItemName(String itemName) {
+        switch (Item.getItemCodeFromItemName(itemName)) {
             case 'B':
                 return Beverage.tableName;
             case 'D':
@@ -195,5 +181,108 @@ public class Item {
         }
 
         return "";
+    }
+
+    public static Item getItemFromDatabaseByName(String itemName) throws SQLException {
+        HashMap<String, String> constraints = new HashMap<>();
+        constraints.put(Item.name_column, itemName);
+
+        ArrayList<HashMap<String, String>> result = QueryBuilder.executeQuery(
+                QueryBuilder.buildSelectionQuery(Item.getTableNameFromItemName(itemName), constraints, null));
+
+        Item ret = null;
+        if (result.size() > 0) {
+            switch (Item.getItemCodeFromItemName(itemName)) {
+                case 'B':
+                    ret = new Beverage(Integer.parseInt(result.get(0).get(Beverage.id_column)),
+                            result.get(0).get(Beverage.name_column),
+                            Float.parseFloat(result.get(0).get(Beverage.price_column)),
+                            Integer.parseInt(result.get(0).get(Beverage.calories_column)));
+                    break;
+                case 'D':
+                    ret = new Dessert(Integer.parseInt(result.get(0).get(Dessert.id_column)),
+                            result.get(0).get(Dessert.name_column),
+                            Float.parseFloat(result.get(0).get(Dessert.price_column)),
+                            Integer.parseInt(result.get(0).get(Dessert.calories_column)));
+                    break;
+                case 'E':
+                    ret = new Entree(Integer.parseInt(result.get(0).get(Entree.id_column)),
+                            result.get(0).get(Entree.name_column),
+                            Float.parseFloat(result.get(0).get(Entree.price_column)),
+                            Integer.parseInt(result.get(0).get(Entree.calories_column)),
+                            result.get(0).get(Entree.toppings_column));
+                    break;
+                case 'M':
+                    ret = new Meal(Integer.parseInt(result.get(0).get(Meal.id_column)),
+                            result.get(0).get(Meal.name_column),
+                            Float.parseFloat(result.get(0).get(Meal.price_column)),
+                            Integer.parseInt(result.get(0).get(Meal.calories_column)),
+                            result.get(0).get(Meal.contents_column));
+                    break;
+                case 'S':
+                    ret = new Side(Integer.parseInt(result.get(0).get(Side.id_column)),
+                            result.get(0).get(Side.name_column),
+                            Float.parseFloat(result.get(0).get(Side.price_column)),
+                            Integer.parseInt(result.get(0).get(Side.calories_column)));
+                    break;
+                case 'T':
+                    ret = new Topping(Integer.parseInt(result.get(0).get(Topping.id_column)),
+                            result.get(0).get(Topping.name_column),
+                            Float.parseFloat(result.get(0).get(Topping.price_column)),
+                            Integer.parseInt(result.get(0).get(Topping.calories_column)));
+                    break;
+            }
+        }
+
+        return ret;
+    }
+
+    public static ArrayList<Item> getItemsFromQueryResult(ArrayList<HashMap<String, String>> result) throws SQLException {
+        ArrayList<Item> ret = new ArrayList<>();
+
+        for (HashMap<String, String> h : result) {
+            switch (Item.getItemCodeFromItemName(h.get(Item.name_column))) {
+                case 'B':
+                    ret.add(new Beverage(Integer.parseInt(result.get(0).get(Beverage.id_column)),
+                            result.get(0).get(Beverage.name_column),
+                            Float.parseFloat(result.get(0).get(Beverage.price_column)),
+                            Integer.parseInt(result.get(0).get(Beverage.calories_column))));
+                    break;
+                case 'D':
+                    ret.add(new Dessert(Integer.parseInt(result.get(0).get(Dessert.id_column)),
+                            result.get(0).get(Dessert.name_column),
+                            Float.parseFloat(result.get(0).get(Dessert.price_column)),
+                            Integer.parseInt(result.get(0).get(Dessert.calories_column))));
+                    break;
+                case 'E':
+                    ret.add(new Entree(Integer.parseInt(result.get(0).get(Entree.id_column)),
+                            result.get(0).get(Entree.name_column),
+                            Float.parseFloat(result.get(0).get(Entree.price_column)),
+                            Integer.parseInt(result.get(0).get(Entree.calories_column)),
+                            result.get(0).get(Entree.toppings_column)));
+                    break;
+                case 'M':
+                    ret.add(new Meal(Integer.parseInt(result.get(0).get(Meal.id_column)),
+                            result.get(0).get(Meal.name_column),
+                            Float.parseFloat(result.get(0).get(Meal.price_column)),
+                            Integer.parseInt(result.get(0).get(Meal.calories_column)),
+                            result.get(0).get(Meal.contents_column)));
+                    break;
+                case 'S':
+                    ret.add(new Side(Integer.parseInt(result.get(0).get(Side.id_column)),
+                            result.get(0).get(Side.name_column),
+                            Float.parseFloat(result.get(0).get(Side.price_column)),
+                            Integer.parseInt(result.get(0).get(Side.calories_column))));
+                    break;
+                case 'T':
+                    ret.add(new Topping(Integer.parseInt(result.get(0).get(Topping.id_column)),
+                            result.get(0).get(Topping.name_column),
+                            Float.parseFloat(result.get(0).get(Topping.price_column)),
+                            Integer.parseInt(result.get(0).get(Topping.calories_column))));
+                    break;
+            }
+        }
+
+        return ret;
     }
 }
