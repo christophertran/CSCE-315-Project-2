@@ -25,40 +25,6 @@ public class Order {
     String contents;
     boolean fulfilled;
 
-    public Order(ArrayList<Item> items, Customer customer, Employee employee, boolean fulfilled) throws SQLException {
-        this.customer = customer;
-        this.employee = employee;
-        this.date = LocalDate.now().toString();
-        this.time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        this.contents = Order.makeItemListString(items);
-        this.fulfilled = fulfilled;
-
-        // Insert into database
-        HashMap<String, String> values = new HashMap<>();
-        if (this.customer != null) {
-            values.put(Order.customer_id_column, this.customer.id.toString());
-        }
-        if (this.employee != null) {
-            values.put(Order.employee_id_column, this.employee.id.toString());
-        }
-        values.put(Order.date_column, this.date);
-        values.put(Order.time_column, this.time);
-        values.put(Order.contents_column, this.contents);
-        values.put(Order.fulfilled_column, this.fulfilled ? "true" : "false");
-
-        int updateResult = QueryBuilder.executeUpdate(QueryBuilder.buildInsertionQuery(Order.tableName, values));
-
-        ArrayList<HashMap<String, String>> orderResult = null;
-
-        if (updateResult > 0) {
-            orderResult = QueryBuilder.executeQuery(QueryBuilder.buildGetLastItemFromTableQuery(Order.tableName));
-        }
-
-        if (orderResult != null) {
-            this.id = Integer.parseInt(orderResult.get(0).get(Order.id_column));
-        }
-    }
-
     public Order(String contents, Customer customer, Employee employee, boolean fulfilled) throws SQLException {
         this.customer = customer;
         this.employee = employee;
@@ -94,13 +60,4 @@ public class Order {
         }
     }
 
-    static String makeItemListString(ArrayList<Item> items) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Item item : items) {
-            stringBuilder.append(item.getName() + " ");
-        }
-        stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
-
-        return stringBuilder.toString();
-    }
 }
