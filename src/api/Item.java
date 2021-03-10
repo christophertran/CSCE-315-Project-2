@@ -14,7 +14,6 @@ public class Item {
     static final String trending_up_key = "trending up";
     static final String trending_down_key = "trending down";
 
-
     Integer id;
     String name;
     Float price;
