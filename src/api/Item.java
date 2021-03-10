@@ -121,22 +121,20 @@ public class Item {
 
         for (int i = 0; i < limit; i++) {
             Map.Entry<String, Integer> maxEntry = null;
+            Map.Entry<String, Integer> minEntry = null;
+
             for (Map.Entry<String, Integer> itemNameFrequencyEntry : itemNameFrequencies.entrySet()) {
                 if (maxEntry == null || itemNameFrequencyEntry.getValue() > maxEntry.getValue()) {
                     maxEntry = itemNameFrequencyEntry;
                 }
-            }
-            ret.get(Item.trending_up_key).add(Item.getItemFromDatabaseByName(maxEntry.getKey()));
-            itemNameFrequencies.remove(maxEntry.getKey());
-        }
 
-        for (int i = 0; i < limit; i++) {
-            Map.Entry<String, Integer> minEntry = null;
-            for (Map.Entry<String, Integer> itemNameFrequencyEntry : itemNameFrequencies.entrySet()) {
                 if (minEntry == null || itemNameFrequencyEntry.getValue() < minEntry.getValue()) {
                     minEntry = itemNameFrequencyEntry;
                 }
             }
+
+            ret.get(Item.trending_up_key).add(Item.getItemFromDatabaseByName(maxEntry.getKey()));
+            itemNameFrequencies.remove(maxEntry.getKey());
             ret.get(Item.trending_down_key).add(Item.getItemFromDatabaseByName(minEntry.getKey()));
             itemNameFrequencies.remove(minEntry.getKey());
         }
