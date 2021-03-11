@@ -1,9 +1,15 @@
+package db;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import api.*;
+
+import javax.management.Query;
 import javax.swing.JOptionPane;
+import java.sql.Array;
+import java.sql.SQLException;
 import java.util.*;
 /**
  *
@@ -11,6 +17,7 @@ import java.util.*;
  */
 public class PoSGUI extends javax.swing.JFrame {
     ArrayList<String> currentItems = new ArrayList<String>();
+    ArrayList<String> abbreviatedItems = new ArrayList<String>();
     boolean employeeView = false;
     /**
      * Creates new form PoSGUI
@@ -144,6 +151,7 @@ public class PoSGUI extends javax.swing.JFrame {
 
         mealFrame.setMinimumSize(new java.awt.Dimension(500, 600));
         mealFrame.setPreferredSize(new java.awt.Dimension(500, 600));
+        mealFrame.setResizable(false);
 
         currentMeal.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         currentMeal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -267,6 +275,7 @@ public class PoSGUI extends javax.swing.JFrame {
         toppingFrame.setAlwaysOnTop(true);
         toppingFrame.setMinimumSize(new java.awt.Dimension(500, 600));
         toppingFrame.setPreferredSize(new java.awt.Dimension(500, 600));
+        toppingFrame.setResizable(false);
 
         toppingLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         toppingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -384,6 +393,7 @@ public class PoSGUI extends javax.swing.JFrame {
         othersFrame.setMaximumSize(new java.awt.Dimension(400, 350));
         othersFrame.setMinimumSize(new java.awt.Dimension(400, 350));
         othersFrame.setPreferredSize(new java.awt.Dimension(400, 350));
+        othersFrame.setResizable(false);
 
         othersLabel.setAlignment(java.awt.Label.CENTER);
         othersLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -555,7 +565,11 @@ public class PoSGUI extends javax.swing.JFrame {
         checkoutButton.setText("Proceed to Checkout >>");
         checkoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkoutButtonActionPerformed(evt);
+                try {
+                    checkoutButtonActionPerformed(evt);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
         });
 
@@ -1130,6 +1144,11 @@ public class PoSGUI extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
+        sidesPanel.setVisible(false);
+        entreesPanel.setVisible(false);
+        beveragePanel.setVisible(false);
+        dessertsPanel.setVisible(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1140,12 +1159,12 @@ public class PoSGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1160,36 +1179,60 @@ public class PoSGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void meal2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meal2ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_meal2ActionPerformed
 
     private void meal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meal3ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_meal3ActionPerformed
 
     private void meal4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meal4ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_meal4ActionPerformed
 
     private void meal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meal1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_meal1ActionPerformed
 
     private void mealsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mealsButtonActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_mealsButtonActionPerformed
 
     private void meal5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meal5ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_meal5ActionPerformed
 
-    private void checkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutButtonActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Order in process!");
+    private void checkoutButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_checkoutButtonActionPerformed
+        String customerName = enterName.getText();
+
+        if (!customerName.equals("Enter Customer Name")) {
+            StringBuilder orderContents = new StringBuilder();
+            for (String items : abbreviatedItems) {
+                boolean isMeal = false;
+                for (Item m : allMeals) {
+                    if (items.substring(0, 2).equals(m.getName())) {
+                        isMeal = true;
+                    }
+                }
+                if (isMeal) {
+                    // Remove the meals tag in front of the items
+                    items = items.substring(3);
+                }
+
+                orderContents.append(items.replace(',', ' '));
+                orderContents.append(" ");
+            }
+            orderContents.delete(orderContents.length() - 1, orderContents.length());
+
+            Order temp = new Order(orderContents.toString(), Customer.getCustomerByName(customerName), null, true);
+
+            enterName.setText("Enter Customer Name");
+            abbreviatedItems.clear();
+            currentItems.clear();
+            update();
+
+            JOptionPane.showMessageDialog(this, "Order in process!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Please enter a customer name!");
+        }
     }//GEN-LAST:event_checkoutButtonActionPerformed
 
     private void entreesButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entreesButtonMouseClicked
-        //JOptionPane.showMessageDialog(this, "Hi");// TODO add your handling code here:
+        //JOptionPane.showMessageDialog(this, "Hi")
         mealsPanel.setVisible(false);
         entreesPanel.setVisible(true);
         sidesPanel.setVisible(false);
@@ -1201,7 +1244,7 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_entreesButtonMouseClicked
 
     private void entreesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entreesButtonActionPerformed
-        //JOptionPane.showMessageDialog(this, "Hi2");// TODO add your handling code here:
+        //JOptionPane.showMessageDialog(this, "Hi2")
     }//GEN-LAST:event_entreesButtonActionPerformed
 
     private void mealsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mealsButtonMouseClicked
@@ -1215,7 +1258,6 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_mealsButtonMouseClicked
 
     private void sidesButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidesButtonMouseClicked
-        // TODO add your handling code here:
         mealsPanel.setVisible(false);
         entreesPanel.setVisible(false);
         sidesPanel.setVisible(true);
@@ -1227,7 +1269,6 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_sidesButtonMouseClicked
 
     private void dessertsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dessertsButtonMouseClicked
-        // TODO add your handling code here:
         mealsPanel.setVisible(false);
         entreesPanel.setVisible(false);
         sidesPanel.setVisible(false);
@@ -1239,7 +1280,6 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_dessertsButtonMouseClicked
 
     private void beverageButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverageButtonMouseClicked
-        // TODO add your handling code here:
         mealsPanel.setVisible(false);
         entreesPanel.setVisible(false);
         sidesPanel.setVisible(false);
@@ -1251,79 +1291,60 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_beverageButtonMouseClicked
 
     private void entree1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_entree1ActionPerformed
 
     private void entree2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree2ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_entree2ActionPerformed
 
     private void entree3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree3ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_entree3ActionPerformed
 
     private void entree4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree4ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_entree4ActionPerformed
 
     private void entree5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree5ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_entree5ActionPerformed
 
     private void entree6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree6ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_entree6ActionPerformed
 
     private void entree7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree7ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_entree7ActionPerformed
 
     private void side1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_side1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_side1ActionPerformed
 
     private void side2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_side2ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_side2ActionPerformed
 
     private void side3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_side3ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_side3ActionPerformed
 
     private void side4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_side4ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_side4ActionPerformed
 
     private void beverage1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beverage1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_beverage1ActionPerformed
 
     private void beverage2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beverage2ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_beverage2ActionPerformed
 
     private void beverage3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beverage3ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_beverage3ActionPerformed
 
     private void beverage4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beverage4ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_beverage4ActionPerformed
 
     private void beverage5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beverage5ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_beverage5ActionPerformed
 
     private void dessert1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dessert1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_dessert1ActionPerformed
 
     private void dessert2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dessert2ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_dessert2ActionPerformed
 
     private void meal1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_meal1MouseClicked
-        // TODO add your handling code here:
         mealFrame.setVisible(true);
         toppingFrame.setVisible(false);
         currentMeal.setText("Meal1");
@@ -1334,7 +1355,6 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_meal1MouseClicked
 
     private void meal5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_meal5MouseClicked
-        // TODO add your handling code here:
         mealFrame.setVisible(true);
         toppingFrame.setVisible(false);
         currentMeal.setText("Meal5");
@@ -1345,10 +1365,9 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_meal5MouseClicked
 
     private void meal4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_meal4MouseClicked
-        // TODO add your handling code here:
         mealFrame.setVisible(true);
         toppingFrame.setVisible(false);
-        currentMeal.setText("M4eal");
+        currentMeal.setText("Meal4");
         entreeLabel.setText("Entree1");
         sideLabel.setText("Side2");
         beverageLabel.setText("Beverage1");
@@ -1356,7 +1375,6 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_meal4MouseClicked
 
     private void meal3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_meal3MouseClicked
-        // TODO add your handling code here:
         mealFrame.setVisible(true);
         toppingFrame.setVisible(false);
         currentMeal.setText("Meal3");
@@ -1367,7 +1385,6 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_meal3MouseClicked
 
     private void meal2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_meal2MouseClicked
-        // TODO add your handling code here:
         mealFrame.setVisible(true);
         toppingFrame.setVisible(false);
         currentMeal.setText("Meal2");
@@ -1378,11 +1395,9 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_meal2MouseClicked
 
     private void entreeCustomizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entreeCustomizeMouseClicked
-        // TODO add your handling code here:
     }//GEN-LAST:event_entreeCustomizeMouseClicked
 
     private void entreeCustomizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entreeCustomizeActionPerformed
-        // TODO add your handling code here:
         toppingFrame.setVisible(true);
         toppingLabel.setText("Customizing " + entreeLabel.getText());
         switch(entreeLabel.getText())
@@ -1413,42 +1428,37 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_entreeCustomizeActionPerformed
 
     private void addItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addItemsActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_addItemsActionPerformed
 
     private void addItemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addItemsMouseClicked
-        // TODO add your handling code here:
         if(customizations.getText().equals("No Customizations"))
             customizations.setText("");
         currentItems.add(currentMeal.getText() + "," + entreeLabel.getText() + 
                 " " + customizations.getText().replaceAll(", ", " ").replaceAll("<html>|</html>", "") + "," + sideLabel.getText() + ","
                 + beverageLabel.getText());
+        abbreviatedItems.add(currentMeal.getText().charAt(0) + "" + currentMeal.getText().charAt(4) + "," + entreeLabel.getText().charAt(0) + entreeLabel.getText().charAt(6) +
+                "" + customizations.getText().replaceAll(", ", "").replaceAll("<html>|</html>", "").replaceAll("noTopping","-T").replaceAll("addTopping","+T") + "," + sideLabel.getText().charAt(0) + sideLabel.getText().charAt(4) + ","
+                + beverageLabel.getText().charAt(0) + beverageLabel.getText().charAt(8));
         update();
     }//GEN-LAST:event_addItemsMouseClicked
 
     private void enterNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterNameActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_enterNameActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        // TODO add your handling code here:
     }//GEN-LAST:event_formMouseClicked
 
     private void enterNameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enterNameMouseEntered
-        // TODO add your handling code here:
     }//GEN-LAST:event_enterNameMouseEntered
 
     private void enterNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enterNameMouseClicked
-        // TODO add your handling code here:
         enterName.setText("");
     }//GEN-LAST:event_enterNameMouseClicked
 
     private void entreeCustomizeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_entreeCustomizeFocusLost
-        // TODO add your handling code here:
     }//GEN-LAST:event_entreeCustomizeFocusLost
 
     private void entree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree1MouseClicked
-        // TODO add your handling code here:
         toppingFrame.setVisible(true);
         toppingLabel.setText("Adding Entree1");
         addCommitButton.setText("Add");
@@ -1465,7 +1475,6 @@ public class PoSGUI extends javax.swing.JFrame {
     }
     
     private void addCommitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCommitButtonActionPerformed
-        // TODO add your handling code here:
         if(addCommitButton.getText().equals("Add"))
         {
             String customText = "";
@@ -1526,14 +1535,14 @@ public class PoSGUI extends javax.swing.JFrame {
             {
                 if(!topping1Box.isSelected())
                     customText += "noTopping1 ";
-                if(topping2Box.isSelected())
-                    customText += "addTopping2 ";
+                if(!topping2Box.isSelected())
+                    customText += "noTopping2 ";
                 if(topping3Box.isSelected())
                     customText += "addTopping3 ";
                 if(!topping4Box.isSelected())
                     customText += "noTopping4 ";
-                if(!topping5Box.isSelected())
-                    customText += "noTopping5";
+                if(topping5Box.isSelected())
+                    customText += "addTopping5";
             }
             else if(currentEntree.equals("Entree6"))
             {
@@ -1553,7 +1562,7 @@ public class PoSGUI extends javax.swing.JFrame {
                 if(!topping1Box.isSelected())
                     customText += "noTopping1 ";
                 if(topping2Box.isSelected())
-                    customText += "Topping2 ";
+                    customText += "addTopping2 ";
                 if(!topping3Box.isSelected())
                     customText += "noTopping3 ";
                 if(!topping4Box.isSelected())
@@ -1562,6 +1571,8 @@ public class PoSGUI extends javax.swing.JFrame {
                     customText += "addTopping5";
             }//</editor-fold>
             currentItems.add(currentEntree + " " + customText);
+            abbreviatedItems.add(currentEntree.charAt(0) + "" + currentEntree.charAt(6) +
+                    "" + customText.replaceAll(" ", "").replaceAll("<html>|</html>", "").replaceAll("noTopping","-T").replaceAll("addTopping","+T"));
             update();
         }
         else if(addCommitButton.getText().equals("Save Changes"))
@@ -1569,7 +1580,7 @@ public class PoSGUI extends javax.swing.JFrame {
             String customText = "<html>";
             String currentEntree = toppingLabel.getText().split(" ")[1];
             if(currentEntree.equals("Entree1"))
-            {//<editor-fold defaultstate="collapsed" desc="Topping Stuff">             
+            {//<editor-fold defaultstate="collapsed" desc="Topping Stuff">
                 if(!topping1Box.isSelected())
                     customText += "noTopping1, ";
                 if(!topping2Box.isSelected())
@@ -1624,14 +1635,14 @@ public class PoSGUI extends javax.swing.JFrame {
             {
                 if(!topping1Box.isSelected())
                     customText += "noTopping1, ";
-                if(topping2Box.isSelected())
-                    customText += "addTopping2, ";
+                if(!topping2Box.isSelected())
+                    customText += "noTopping2, ";
                 if(topping3Box.isSelected())
                     customText += "addTopping3, ";
                 if(!topping4Box.isSelected())
                     customText += "noTopping4, ";
-                if(!topping5Box.isSelected())
-                    customText += "noTopping5";
+                if(topping5Box.isSelected())
+                    customText += "addTopping5";
             }
             else if(currentEntree.equals("Entree6"))
             {
@@ -1651,7 +1662,7 @@ public class PoSGUI extends javax.swing.JFrame {
                 if(!topping1Box.isSelected())
                     customText += "noTopping1, ";
                 if(topping2Box.isSelected())
-                    customText += "Topping2, ";
+                    customText += "addTopping2, ";
                 if(!topping3Box.isSelected())
                     customText += "noTopping3, ";
                 if(!topping4Box.isSelected())
@@ -1665,7 +1676,6 @@ public class PoSGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_addCommitButtonActionPerformed
 
     private void entree2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree2MouseClicked
-        // TODO add your handling code here:
         toppingFrame.setVisible(true);
         toppingLabel.setText("Adding Entree2");
         addCommitButton.setText("Add");
@@ -1682,7 +1692,6 @@ public class PoSGUI extends javax.swing.JFrame {
     }
     
     private void entree3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree3MouseClicked
-        // TODO add your handling code here:
         toppingFrame.setVisible(true);
         toppingLabel.setText("Adding Entree3");
         addCommitButton.setText("Add");
@@ -1698,7 +1707,6 @@ public class PoSGUI extends javax.swing.JFrame {
         topping5Box.setSelected(true);
     }
     private void entree4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree4MouseClicked
-        // TODO add your handling code here:
         toppingFrame.setVisible(true);
         toppingLabel.setText("Adding Entree4");
         addCommitButton.setText("Add");
@@ -1713,7 +1721,6 @@ public class PoSGUI extends javax.swing.JFrame {
         topping5Box.setSelected(false);
     }
     private void entree5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree5MouseClicked
-        // TODO add your handling code here:
         toppingFrame.setVisible(true);
         toppingLabel.setText("Adding Entree5");
         addCommitButton.setText("Add");
@@ -1729,7 +1736,6 @@ public class PoSGUI extends javax.swing.JFrame {
         topping5Box.setSelected(false);
     }
     private void entree6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree6MouseClicked
-        // TODO add your handling code here:
         toppingFrame.setVisible(true);
         toppingLabel.setText("Adding Entree6");
         addCommitButton.setText("Add");
@@ -1745,7 +1751,6 @@ public class PoSGUI extends javax.swing.JFrame {
         topping5Box.setSelected(true);
     }
     private void entree7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree7MouseClicked
-        // TODO add your handling code here:
         toppingFrame.setVisible(true);
         toppingLabel.setText("Adding Entree7");
         addCommitButton.setText("Add");
@@ -1762,45 +1767,38 @@ public class PoSGUI extends javax.swing.JFrame {
     }
     
     private void topping2BoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topping2BoxActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_topping2BoxActionPerformed
 
     private void topping3BoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topping3BoxActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_topping3BoxActionPerformed
 
     private void topping4BoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topping4BoxActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_topping4BoxActionPerformed
 
     private void topping5BoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topping5BoxActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_topping5BoxActionPerformed
 
     private void topping1BoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topping1BoxActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_topping1BoxActionPerformed
 
     private void quantityAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantityAddActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_quantityAddActionPerformed
 
     private void quantityButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantityButtonActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_quantityButtonActionPerformed
 
     private void quantityAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quantityAddMouseClicked
-        // TODO add your handling code here:
         quantityAdd.setText("");
     }//GEN-LAST:event_quantityAddMouseClicked
 
     private void quantityButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quantityButtonMouseClicked
-        // TODO add your handling code here:
         if(quantityAdd.getText().matches("[+1234567890]"))
         {
             for(int i = 0; i < Integer.parseInt(quantityAdd.getText()); i++)
             {
                 currentItems.add(othersLabel.getText().split(" ")[1]);
+                String item = othersLabel.getText().split(" ")[1];
+                abbreviatedItems.add(item.charAt(0) + "" + item.charAt(item.length()-1));
             }
         }
         update();
@@ -1814,83 +1812,69 @@ public class PoSGUI extends javax.swing.JFrame {
         quantityAdd.setText("1");
     }
     private void side1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side1MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Side1");
     }//GEN-LAST:event_side1MouseClicked
 
     private void side2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side2MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Side2");
     }//GEN-LAST:event_side2MouseClicked
 
     private void side3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side3MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Side3");
     }//GEN-LAST:event_side3MouseClicked
 
     private void side4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side4MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Side4");
     }//GEN-LAST:event_side4MouseClicked
 
     private void beverage1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverage1MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Beverage1");
     }//GEN-LAST:event_beverage1MouseClicked
 
     private void beverage2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverage2MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Beverage2");
     }//GEN-LAST:event_beverage2MouseClicked
 
     private void beverage3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverage3MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Beverage3");
     }//GEN-LAST:event_beverage3MouseClicked
 
     private void beverage4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverage4MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Beverage4");
     }//GEN-LAST:event_beverage4MouseClicked
 
     private void beverage5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverage5MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Beverage5");
     }//GEN-LAST:event_beverage5MouseClicked
 
     private void dessert1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dessert1MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Dessert1");
     }//GEN-LAST:event_dessert1MouseClicked
 
     private void dessert2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dessert2MouseClicked
-        // TODO add your handling code here:
         othersOpen();
         othersLabel.setText("Adding Dessert2");
     }//GEN-LAST:event_dessert2MouseClicked
 
     private void clearOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearOrderMouseClicked
-        // TODO add your handling code here:
         currentItems.clear();
         update();
     }//GEN-LAST:event_clearOrderMouseClicked
 
     private void employeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeButtonActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_employeeButtonActionPerformed
 
     private void employeeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeButtonMouseClicked
-        // TODO add your handling code here:
         employeeView = !employeeView;
         if(employeeView)
         {
@@ -1907,12 +1891,17 @@ public class PoSGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_employeeButtonMouseClicked
 
-    
+    public static ArrayList<Item> allBeverages = null;
+    public static ArrayList<Item> allDesserts = null;
+    public static ArrayList<Item> allEntrees = null;
+    public static ArrayList<Item> allMeals = null;
+    public static ArrayList<Item> allSides = null;
+    public static ArrayList<Item> allToppings = null;
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws SQLException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1935,6 +1924,15 @@ public class PoSGUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(PoSGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+
+        QueryBuilder.openDBConnection();
+
+        allBeverages = Beverage.getAllItems();
+        allDesserts = Dessert.getAllItems();
+        allEntrees = Entree.getAllItems();
+        allMeals = Meal.getAllItems();
+        allSides = Side.getAllItems();
+        allToppings = Topping.getAllItems();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
