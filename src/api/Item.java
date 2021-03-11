@@ -124,6 +124,13 @@ public class Item {
         return ret;
     }
 
+    /**
+     * Return frequencies of order content items in data range provided
+     * @param startDate Beginning of date range
+     * @param endDate End of date range
+     * @return HashMap with item name as key and frequency count as value
+     * @throws SQLException Throws SQLException
+     */
     public static HashMap<String, Integer> getItemFrequencies(String startDate, String endDate) throws SQLException {
         String query = QueryBuilder.buildGetOrdersFromDateRangeQuery(startDate, endDate, null, null);
         ArrayList<HashMap<String, String>> queryResult = QueryBuilder.executeQuery(query);
@@ -149,6 +156,16 @@ public class Item {
         return itemNameFrequencies;
     }
 
+    /**
+     * This functions will return the effect of an item's price change on a weeks revenue. Given a date, data will be pulled
+     * from 1 week before and price change effect will be calculated.
+     *
+     * @param itemName Name of item that price will be changed for
+     * @param adjustedPrice New price of item that revenue change is wanted to be calculated at
+     * @param endDate Date that change wants to be calculated from
+     * @return Float that is the difference between revenues
+     * @throws SQLException Throws SQLException
+     */
     public static Float priceChangeEffect(String itemName, Float adjustedPrice, String endDate) throws SQLException {
         String currentDateMinus1Week = LocalDate.parse(endDate).minusWeeks(1).toString();
         HashMap<String, Integer> itemNameFrequencies = Item.getItemFrequencies(currentDateMinus1Week, endDate);
