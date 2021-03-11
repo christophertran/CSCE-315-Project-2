@@ -80,6 +80,7 @@ public class Item {
         this.calories = calories;
     }
 
+
     /**
      * Gets the provided amount of both trending up and trending down items. They are returned in a hashmap and the values
      * can be accessed by using the keys Item.trending_up_key and Item.trending_down_key
@@ -90,34 +91,15 @@ public class Item {
      * @return Return hashmap containing two arraylists of trending up and trending down items.
      * @throws SQLException Throws SQL Exception
      */
-    public static HashMap<String, ArrayList<Item>> getTrendingItems(Integer limit) throws  SQLException {
+    public static HashMap<String, ArrayList<Item>> getTrendingItems(Integer limit) throws SQLException {
         HashMap<String, ArrayList<Item>> ret = new HashMap<>();
         ret.put(Item.trending_up_key, new ArrayList<>());
         ret.put(Item.trending_down_key, new ArrayList<>());
 
         String currentDate = LocalDate.now().toString();
-        String currentDataMinus2Weeks = LocalDate.now().minusWeeks(2).toString();
+        String currentDateMinus2Weeks = LocalDate.now().minusWeeks(2).toString();
 
-        String query = QueryBuilder.buildGetOrdersFromDateRangeQuery(currentDataMinus2Weeks, currentDate, null, null);
-        ArrayList<HashMap<String, String>> queryResult = QueryBuilder.executeQuery(query);
-
-        ArrayList<String> itemsNames = new ArrayList<>();
-        for (HashMap<String, String> order : queryResult) {
-            String orderContents = order.get(Order.contents_column);
-
-            Scanner sc = new Scanner(orderContents);
-            sc.useDelimiter(" ");
-
-            while (sc.hasNext()) {
-                itemsNames.add(Item.getFullItemNameFromString(sc.next()));
-            }
-        }
-
-        HashSet<String> uniqueItemNames = new HashSet<>(itemsNames);
-        HashMap<String, Integer> itemNameFrequencies = new HashMap<>();
-        for (String s : uniqueItemNames) {
-            itemNameFrequencies.computeIfAbsent(s, s1 -> Collections.frequency(itemsNames, s1));
-        }
+        HashMap<String, Integer> itemNameFrequencies = Item.getItemFrequencies(currentDateMinus2Weeks, currentDate);
 
         for (int i = 0; i < limit; i++) {
             Map.Entry<String, Integer> maxEntry = null;
@@ -140,6 +122,47 @@ public class Item {
         }
 
         return ret;
+    }
+
+    public static HashMap<String, Integer> getItemFrequencies(String startDate, String endDate) throws SQLException {
+        String query = QueryBuilder.buildGetOrdersFromDateRangeQuery(startDate, endDate, null, null);
+        ArrayList<HashMap<String, String>> queryResult = QueryBuilder.executeQuery(query);
+
+        ArrayList<String> itemsNames = new ArrayList<>();
+        for (HashMap<String, String> order : queryResult) {
+            String orderContents = order.get(Order.contents_column);
+
+            Scanner sc = new Scanner(orderContents);
+            sc.useDelimiter(" ");
+
+            while (sc.hasNext()) {
+                itemsNames.add(Item.getFullItemNameFromString(sc.next()));
+            }
+        }
+
+        HashSet<String> uniqueItemNames = new HashSet<>(itemsNames);
+        HashMap<String, Integer> itemNameFrequencies = new HashMap<>();
+        for (String s : uniqueItemNames) {
+            itemNameFrequencies.computeIfAbsent(s, s1 -> Collections.frequency(itemsNames, s1));
+        }
+
+        return itemNameFrequencies;
+    }
+
+    public static Float priceChangeEffect(String itemName, Float adjustedPrice, String endDate) throws SQLException {
+        String currentDateMinus1Week = LocalDate.parse(endDate).minusWeeks(1).toString();
+        HashMap<String, Integer> itemNameFrequencies = Item.getItemFrequencies(currentDateMinus1Week, endDate);
+
+        int quantityOfSelectedItem;
+        if (itemNameFrequencies.get(itemName) != null) {
+            quantityOfSelectedItem = itemNameFrequencies.get(itemName);
+        } else {
+            quantityOfSelectedItem = 0;
+        }
+
+        Item selectedItem = Item.getItemFromDatabaseByName(itemName);
+        float price = selectedItem.getPrice();
+        return (adjustedPrice - price) * quantityOfSelectedItem;
     }
 
     /**
