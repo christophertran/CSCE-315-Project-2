@@ -240,17 +240,17 @@ public class QueryBuilder {
         return stringBuilder.toString();
     }
 
-    public static void main(String[] args) throws SQLException, FileNotFoundException {
-        QueryBuilder.openDBConnection();
-
-        HashMap<String, ArrayList<Item>> trendingItems = Item.getTrendingItems(3);
-
-        System.out.println("Trending Up: ");
-        System.out.println(Item.getItemsAsString(trendingItems.get(Item.trending_up_key)));
-
-        System.out.println("Trending Down: ");
-        System.out.println(Item.getItemsAsString(trendingItems.get(Item.trending_down_key)));
-
-        QueryBuilder.closeDBConnection();
-    }
+//    public static void main(String[] args) throws SQLException, FileNotFoundException {
+//        QueryBuilder.openDBConnection();
+//
+//        HashMap<String, ArrayList<Item>> trendingItems = Item.getTrendingItems(3);
+//
+//        System.out.println("Trending Up: ");
+//        System.out.println(Item.getItemsAsString(trendingItems.get(Item.trending_up_key)));
+//
+//        System.out.println("Trending Down: ");
+//        System.out.println(Item.getItemsAsString(trendingItems.get(Item.trending_down_key)));
+//
+//        QueryBuilder.closeDBConnection();
+//    }
 }

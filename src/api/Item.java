@@ -1,6 +1,5 @@
 package api;
 
-import java.sql.Array;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
@@ -80,6 +79,28 @@ public class Item {
         this.calories = calories;
     }
 
+    /**
+     * Returns all items inside a map, with their names being the key and corresponding item as the value.
+     * @return HashMap of items with their names as the keys
+     * @throws SQLException Throws SQLException
+     */
+    public static HashMap<String, Item> getAllItemsAsMap() throws SQLException {
+        HashMap<String, Item> ret = new HashMap<>();
+
+        ArrayList<Item> allItems = new ArrayList<>();
+        allItems.addAll(Beverage.getAllItems());
+        allItems.addAll(Dessert.getAllItems());
+        allItems.addAll(Entree.getAllItems());
+        allItems.addAll(Meal.getAllItems());
+        allItems.addAll(Side.getAllItems());
+        allItems.addAll(Topping.getAllItems());
+
+        for (Item i : allItems) {
+            ret.putIfAbsent(i.getName(), i);
+        }
+
+        return ret;
+    }
 
     /**
      * Gets the provided amount of both trending up and trending down items. They are returned in a hashmap and the values
