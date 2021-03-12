@@ -8,7 +8,7 @@ public class Meal extends Item{
     static final String tableName = "meals";
     static final String contents_column = "contents";
 
-    ArrayList<Item> contents;
+    private ArrayList<Item> contents;
 
     public ArrayList<Item> getContents() {
         return contents;
@@ -38,9 +38,9 @@ public class Meal extends Item{
 
         values.put(Meal.contents_column, Item.getItemsAsString(this.contents));
 
-        constraints.put(Meal.name_column, this.name);
+        constraints.put(Meal.name_column, this.getName());
 
-        return QueryBuilder.executeUpdate(QueryBuilder.buildUpdateQuery(Item.getTableNameFromItemName(this.name), values, constraints));
+        return QueryBuilder.executeUpdate(QueryBuilder.buildUpdateQuery(Item.getTableNameFromItemName(this.getName()), values, constraints));
     }
 
     Meal(int id, String name, float price, int calories, String contents) throws SQLException {
@@ -56,5 +56,23 @@ public class Meal extends Item{
     public static ArrayList<Item> getAllItems() throws SQLException {
         ArrayList<HashMap<String, String>> queryResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Meal.tableName, null, null));
         return Item.getItemsFromQueryResult(queryResult);
+    }
+
+    public static String createButtonHTML(Item item) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        if (item != null) {
+            Meal meal = (Meal) item;
+
+            stringBuilder.append(String.format("<html><center>\n%s<br><br>", meal.getFullName()));
+
+            for (Item i : meal.getContents()) {
+                stringBuilder.append(String.format("\n%s<br>", i.getFullName()));
+            }
+
+            stringBuilder.append(String.format("<br>\nPrice: $%s, Calories %s\n</center>\n</html>", meal.getPrice().toString(), meal.getCalories().toString()));
+        }
+
+        return stringBuilder.toString();
     }
 }

@@ -158,7 +158,7 @@ public class QueryBuilder {
      */
     static String buildInsertionQuery(String table, HashMap<String, String> values) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("INSERT INTO \"%s\" ( "));
+        stringBuilder.append(String.format("INSERT INTO \"%s\" ( ", table));
 
         for (Map.Entry<String, String> entry : values.entrySet()) {
             stringBuilder.append(String.format(" \"%s\", ", entry.getKey()));

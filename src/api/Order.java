@@ -17,13 +17,13 @@ public class Order {
     static final String contents_column = "contents";
     static final String fulfilled_column = "fulfilled";
 
-    int id;
-    Customer customer;
-    Employee employee;
-    String date;
-    String time;
-    String contents;
-    boolean fulfilled;
+    private int id;
+    private Customer customer;
+    private Employee employee;
+    private String date;
+    private String time;
+    private String contents;
+    private boolean fulfilled;
 
     public Order(String contents, Customer customer, Employee employee, boolean fulfilled) throws SQLException {
         this.customer = customer;
@@ -36,11 +36,11 @@ public class Order {
         // Insert into database
         HashMap<String, String> values = new HashMap<>();
         if (this.customer != null) {
-            values.put(Order.customer_id_column, this.customer.id.toString());
+            values.put(Order.customer_id_column, this.customer.getId().toString());
         }
 
         if (this.employee != null) {
-            values.put(Order.employee_id_column, this.employee.id.toString());
+            values.put(Order.employee_id_column, this.employee.getId().toString());
         }
         values.put(Order.date_column, this.date);
         values.put(Order.time_column, this.time);

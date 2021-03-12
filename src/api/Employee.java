@@ -7,10 +7,10 @@ public class Employee {
     static final String address_column = "address";
     static final String email_column = "email";
 
-    Integer id;
-    String name;
-    String address;
-    String email;
+    private Integer id;
+    private String name;
+    private String address;
+    private String email;
 
     public Integer getId() {
         return id;

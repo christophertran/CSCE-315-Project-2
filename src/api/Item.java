@@ -13,10 +13,10 @@ public class Item {
     static final String trending_up_key = "trending up";
     static final String trending_down_key = "trending down";
 
-    Integer id;
-    String name;
-    Float price;
-    Integer calories;
+    private Integer id;
+    private String name;
+    private Float price;
+    private Integer calories;
 
     public Integer getId() {
         return id;
@@ -24,6 +24,33 @@ public class Item {
 
     public String getName() {
         return name;
+    }
+
+    public String getFullName() {
+        String ret = "";
+
+        switch (Item.getItemCodeFromItemName(name)) {
+            case 'B':
+                ret = "Beverage" + name.charAt(1);
+                break;
+            case 'D':
+                ret = "Dessert" + name.charAt(1);
+                break;
+            case 'E':
+                ret = "Entree" + name.charAt(1);
+                break;
+            case 'M':
+                ret = "Meal" + name.charAt(1);
+                break;
+            case 'S':
+                ret = "Side" + name.charAt(1);
+                break;
+            case 'T':
+                ret = "Topping" + name.charAt(1);
+                break;
+        }
+
+        return ret;
     }
 
     public Float getPrice() {
@@ -344,42 +371,42 @@ public class Item {
         for (HashMap<String, String> h : result) {
             switch (Item.getItemCodeFromItemName(h.get(Item.name_column))) {
                 case 'B':
-                    ret.add(new Beverage(Integer.parseInt(result.get(0).get(Beverage.id_column)),
-                            result.get(0).get(Beverage.name_column),
-                            Float.parseFloat(result.get(0).get(Beverage.price_column)),
-                            Integer.parseInt(result.get(0).get(Beverage.calories_column))));
+                    ret.add(new Beverage(Integer.parseInt(h.get(Beverage.id_column)),
+                            h.get(Beverage.name_column),
+                            Float.parseFloat(h.get(Beverage.price_column)),
+                            Integer.parseInt(h.get(Beverage.calories_column))));
                     break;
                 case 'D':
-                    ret.add(new Dessert(Integer.parseInt(result.get(0).get(Dessert.id_column)),
-                            result.get(0).get(Dessert.name_column),
-                            Float.parseFloat(result.get(0).get(Dessert.price_column)),
-                            Integer.parseInt(result.get(0).get(Dessert.calories_column))));
+                    ret.add(new Dessert(Integer.parseInt(h.get(Dessert.id_column)),
+                            h.get(Dessert.name_column),
+                            Float.parseFloat(h.get(Dessert.price_column)),
+                            Integer.parseInt(h.get(Dessert.calories_column))));
                     break;
                 case 'E':
-                    ret.add(new Entree(Integer.parseInt(result.get(0).get(Entree.id_column)),
-                            result.get(0).get(Entree.name_column),
-                            Float.parseFloat(result.get(0).get(Entree.price_column)),
-                            Integer.parseInt(result.get(0).get(Entree.calories_column)),
-                            result.get(0).get(Entree.toppings_column)));
+                    ret.add(new Entree(Integer.parseInt(h.get(Entree.id_column)),
+                            h.get(Entree.name_column),
+                            Float.parseFloat(h.get(Entree.price_column)),
+                            Integer.parseInt(h.get(Entree.calories_column)),
+                            h.get(Entree.toppings_column)));
                     break;
                 case 'M':
-                    ret.add(new Meal(Integer.parseInt(result.get(0).get(Meal.id_column)),
-                            result.get(0).get(Meal.name_column),
-                            Float.parseFloat(result.get(0).get(Meal.price_column)),
-                            Integer.parseInt(result.get(0).get(Meal.calories_column)),
-                            result.get(0).get(Meal.contents_column)));
+                    ret.add(new Meal(Integer.parseInt(h.get(Meal.id_column)),
+                            h.get(Meal.name_column),
+                            Float.parseFloat(h.get(Meal.price_column)),
+                            Integer.parseInt(h.get(Meal.calories_column)),
+                            h.get(Meal.contents_column)));
                     break;
                 case 'S':
-                    ret.add(new Side(Integer.parseInt(result.get(0).get(Side.id_column)),
-                            result.get(0).get(Side.name_column),
-                            Float.parseFloat(result.get(0).get(Side.price_column)),
-                            Integer.parseInt(result.get(0).get(Side.calories_column))));
+                    ret.add(new Side(Integer.parseInt(h.get(Side.id_column)),
+                            h.get(Side.name_column),
+                            Float.parseFloat(h.get(Side.price_column)),
+                            Integer.parseInt(h.get(Side.calories_column))));
                     break;
                 case 'T':
-                    ret.add(new Topping(Integer.parseInt(result.get(0).get(Topping.id_column)),
-                            result.get(0).get(Topping.name_column),
-                            Float.parseFloat(result.get(0).get(Topping.price_column)),
-                            Integer.parseInt(result.get(0).get(Topping.calories_column))));
+                    ret.add(new Topping(Integer.parseInt(h.get(Topping.id_column)),
+                            h.get(Topping.name_column),
+                            Float.parseFloat(h.get(Topping.price_column)),
+                            Integer.parseInt(h.get(Topping.calories_column))));
                     break;
             }
         }
@@ -402,5 +429,9 @@ public class Item {
         stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
 
         return stringBuilder.toString();
+    }
+
+    public static String createButtonHTML(Item item) {
+        return String.format("<html>\n<center>\n%s<br><br>\nPrice: $%s, Calories: %s\n</center>\n</html>\n", item.getFullName(), item.getPrice().toString(), item.getCalories().toString());
     }
 }

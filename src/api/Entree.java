@@ -8,7 +8,7 @@ public class Entree extends Item {
     static final String tableName = "entrees";
     static final String toppings_column = "toppings";
 
-    ArrayList<Item> toppings;
+    private ArrayList<Item> toppings;
 
     public ArrayList<Item> getToppings() {
         return toppings;
@@ -38,9 +38,9 @@ public class Entree extends Item {
 
         values.put(Entree.toppings_column, Item.getItemsAsString(this.toppings));
 
-        constraints.put(Entree.name_column, this.name);
+        constraints.put(Entree.name_column, this.getName());
 
-        return QueryBuilder.executeUpdate(QueryBuilder.buildUpdateQuery(Item.getTableNameFromItemName(this.name), values, constraints));
+        return QueryBuilder.executeUpdate(QueryBuilder.buildUpdateQuery(Item.getTableNameFromItemName(this.getName()), values, constraints));
     }
 
     Entree(int id, String name, float price, int calories, String toppings) throws SQLException {
