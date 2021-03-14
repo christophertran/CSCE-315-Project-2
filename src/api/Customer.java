@@ -82,11 +82,11 @@ public class Customer {
 
         ArrayList<HashMap<String, String>> queryResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Order.tableName, constraints, 1));
 
-        Scanner sc = new Scanner(queryResult.get(0).get(Order.contents_column));
-        sc.useDelimiter(" ");
-
         ArrayList<Item> previousOrder = new ArrayList<>();
         if (queryResult.size() > 0) {
+            Scanner sc = new Scanner(queryResult.get(0).get(Order.contents_column));
+            sc.useDelimiter(" ");
+
             while(sc.hasNext() && (limit == null || (limit-- > 0))) {
                 String itemName = Item.getFullItemNameFromString(sc.next());
                 previousOrder.add(Item.getItemFromDatabaseByName(itemName));

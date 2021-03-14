@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package db;
 import api.*;
-
 import java.awt.*;
 import javax.swing.JOptionPane;
 import java.sql.Array;
@@ -380,6 +380,24 @@ public class PoSGUI extends javax.swing.JFrame {
         priceDateMeal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 priceDateMealKeyReleased(evt);
+            }
+        });
+
+        entreePriceChange.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                entreePriceChangeKeyReleased(evt);
+            }
+        });
+
+        mealPriceChange.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                mealPriceChangeKeyReleased(evt);
+            }
+        });
+
+        otherPriceChange.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                otherPriceChangeKeyReleased(evt);
             }
         });
 
@@ -2962,7 +2980,7 @@ public class PoSGUI extends javax.swing.JFrame {
             Float theoreticalPrice = Float.parseFloat(mealPriceChange.getText());
 
             if (theoreticalPrice > 0.00) {
-                System.out.println(String.format("Item: %s, Date: %s, Theoretical Price: %s", itemName, priceDateMeal.getText(), theoreticalPrice.toString()));
+//                System.out.println(String.format("Item: %s, Date: %s, Theoretical Price: %s", itemName, priceDateMeal.getText(), theoreticalPrice.toString()));
                 priceDeltaMeal.setText(String.format("$%.2f", Item.priceChangeEffect(itemName, theoreticalPrice, priceDateMeal.getText())));
             }
         } catch (Exception e) {
@@ -2981,7 +2999,7 @@ public class PoSGUI extends javax.swing.JFrame {
             Float theoreticalPrice = Float.parseFloat(entreePriceChange.getText());
 
             if (theoreticalPrice > 0.00) {
-                System.out.println(String.format("Item: %s, Date: %s, Theoretical Price: %s", itemName, priceDateEntree.getText(), theoreticalPrice.toString()));
+//                System.out.println(String.format("Item: %s, Date: %s, Theoretical Price: %s", itemName, priceDateEntree.getText(), theoreticalPrice.toString()));
                 priceDeltaEntree.setText(String.format("$%.2f", Item.priceChangeEffect(itemName, theoreticalPrice, priceDateEntree.getText())));
             }
         } catch (Exception e) {
@@ -3000,13 +3018,72 @@ public class PoSGUI extends javax.swing.JFrame {
             Float theoreticalPrice = Float.parseFloat(otherPriceChange.getText());
 
             if (theoreticalPrice > 0.00) {
-                System.out.println(String.format("Item: %s, Date: %s, Theoretical Price: %s", itemName, priceDateOthers.getText(), theoreticalPrice.toString()));
+//                System.out.println(String.format("Item: %s, Date: %s, Theoretical Price: %s", itemName, priceDateOthers.getText(), theoreticalPrice.toString()));
                 priceDeltaOthers.setText(String.format("$%.2f", Item.priceChangeEffect(itemName, theoreticalPrice, priceDateOthers.getText())));
             }
         } catch (Exception e) {
             priceDateOthers.setForeground(Color.RED);
         }
     }//GEN-LAST:event_priceDateOthersKeyReleased
+
+
+
+    private void entreePriceChangeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_entreePriceChangeKey
+        try {
+            LocalDate.parse(priceDateEntree.getText());
+
+            priceDateEntree.setForeground(Color.BLACK);
+
+            String itemName = Item.getAbbreviatedNameFromFullName(entreeLabel.getText().split(" ")[1]);
+
+            Float theoreticalPrice = Float.parseFloat(entreePriceChange.getText());
+
+            if (theoreticalPrice > 0.00) {
+//                System.out.println(String.format("Item: %s, Date: %s, Theoretical Price: %s", itemName, priceDateEntree.getText(), theoreticalPrice.toString()));
+                priceDeltaEntree.setText(String.format("$%.2f", Item.priceChangeEffect(itemName, theoreticalPrice, priceDateEntree.getText())));
+            }
+        } catch (Exception e) {
+            priceDateEntree.setForeground(Color.RED);
+        }
+    }//GEN-LAST:event_entreePriceChangeKeyReleased
+
+    private void mealPriceChangeKeyReleased(java.awt.event.KeyEvent evt) { //GEN-FIRST:event_mealPriceChangeKeyReleased
+        try {
+            LocalDate.parse(priceDateMeal.getText());
+
+            priceDateMeal.setForeground(Color.BLACK);
+
+            String itemName = Item.getAbbreviatedNameFromFullName(currentMeal.getText());
+
+            Float theoreticalPrice = Float.parseFloat(mealPriceChange.getText());
+
+            if (theoreticalPrice > 0.00) {
+//                System.out.println(String.format("Item: %s, Date: %s, Theoretical Price: %s", itemName, priceDateMeal.getText(), theoreticalPrice.toString()));
+                priceDeltaMeal.setText(String.format("$%.2f", Item.priceChangeEffect(itemName, theoreticalPrice, priceDateMeal.getText())));
+            }
+        } catch (Exception e) {
+            priceDateMeal.setForeground(Color.RED);
+        }
+    }//GEN-LAST:event_mealPriceChangeKeyReleased
+
+    private void otherPriceChangeKeyReleased(java.awt.event.KeyEvent evt) { //GEN-FIRST:event_otherPriceChangeKeyReleased
+        try {
+            LocalDate.parse(priceDateOthers.getText());
+
+            priceDateOthers.setForeground(Color.BLACK);
+
+            String itemName = Item.getAbbreviatedNameFromFullName(othersLabel.getText().split(" ")[1]);
+
+            Float theoreticalPrice = Float.parseFloat(otherPriceChange.getText());
+
+            if (theoreticalPrice > 0.00) {
+//                System.out.println(String.format("Item: %s, Date: %s, Theoretical Price: %s", itemName, priceDateOthers.getText(), theoreticalPrice.toString()));
+                priceDeltaOthers.setText(String.format("$%.2f", Item.priceChangeEffect(itemName, theoreticalPrice, priceDateOthers.getText())));
+            }
+        } catch (Exception e) {
+            priceDateOthers.setForeground(Color.RED);
+        }
+    }//GEN-LAST:event_otherPriceChangeKeyReleased
 
     private void confirmPriceOthersActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_confirmPriceOthersActionPerformed
         if(otherPriceChange.getText().matches("[0-9]+([,.][0-9]{1,2})?"))
