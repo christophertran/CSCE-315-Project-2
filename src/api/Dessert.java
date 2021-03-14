@@ -17,7 +17,7 @@ public class Dessert extends Item {
      * @throws SQLException Throws SQLException
      */
     public static ArrayList<Item> getAllItems() throws SQLException {
-        ArrayList<HashMap<String, String>> queryResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Dessert.tableName, null, null));
+        ArrayList<HashMap<String, String>> queryResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Dessert.tableName, null, null, null));
         return Item.getItemsFromQueryResult(queryResult);
     }
 }

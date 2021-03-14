@@ -49,7 +49,7 @@ public class Customer {
     public static Customer getCustomerByName(String customerName) throws SQLException {
         HashMap<String, String> constraints = new HashMap<>();
         constraints.put(Customer.name_column, customerName.toUpperCase());
-        ArrayList<HashMap<String, String>> customerResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Customer.tableName, constraints, null));
+        ArrayList<HashMap<String, String>> customerResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Customer.tableName, constraints, null, null));
 
         if (customerResult.size() == 0)
         {
@@ -80,7 +80,7 @@ public class Customer {
         HashMap<String, String> constraints = new HashMap<>();
         constraints.put(Order.customer_id_column, customer.getId().toString());
 
-        ArrayList<HashMap<String, String>> queryResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Order.tableName, constraints, 1));
+        ArrayList<HashMap<String, String>> queryResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Order.tableName, constraints, 1, "DESC"));
 
         ArrayList<Item> previousOrder = new ArrayList<>();
         if (queryResult.size() > 0) {

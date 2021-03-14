@@ -48,7 +48,7 @@ public class Employee {
     public static Employee getEmployeeByID(Integer id) throws SQLException {
         HashMap<String, String> constraints = new HashMap<>();
         constraints.put(Employee.id_column, id.toString());
-        ArrayList<HashMap<String, String>> employeeResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Employee.tableName, constraints, null));
+        ArrayList<HashMap<String, String>> employeeResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Employee.tableName, constraints, null, null));
 
         if (employeeResult.size() == 0)
         {

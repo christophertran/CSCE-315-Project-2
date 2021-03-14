@@ -54,7 +54,7 @@ public class Meal extends Item{
      * @throws SQLException Throws SQLException
      */
     public static ArrayList<Item> getAllItems() throws SQLException {
-        ArrayList<HashMap<String, String>> queryResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Meal.tableName, null, null));
+        ArrayList<HashMap<String, String>> queryResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Meal.tableName, null, null, null));
         return Item.getItemsFromQueryResult(queryResult);
     }
 

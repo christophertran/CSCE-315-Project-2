@@ -119,9 +119,10 @@ public class QueryBuilder {
      * @param table Name of table in database
      * @param constraints "WHERE" constraints of query
      * @param limit Add the "LIMIT" clause to the query
+     * @param orderBy Choose whether to order by the ID in "asc" or "desc" order
      * @return String that represents the SQL selection query created
      */
-    static String buildSelectionQuery(String table, HashMap<String, String> constraints, Integer limit) {
+    static String buildSelectionQuery(String table, HashMap<String, String> constraints, Integer limit, String orderBy) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("SELECT * FROM ").append(table);
 
@@ -138,6 +139,10 @@ public class QueryBuilder {
                     stringBuilder.append(", ");
                 i++;
             }
+        }
+
+        if (orderBy != null) {
+            stringBuilder.append("ORDER BY \"id\"").append(orderBy.toUpperCase());
         }
 
         if (limit != null) {

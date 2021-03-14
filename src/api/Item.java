@@ -289,7 +289,7 @@ public class Item {
         constraints.put(Item.name_column, itemName);
 
         ArrayList<HashMap<String, String>> result = QueryBuilder.executeQuery(
-                QueryBuilder.buildSelectionQuery(Item.getTableNameFromItemName(itemName), constraints, null));
+                QueryBuilder.buildSelectionQuery(Item.getTableNameFromItemName(itemName), constraints, null, null));
 
         if (result.size() > 0) {
             switch (Item.getItemCodeFromItemName(itemName)) {
