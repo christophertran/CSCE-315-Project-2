@@ -3144,7 +3144,7 @@ public class PoSGUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(PoSGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        //TODO Connect to DB
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
