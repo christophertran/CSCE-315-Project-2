@@ -10,8 +10,8 @@ public class Item {
     static final String price_column = "price";
     static final String calories_column = "calories";
 
-    static final String trending_up_key = "trending up";
-    static final String trending_down_key = "trending down";
+    public static final String trending_up_key = "trending up";
+    public static final String trending_down_key = "trending down";
 
     private Integer id;
     private String name;
@@ -431,7 +431,21 @@ public class Item {
         return stringBuilder.toString();
     }
 
+    /**
+     * Returns HTML for displaying into information on the GUI
+     * @param item Item that display information is to be created for
+     * @return HTML code in string format of given item's information
+     */
     public static String createButtonHTML(Item item) {
         return String.format("<html>\n<center>\n%s<br><br>\nPrice: $%s, Calories: %s\n</center>\n</html>\n", item.getFullName(), item.getPrice().toString(), item.getCalories().toString());
+    }
+
+    /**
+     * Returns the abbreviated version of an item name given the full version
+     * @param fullName Full name of an item
+     * @return Abbreviated version of the full name of an item
+     */
+    public static String getAbbreviatedNameFromFullName(String fullName) {
+        return String.valueOf(fullName.charAt(0)) + fullName.charAt(fullName.length() - 1);
     }
 }

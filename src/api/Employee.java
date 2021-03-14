@@ -1,5 +1,9 @@
 package api;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Employee {
     static final String tableName = "employees";
     static final String id_column = "id";
@@ -33,5 +37,24 @@ public class Employee {
         this.name = name;
         this.address = address;
         this.email = email;
+    }
+
+    /**
+     * Returns employee by ID if they exist in the database
+     * @param id ID of employee wanted
+     * @return Employee object is employee exists, null if they don't exist
+     * @throws SQLException Throws SQL Exception
+     */
+    public static Employee getEmployeeByID(Integer id) throws SQLException {
+        HashMap<String, String> constraints = new HashMap<>();
+        constraints.put(Employee.id_column, id.toString());
+        ArrayList<HashMap<String, String>> employeeResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Employee.tableName, constraints, null));
+
+        if (employeeResult.size() == 0)
+        {
+            return null;
+        }
+
+        return new Employee(Integer.parseInt(employeeResult.get(0).get(Employee.id_column)), employeeResult.get(0).get(Employee.name_column), employeeResult.get(0).get(Employee.address_column), employeeResult.get(0).get(Employee.email_column));
     }
 }

@@ -58,6 +58,11 @@ public class Meal extends Item{
         return Item.getItemsFromQueryResult(queryResult);
     }
 
+    /**
+     * Overloaded version of item's createButtonHTML, meant to return meal specific HTML information
+     * @param item Meal item to have html information created for
+     * @return HTML code in a string displaying given item's information
+     */
     public static String createButtonHTML(Item item) {
         StringBuilder stringBuilder = new StringBuilder();
 

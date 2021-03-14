@@ -1,4 +1,3 @@
-package db;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,10 +5,11 @@ package db;
  */
 import api.*;
 
-import javax.management.Query;
+import java.awt.*;
 import javax.swing.JOptionPane;
 import java.sql.Array;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 /**
  *
@@ -18,50 +18,160 @@ import java.util.*;
 public class PoSGUI extends javax.swing.JFrame {
     ArrayList<String> currentItems = new ArrayList<String>();
     ArrayList<String> abbreviatedItems = new ArrayList<String>();
+    ArrayList<String> unavailableItems = new ArrayList<String>();
     boolean employeeView = false;
+    int selectIndex = 0;
+    String customerName = "";
     /**
      * Creates new form PoSGUI
      */
-    public PoSGUI() {
+    public PoSGUI() throws SQLException {
         initComponents();
+        updateFoodButtons(); 
     }
     
+    //Updates the "Current Order" list in the right side of the screen.
     public void update()
     {
-        String orderText = "";
+        String orderText = "<html>";
         //takes each order entry
-        for(String orderEntry:currentItems) //"meal1,entree1 customization,side1,drink1"
+        for(int orderEntry = 0; orderEntry < currentItems.size(); orderEntry++) //"meal1,entree1 customization,side1,drink1"
         {
+            if(orderEntry == selectIndex)
+            {
+                orderText+= "<b>";
+            }
             //takes each item within order entry (incase of combo meals)
-            String[] individualItems = orderEntry.split(","); //"meal1","entree1 customization","side1","drink1"
+            String[] individualItems = currentItems.get(orderEntry).split(","); //"meal1","entree1 customization","side1","drink1"
             if(individualItems.length != 1) //means it's a meal
             {
-                orderText += "-" + individualItems[0] + "\n";
+                orderText += "-" + individualItems[0] + "<br>";
                 for(int i = 1; i < individualItems.length; i++)//"entree1 cusomization"
                 {
                     String[] customizations = individualItems[i].split(" "); //"entree1","custmoization"
                     //customizations[0] is the entree
-                    orderText += "    -" + customizations[0] + "\n"; //entree1
+                    orderText += "&emsp;-" + customizations[0] + "<br>"; //entree1
                     for(int j = 1; j < customizations.length; j++)
                     {
-                        orderText += "\t-" + customizations[j] + "\n";
+                        orderText += "&emsp;&emsp;-" + customizations[j] + "<br>";
                     }
                 }               
             }
-            else //TODO: in case not a meal
+            else //in case not a meal
             {
                 String[] customizations = individualItems[0].split(" ");
-                orderText += "-" + customizations[0] + "\n"; //entree1
+                orderText += "-" + customizations[0] + "<br>"; //entree1
                 for(int j = 1; j < customizations.length; j++)
                 {
-                    orderText += "    -" + customizations[j] + "\n";
+                    orderText += "&emsp;-" + customizations[j] + "<br>";
                 }
             }
-            orderText += "\n";
+            if(orderEntry == selectIndex)
+            {
+                orderText+= "</b>";
+            }
+            orderText += "<br>";
         }
-        currentOrder.setText(orderText);
+        currentOrder.setText(orderText + "</b></html>");
     }
 
+    //Updates every button after availability has been modified.
+    public void updateAvailability()
+    {
+        if(unavailableItems.contains("Meal1") || unavailableItems.contains("Entree1") || unavailableItems.contains("Side2") || unavailableItems.contains("Beverage4"))
+            meal1.setEnabled(false);
+        else
+            meal1.setEnabled(true);
+        if(unavailableItems.contains("Meal2") || unavailableItems.contains("Entree5") || unavailableItems.contains("Side4") || unavailableItems.contains("Beverage5"))
+            meal2.setEnabled(false);
+        else
+            meal2.setEnabled(true);
+        if(unavailableItems.contains("Meal3") || unavailableItems.contains("Entree6") || unavailableItems.contains("Side2") || unavailableItems.contains("Beverage1"))
+            meal3.setEnabled(false);
+        else
+            meal3.setEnabled(true);
+        if(unavailableItems.contains("Meal4") || unavailableItems.contains("Entree1") || unavailableItems.contains("Side2") || unavailableItems.contains("Beverage1"))
+            meal4.setEnabled(false);
+        else
+            meal4.setEnabled(true);
+        if(unavailableItems.contains("Meal5") || unavailableItems.contains("Entree5") || unavailableItems.contains("Side2") || unavailableItems.contains("Beverage5"))
+            meal5.setEnabled(false);
+        else
+            meal5.setEnabled(true);
+        if(unavailableItems.contains("Entree1"))
+            entree1.setEnabled(false);
+        else
+            entree1.setEnabled(true);
+        if(unavailableItems.contains("Entree2"))
+            entree2.setEnabled(false);
+        else
+            entree2.setEnabled(true);
+        if(unavailableItems.contains("Entree3"))
+            entree3.setEnabled(false);
+        else
+            entree3.setEnabled(true);
+        if(unavailableItems.contains("Entree4"))
+            entree4.setEnabled(false);
+        else
+            entree4.setEnabled(true);
+        if(unavailableItems.contains("Entree5"))
+            entree5.setEnabled(false);
+        else
+            entree5.setEnabled(true);
+        if(unavailableItems.contains("Entree6"))
+            entree6.setEnabled(false);
+        else
+            entree6.setEnabled(true);
+        if(unavailableItems.contains("Entree7"))
+            entree7.setEnabled(false);
+        else
+            entree7.setEnabled(true);
+        if(unavailableItems.contains("Side1"))
+            side1.setEnabled(false);
+        else
+            side1.setEnabled(true);
+        if(unavailableItems.contains("Side2"))
+            side2.setEnabled(false);
+        else
+            side2.setEnabled(true);
+        if(unavailableItems.contains("Side3"))
+            side3.setEnabled(false);
+        else
+            side3.setEnabled(true);
+        if(unavailableItems.contains("Side4"))
+            side4.setEnabled(false);
+        else
+            side4.setEnabled(true);
+        if(unavailableItems.contains("Beverage1"))
+            beverage1.setEnabled(false);
+        else
+            beverage1.setEnabled(true);
+        if(unavailableItems.contains("Beverage2"))
+            beverage2.setEnabled(false);
+        else
+            beverage2.setEnabled(true);
+        if(unavailableItems.contains("Beverage3"))
+            beverage3.setEnabled(false);
+        else
+            beverage3.setEnabled(true);
+        if(unavailableItems.contains("Beverage5"))
+            beverage4.setEnabled(false);
+        else
+            beverage4.setEnabled(true);
+        if(unavailableItems.contains("Beverage5"))
+            beverage5.setEnabled(false);
+        else
+            beverage5.setEnabled(true);
+        if(unavailableItems.contains("Dessert1"))
+            dessert1.setEnabled(false);
+        else
+            dessert1.setEnabled(true);
+        if(unavailableItems.contains("Dessert2"))
+            dessert2.setEnabled(false);
+        else
+            dessert2.setEnabled(true);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,24 +193,74 @@ public class PoSGUI extends javax.swing.JFrame {
         currentMeal = new javax.swing.JLabel();
         entreeCustomize = new java.awt.Button();
         jLayeredPane2 = new javax.swing.JLayeredPane();
-        entreeLabel = new javax.swing.JLabel();
+        entreeMealLabel = new javax.swing.JLabel();
         customizations = new javax.swing.JLabel();
         sideLabel = new javax.swing.JLabel();
         beverageLabel = new javax.swing.JLabel();
+        mealAvailability = new javax.swing.JCheckBox();
+        mealAvailability.setVisible(false);
+        mealPriceChange = new javax.swing.JTextField();
+        mealPriceChange.setVisible(false);
+        confirmPriceMeal = new javax.swing.JButton();
+        confirmPriceMeal.setVisible(false);
+        priceEffectMeal = new javax.swing.JLabel();
+        priceEffectMeal.setVisible(false);
+        priceDateMeal = new javax.swing.JTextField();
+        priceDateMeal.setVisible(false);
+        priceDeltaMeal = new javax.swing.JLabel();
+        priceDeltaMeal.setVisible(false);
         addItems = new javax.swing.JToggleButton();
         toppingFrame = new javax.swing.JFrame();
-        toppingLabel = new javax.swing.JLabel();
+        entreeLabel = new javax.swing.JLabel();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         topping1Box = new javax.swing.JCheckBox();
         topping2Box = new javax.swing.JCheckBox();
         topping3Box = new javax.swing.JCheckBox();
         topping4Box = new javax.swing.JCheckBox();
         topping5Box = new javax.swing.JCheckBox();
+        entreeAvailability = new javax.swing.JCheckBox();
+        entreeAvailability.setVisible(false);
+        entreePriceChange = new javax.swing.JTextField();
+        entreePriceChange.setVisible(false);
+        confirmPriceEntree = new javax.swing.JButton();
+        confirmPriceEntree.setVisible(false);
         addCommitButton = new javax.swing.JButton();
+        priceEffectEntree = new javax.swing.JLabel();
+        priceEffectEntree.setVisible(false);
+        priceDateEntree = new javax.swing.JTextField();
+        priceDateEntree.setVisible(false);
+        priceDeltaEntree = new javax.swing.JLabel();
+        priceDeltaEntree.setVisible(false);
         othersFrame = new javax.swing.JFrame();
         othersLabel = new java.awt.Label();
         quantityAdd = new java.awt.TextField();
         quantityButton = new java.awt.Button();
+        otherAvailability = new javax.swing.JCheckBox();
+        otherAvailability.setVisible(false);
+        otherPriceChange = new javax.swing.JTextField();
+        otherPriceChange.setVisible(false);
+        confirmPriceOthers = new javax.swing.JButton();
+        confirmPriceOthers.setVisible(false);
+        priceEffectOthers = new javax.swing.JLabel();
+        priceEffectOthers.setVisible(false);
+        priceDateOthers = new javax.swing.JTextField();
+        priceDateOthers.setVisible(false);
+        priceDeltaOthers = new javax.swing.JLabel();
+        priceDeltaOthers.setVisible(false);
+        employeeVerify = new javax.swing.JFrame();
+        employeePWBox = new javax.swing.JPasswordField();
+        employeeVerifyLabel = new javax.swing.JLabel();
+        employeeConfirm = new javax.swing.JButton();
+        trendFrame = new javax.swing.JFrame();
+        currentlyTrending = new javax.swing.JLabel();
+        topTrendHeader = new javax.swing.JLabel();
+        botTrendHeader = new javax.swing.JLabel();
+        encouragingWords = new javax.swing.JLabel();
+        top1Trending = new javax.swing.JLabel();
+        top2Trending = new javax.swing.JLabel();
+        bot1Trending = new javax.swing.JLabel();
+        bot2Trending = new javax.swing.JLabel();
+        trendExit = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         mealsButton = new java.awt.Button();
         entreesButton = new java.awt.Button();
@@ -108,11 +268,18 @@ public class PoSGUI extends javax.swing.JFrame {
         beverageButton = new java.awt.Button();
         dessertsButton = new java.awt.Button();
         employeeButton = new javax.swing.JButton();
+        seeTrend = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        currentOrder = new java.awt.TextArea();
         checkoutButton = new javax.swing.JButton();
         enterName = new javax.swing.JTextField();
         clearOrder = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        currentOrder = new javax.swing.JEditorPane();
+        currentOrder.setContentType("text/html");
+        upSelected = new javax.swing.JButton();
+        removeSelected = new javax.swing.JButton();
+        downSelected = new javax.swing.JButton();
+        customerLogin = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         mealsPanel = new javax.swing.JPanel();
         meal1 = new javax.swing.JButton();
@@ -149,8 +316,8 @@ public class PoSGUI extends javax.swing.JFrame {
         scrollPane1.add(scrollbar2);
         scrollPane1.add(scrollbar1);
 
+        mealFrame.setAlwaysOnTop(true);
         mealFrame.setMinimumSize(new java.awt.Dimension(500, 600));
-        mealFrame.setPreferredSize(new java.awt.Dimension(500, 600));
         mealFrame.setResizable(false);
 
         currentMeal.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
@@ -158,25 +325,15 @@ public class PoSGUI extends javax.swing.JFrame {
         currentMeal.setText("MealLabel");
 
         entreeCustomize.setLabel("Customize");
-        entreeCustomize.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                entreeCustomizeMouseClicked(evt);
-            }
-        });
-        entreeCustomize.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                entreeCustomizeFocusLost(evt);
-            }
-        });
         entreeCustomize.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 entreeCustomizeActionPerformed(evt);
             }
         });
 
-        entreeLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        entreeLabel.setText("entreeLabel");
-        entreeLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        entreeMealLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        entreeMealLabel.setText("entreeLabel");
+        entreeMealLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         customizations.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         customizations.setText("No Customizations");
@@ -190,10 +347,55 @@ public class PoSGUI extends javax.swing.JFrame {
         beverageLabel.setText("drinkLabel");
         beverageLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        jLayeredPane2.setLayer(entreeLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        mealAvailability.setSelected(true);
+        mealAvailability.setText("Available");
+        mealAvailability.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mealAvailabilityActionPerformed(evt);
+            }
+        });
+
+        confirmPriceMeal.setText("Change Price");
+        confirmPriceMeal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    confirmPriceMealActionPerformed(evt);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        });
+
+        priceEffectMeal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        priceEffectMeal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        priceEffectMeal.setText("Theoretical Profit Effect");
+
+        priceDateMeal.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
+        priceDateMeal.setText("Date Range (yyyy-mm-dd)");
+        priceDateMeal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                priceDateMealMouseClicked(evt);
+            }
+        });
+        priceDateMeal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                priceDateMealKeyReleased(evt);
+            }
+        });
+
+        priceDeltaMeal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        priceDeltaMeal.setText("$0.00");
+
+        jLayeredPane2.setLayer(entreeMealLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(customizations, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(sideLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(beverageLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(mealAvailability, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(mealPriceChange, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(confirmPriceMeal, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(priceEffectMeal, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(priceDateMeal, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(priceDeltaMeal, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -202,16 +404,30 @@ public class PoSGUI extends javax.swing.JFrame {
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(beverageLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sideLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addComponent(customizations)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(beverageLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
-                    .addComponent(sideLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mealAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(customizations)
+                            .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                                .addComponent(mealPriceChange, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(confirmPriceMeal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(107, 107, 107))
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(priceEffectMeal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jLayeredPane2Layout.createSequentialGroup()
+                                .addComponent(priceDateMeal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(priceDeltaMeal, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane2Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(entreeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+                    .addComponent(entreeMealLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         jLayeredPane2Layout.setVerticalGroup(
@@ -222,21 +438,28 @@ public class PoSGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(sideLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(beverageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addComponent(beverageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(mealAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(confirmPriceMeal, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mealPriceChange, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(priceEffectMeal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(priceDeltaMeal, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(priceDateMeal, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(137, Short.MAX_VALUE))
             .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane2Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(entreeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(entreeMealLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(310, Short.MAX_VALUE)))
         );
 
         addItems.setText("Add");
-        addItems.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addItemsMouseClicked(evt);
-            }
-        });
         addItems.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addItemsActionPerformed(evt);
@@ -247,11 +470,11 @@ public class PoSGUI extends javax.swing.JFrame {
         mealFrame.getContentPane().setLayout(mealFrameLayout);
         mealFrameLayout.setHorizontalGroup(
             mealFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(currentMeal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(currentMeal, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mealFrameLayout.createSequentialGroup()
-                .addGap(0, 10, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(46, 46, 46)
                 .addGroup(mealFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(addItems, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(entreeCustomize, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
@@ -266,84 +489,54 @@ public class PoSGUI extends javax.swing.JFrame {
                 .addGroup(mealFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(mealFrameLayout.createSequentialGroup()
                         .addComponent(entreeCustomize, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(307, 307, 307)
                         .addComponent(addItems, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(65, Short.MAX_VALUE))
+                    .addComponent(jLayeredPane2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         toppingFrame.setAlwaysOnTop(true);
         toppingFrame.setMinimumSize(new java.awt.Dimension(500, 600));
-        toppingFrame.setPreferredSize(new java.awt.Dimension(500, 600));
         toppingFrame.setResizable(false);
+        toppingFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                toppingFrameWindowClosing(evt);
+            }
+        });
 
-        toppingLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        toppingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        toppingLabel.setText("toppingLabel");
-        toppingLabel.setToolTipText("");
+        entreeLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        entreeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        entreeLabel.setText("entreeLabel");
+        entreeLabel.setToolTipText("");
 
         topping1Box.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         topping1Box.setText("Topping1");
-        topping1Box.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                topping1BoxActionPerformed(evt);
-            }
-        });
 
         topping2Box.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         topping2Box.setText("Topping2");
-        topping2Box.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                topping2BoxActionPerformed(evt);
-            }
-        });
 
         topping3Box.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         topping3Box.setText("Topping3");
-        topping3Box.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                topping3BoxActionPerformed(evt);
-            }
-        });
 
         topping4Box.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         topping4Box.setText("Topping4");
-        topping4Box.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                topping4BoxActionPerformed(evt);
-            }
-        });
 
         topping5Box.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         topping5Box.setText("Topping5");
-        topping5Box.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                topping5BoxActionPerformed(evt);
-            }
-        });
-
-        addCommitButton.setText("add/commitchange");
-        addCommitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addCommitButtonActionPerformed(evt);
-            }
-        });
 
         jLayeredPane3.setLayer(topping1Box, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(topping2Box, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(topping3Box, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(topping4Box, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(topping5Box, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(addCommitButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane3Layout = new javax.swing.GroupLayout(jLayeredPane3);
         jLayeredPane3.setLayout(jLayeredPane3Layout);
         jLayeredPane3Layout.setHorizontalGroup(
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(61, Short.MAX_VALUE)
                 .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(addCommitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(topping1Box, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(topping2Box, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(topping5Box, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -363,9 +556,54 @@ public class PoSGUI extends javax.swing.JFrame {
                 .addComponent(topping4Box, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(topping5Box, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, Short.MAX_VALUE)
-                .addComponent(addCommitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        entreeAvailability.setSelected(true);
+        entreeAvailability.setText("Available");
+        entreeAvailability.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entreeAvailabilityActionPerformed(evt);
+            }
+        });
+
+        confirmPriceEntree.setText("Change Price");
+        confirmPriceEntree.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    confirmPriceEntreeActionPerformed(evt);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        });
+
+        addCommitButton.setText("add/commitchange");
+        addCommitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCommitButtonActionPerformed(evt);
+            }
+        });
+
+        priceEffectEntree.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        priceEffectEntree.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        priceEffectEntree.setText("Theoretical Profit Effect");
+
+        priceDateEntree.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
+        priceDateEntree.setText("Date Range (yyyy-mm-dd)");
+        priceDateEntree.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                priceDateEntreeMouseClicked(evt);
+            }
+        });
+        priceDateEntree.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                priceDateEntreeKeyReleased(evt);
+            }
+        });
+
+        priceDeltaEntree.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        priceDeltaEntree.setText("$0.00");
 
         javax.swing.GroupLayout toppingFrameLayout = new javax.swing.GroupLayout(toppingFrame.getContentPane());
         toppingFrame.getContentPane().setLayout(toppingFrameLayout);
@@ -373,26 +611,59 @@ public class PoSGUI extends javax.swing.JFrame {
             toppingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(toppingFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(toppingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(toppingFrameLayout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addGroup(toppingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(toppingFrameLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(toppingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(toppingFrameLayout.createSequentialGroup()
+                                .addComponent(priceDateEntree, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(priceDeltaEntree, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(toppingFrameLayout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(entreeAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(toppingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, toppingFrameLayout.createSequentialGroup()
+                                    .addComponent(entreePriceChange, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(confirmPriceEntree, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(priceEffectEntree, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(addCommitButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(65, 65, 65))
+                    .addGroup(toppingFrameLayout.createSequentialGroup()
+                        .addComponent(entreeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         toppingFrameLayout.setVerticalGroup(
             toppingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(toppingFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(toppingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(entreeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addGroup(toppingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(toppingFrameLayout.createSequentialGroup()
+                        .addComponent(entreeAvailability)
+                        .addGap(18, 18, 18)
+                        .addGroup(toppingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(entreePriceChange, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(confirmPriceEntree, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(priceEffectEntree)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(toppingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(priceDeltaEntree, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(priceDateEntree, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(84, 84, 84)
+                        .addComponent(addCommitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
-        othersFrame.setMaximumSize(new java.awt.Dimension(400, 350));
-        othersFrame.setMinimumSize(new java.awt.Dimension(400, 350));
-        othersFrame.setPreferredSize(new java.awt.Dimension(400, 350));
+        othersFrame.setAlwaysOnTop(true);
+        othersFrame.setMinimumSize(new java.awt.Dimension(400, 500));
+        othersFrame.setPreferredSize(new java.awt.Dimension(400, 500));
         othersFrame.setResizable(false);
 
         othersLabel.setAlignment(java.awt.Label.CENTER);
@@ -412,16 +683,50 @@ public class PoSGUI extends javax.swing.JFrame {
         });
 
         quantityButton.setLabel("Add");
-        quantityButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                quantityButtonMouseClicked(evt);
-            }
-        });
         quantityButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 quantityButtonActionPerformed(evt);
             }
         });
+
+        otherAvailability.setSelected(true);
+        otherAvailability.setText("Available");
+        otherAvailability.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                otherAvailabilityActionPerformed(evt);
+            }
+        });
+
+        confirmPriceOthers.setText("Change Price");
+        confirmPriceOthers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    confirmPriceOthersActionPerformed(evt);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        });
+
+        priceEffectOthers.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        priceEffectOthers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        priceEffectOthers.setText("Theoretical Profit Effect");
+
+        priceDateOthers.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
+        priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+        priceDateOthers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                priceDateOthersMouseClicked(evt);
+            }
+        });
+        priceDateOthers.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                priceDateOthersKeyReleased(evt);
+            }
+        });
+
+        priceDeltaOthers.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        priceDeltaOthers.setText("$0.00");
 
         javax.swing.GroupLayout othersFrameLayout = new javax.swing.GroupLayout(othersFrame.getContentPane());
         othersFrame.getContentPane().setLayout(othersFrameLayout);
@@ -431,12 +736,30 @@ public class PoSGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(othersLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, othersFrameLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(otherAvailability)
+                .addGap(157, 157, 157))
             .addGroup(othersFrameLayout.createSequentialGroup()
                 .addGap(71, 71, 71)
-                .addComponent(quantityAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                .addComponent(quantityButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
+                .addGroup(othersFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(othersFrameLayout.createSequentialGroup()
+                        .addComponent(priceDateOthers, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(priceDeltaOthers, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(othersFrameLayout.createSequentialGroup()
+                        .addGroup(othersFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(priceEffectOthers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(othersFrameLayout.createSequentialGroup()
+                                .addComponent(otherPriceChange, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)
+                                .addComponent(confirmPriceOthers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(othersFrameLayout.createSequentialGroup()
+                                .addComponent(quantityAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                                .addComponent(quantityButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(48, 48, 48))))
         );
         othersFrameLayout.setVerticalGroup(
             othersFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,7 +772,160 @@ public class PoSGUI extends javax.swing.JFrame {
                     .addGroup(othersFrameLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(quantityAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addGap(8, 8, 8)
+                .addComponent(otherAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(othersFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(otherPriceChange, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(confirmPriceOthers, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(priceEffectOthers, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(othersFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(priceDateOthers, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(priceDeltaOthers, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(67, Short.MAX_VALUE))
+        );
+
+        employeeVerify.setAlwaysOnTop(true);
+        employeeVerify.setMinimumSize(new java.awt.Dimension(400, 300));
+        employeeVerify.setResizable(false);
+        employeeVerify.setSize(new java.awt.Dimension(400, 300));
+
+        employeePWBox.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        employeePWBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                employeePWBoxActionPerformed(evt);
+            }
+        });
+
+        employeeVerifyLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        employeeVerifyLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        employeeVerifyLabel.setText("Enter Employee ID");
+
+        employeeConfirm.setText("Enter");
+        employeeConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    employeeConfirmActionPerformed(evt);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        });
+
+        javax.swing.GroupLayout employeeVerifyLayout = new javax.swing.GroupLayout(employeeVerify.getContentPane());
+        employeeVerify.getContentPane().setLayout(employeeVerifyLayout);
+        employeeVerifyLayout.setHorizontalGroup(
+            employeeVerifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, employeeVerifyLayout.createSequentialGroup()
+                .addContainerGap(130, Short.MAX_VALUE)
+                .addGroup(employeeVerifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(employeeVerifyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(employeePWBox)
+                    .addComponent(employeeConfirm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(122, 122, 122))
+        );
+        employeeVerifyLayout.setVerticalGroup(
+            employeeVerifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, employeeVerifyLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(employeeVerifyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(employeePWBox, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addComponent(employeeConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
+        );
+
+        trendFrame.setAlwaysOnTop(true);
+        trendFrame.setMinimumSize(new java.awt.Dimension(400, 400));
+        trendFrame.setPreferredSize(new java.awt.Dimension(400, 400));
+        trendFrame.setResizable(false);
+
+        currentlyTrending.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        currentlyTrending.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        currentlyTrending.setText("Currently Trending");
+
+        topTrendHeader.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        topTrendHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        topTrendHeader.setText("Top 2 Trending");
+
+        botTrendHeader.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        botTrendHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        botTrendHeader.setText("Bottom 2 Trending");
+
+        encouragingWords.setText("(Try it out!)");
+
+        top1Trending.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        top1Trending.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        top1Trending.setText("1. ");
+
+        top2Trending.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        top2Trending.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        top2Trending.setText("2. ");
+
+        bot1Trending.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        bot1Trending.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bot1Trending.setText("1. ");
+
+        bot2Trending.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        bot2Trending.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bot2Trending.setText("2. ");
+
+        trendExit.setText("Continue");
+        trendExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                trendExitActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout trendFrameLayout = new javax.swing.GroupLayout(trendFrame.getContentPane());
+        trendFrame.getContentPane().setLayout(trendFrameLayout);
+        trendFrameLayout.setHorizontalGroup(
+            trendFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(trendFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(trendFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(top2Trending, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bot1Trending, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(topTrendHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(currentlyTrending, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, trendFrameLayout.createSequentialGroup()
+                        .addGap(0, 115, Short.MAX_VALUE)
+                        .addComponent(botTrendHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(encouragingWords, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bot2Trending, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(top1Trending, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(trendFrameLayout.createSequentialGroup()
+                .addGap(151, 151, 151)
+                .addComponent(trendExit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        trendFrameLayout.setVerticalGroup(
+            trendFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(trendFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(currentlyTrending, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(topTrendHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(top1Trending)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(top2Trending)
+                .addGap(23, 23, 23)
+                .addGroup(trendFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botTrendHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(encouragingWords))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bot1Trending)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bot2Trending)
+                .addGap(18, 18, 18)
+                .addComponent(trendExit, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -462,14 +938,14 @@ public class PoSGUI extends javax.swing.JFrame {
                 formMouseClicked(evt);
             }
         });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         mealsButton.setLabel("Meals");
         mealsButton.setMinimumSize(new java.awt.Dimension(80, 100));
-        mealsButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mealsButtonMouseClicked(evt);
-            }
-        });
         mealsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mealsButtonActionPerformed(evt);
@@ -478,11 +954,6 @@ public class PoSGUI extends javax.swing.JFrame {
 
         entreesButton.setActionCommand("Entrees");
         entreesButton.setLabel("Entrees");
-        entreesButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                entreesButtonMouseClicked(evt);
-            }
-        });
         entreesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 entreesButtonActionPerformed(evt);
@@ -490,36 +961,43 @@ public class PoSGUI extends javax.swing.JFrame {
         });
 
         sidesButton.setLabel("Sides");
-        sidesButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sidesButtonMouseClicked(evt);
+        sidesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sidesButtonActionPerformed(evt);
             }
         });
 
         beverageButton.setLabel("Beverages");
-        beverageButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                beverageButtonMouseClicked(evt);
+        beverageButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                beverageButtonActionPerformed(evt);
             }
         });
 
         dessertsButton.setLabel("Desserts");
-        dessertsButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dessertsButtonMouseClicked(evt);
+        dessertsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dessertsButtonActionPerformed(evt);
             }
         });
 
         employeeButton.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         employeeButton.setText("Employee View");
-        employeeButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                employeeButtonMouseClicked(evt);
-            }
-        });
         employeeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 employeeButtonActionPerformed(evt);
+            }
+        });
+
+        seeTrend.setText("See Trends");
+        seeTrend.setToolTipText("");
+        seeTrend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    seeTrendActionPerformed(evt);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
         });
 
@@ -530,6 +1008,7 @@ public class PoSGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(seeTrend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(employeeButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -554,13 +1033,12 @@ public class PoSGUI extends javax.swing.JFrame {
                 .addComponent(beverageButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dessertsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(165, 165, 165)
+                .addGap(77, 77, 77)
+                .addComponent(seeTrend, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(employeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        currentOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        currentOrder.setEditable(false);
 
         checkoutButton.setText("Proceed to Checkout >>");
         checkoutButton.addActionListener(new java.awt.event.ActionListener() {
@@ -590,9 +1068,43 @@ public class PoSGUI extends javax.swing.JFrame {
         });
 
         clearOrder.setText("Clear Order");
-        clearOrder.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clearOrderMouseClicked(evt);
+        clearOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearOrderActionPerformed(evt);
+            }
+        });
+
+        jScrollPane2.setViewportView(currentOrder);
+
+        upSelected.setText("^");
+        upSelected.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                upSelectedActionPerformed(evt);
+            }
+        });
+
+        removeSelected.setText("Remove Selected");
+        removeSelected.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeSelectedActionPerformed(evt);
+            }
+        });
+
+        downSelected.setText("v");
+        downSelected.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                downSelectedActionPerformed(evt);
+            }
+        });
+
+        customerLogin.setText("Login");
+        customerLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    customerLoginActionPerformed(evt);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
         });
 
@@ -603,28 +1115,45 @@ public class PoSGUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(upSelected)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(downSelected, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(removeSelected, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(clearOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(enterName, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(checkoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(currentOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(enterName, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customerLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(removeSelected, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(upSelected, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(downSelected, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(currentOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(enterName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(enterName, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(customerLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(checkoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(clearOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(44, 44, 44))
         );
 
         clearOrder.setVisible(false);
@@ -632,7 +1161,7 @@ public class PoSGUI extends javax.swing.JFrame {
         mealsPanel.setMinimumSize(new java.awt.Dimension(860, 533));
 
         meal1.setText("<html><center>\nMeal1<br><br>\nEntree1<br>\nSide2<br>\nBeverage4 <br><br>\nPrice: $15.82, Calories 2495\n</center> \n</html>");
-        meal1.setActionCommand("<html>Meal1<P><P>Entree1<P>Side2<P>Drink4</html>");
+        meal1.setActionCommand("");
         meal1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 meal1MouseClicked(evt);
@@ -717,13 +1246,13 @@ public class PoSGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(mealsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(meal4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(meal3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(mealsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(meal1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(meal2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(meal3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(meal2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(meal1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(meal5, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         entreesPanel.setEnabled(false);
@@ -852,7 +1381,7 @@ public class PoSGUI extends javax.swing.JFrame {
                     .addGroup(entreesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(entree5, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(entree6, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(265, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         sidesPanel.setEnabled(false);
@@ -883,7 +1412,6 @@ public class PoSGUI extends javax.swing.JFrame {
         });
 
         side3.setText("<html>\n<center>\nSide3<br><br>\nPrice: $4.29, Calories: 222\n</center>\n</html>\n");
-        side3.setActionCommand("<html>\n<center>\nSide3<br><br>\nPrice: $4.29, Calories: 222\n</center>\n</html>\n");
         side3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 side3MouseClicked(evt);
@@ -916,9 +1444,9 @@ public class PoSGUI extends javax.swing.JFrame {
                 .addComponent(side1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(side2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(side3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(side3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(side4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(30, Short.MAX_VALUE))
         );
@@ -932,7 +1460,7 @@ public class PoSGUI extends javax.swing.JFrame {
                         .addComponent(side1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(side2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(side3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(505, Short.MAX_VALUE))
+                .addContainerGap(563, Short.MAX_VALUE))
         );
 
         beveragePanel.setEnabled(false);
@@ -1028,9 +1556,9 @@ public class PoSGUI extends javax.swing.JFrame {
                         .addComponent(beverage1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(beverage2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(beverage3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(beverage5, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(249, Short.MAX_VALUE))
+                .addContainerGap(295, Short.MAX_VALUE))
         );
 
         dessertsPanel.setEnabled(false);
@@ -1078,7 +1606,7 @@ public class PoSGUI extends javax.swing.JFrame {
                 .addGroup(dessertsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(dessert2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dessert1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(505, Short.MAX_VALUE))
+                .addContainerGap(563, Short.MAX_VALUE))
         );
 
         jLayeredPane1.setLayer(mealsPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -1102,26 +1630,26 @@ public class PoSGUI extends javax.swing.JFrame {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                    .addContainerGap(20, Short.MAX_VALUE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sidesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(beveragePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(20, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(dessertsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(20, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(entreesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(entreesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(295, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -1145,9 +1673,6 @@ public class PoSGUI extends javax.swing.JFrame {
         );
 
         sidesPanel.setVisible(false);
-        entreesPanel.setVisible(false);
-        beveragePanel.setVisible(false);
-        dessertsPanel.setVisible(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1160,11 +1685,13 @@ public class PoSGUI extends javax.swing.JFrame {
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1179,60 +1706,145 @@ public class PoSGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void meal2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meal2ActionPerformed
+        mealFrame.setVisible(true);
+        toppingFrame.setVisible(false);
+        mealAvailability.setSelected(true);
+        currentMeal.setText("Meal2");
+        entreeMealLabel.setText("Entree5");
+        sideLabel.setText("Side4");
+        beverageLabel.setText("Beverage5");
+        customizations.setText("No Customizations");
+        mealPriceChange.setText("0.00");
+        priceDateMeal.setText("Date Range (yyyy-mm-dd)");
     }//GEN-LAST:event_meal2ActionPerformed
 
     private void meal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meal3ActionPerformed
+        mealFrame.setVisible(true);
+        toppingFrame.setVisible(false);
+        mealAvailability.setSelected(true);
+        currentMeal.setText("Meal3");
+        entreeMealLabel.setText("Entree6");
+        sideLabel.setText("Side3");
+        beverageLabel.setText("Beverage2");
+        customizations.setText("No Customizations");
+        mealPriceChange.setText("0.00");
+        priceDateMeal.setText("Date Range (yyyy-mm-dd)");
     }//GEN-LAST:event_meal3ActionPerformed
 
     private void meal4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meal4ActionPerformed
+        mealFrame.setVisible(true);
+        toppingFrame.setVisible(false);
+        mealAvailability.setSelected(true);
+        currentMeal.setText("Meal4");
+        entreeMealLabel.setText("Entree1");
+        sideLabel.setText("Side2");
+        beverageLabel.setText("Beverage1");
+        customizations.setText("No Customizations");
+        mealPriceChange.setText("0.00");
+        priceDateMeal.setText("Date Range (yyyy-mm-dd)");
     }//GEN-LAST:event_meal4ActionPerformed
 
     private void meal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meal1ActionPerformed
+        mealFrame.setVisible(true);
+        toppingFrame.setVisible(false);
+        mealAvailability.setSelected(true);
+        currentMeal.setText("Meal1");
+        entreeMealLabel.setText("Entree1");
+        sideLabel.setText("Side2");
+        beverageLabel.setText("Beverage4");
+        customizations.setText("No Customizations");
+        mealPriceChange.setText("0.00");
+        priceDateMeal.setText("Date Range (yyyy-mm-dd)");
     }//GEN-LAST:event_meal1ActionPerformed
 
     private void mealsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mealsButtonActionPerformed
+        mealsPanel.setVisible(true);
+        entreesPanel.setVisible(false);
+        sidesPanel.setVisible(false);
+        beveragePanel.setVisible(false);
+        dessertsPanel.setVisible(false);
+        toppingFrame.setVisible(false);
+        othersFrame.setVisible(false);
+        trendFrame.setVisible(false);
     }//GEN-LAST:event_mealsButtonActionPerformed
 
     private void meal5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meal5ActionPerformed
+        mealFrame.setVisible(true);
+        toppingFrame.setVisible(false);
+        mealAvailability.setSelected(true);
+        currentMeal.setText("Meal5");
+        entreeMealLabel.setText("Entree5");
+        sideLabel.setText("Side2");
+        beverageLabel.setText("Beverage5");
+        customizations.setText("No Customizations");
+        mealPriceChange.setText("0.00");
+        priceDateMeal.setText("Date Range (yyyy-mm-dd)");
     }//GEN-LAST:event_meal5ActionPerformed
 
     private void checkoutButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_checkoutButtonActionPerformed
-        String customerName = enterName.getText();
-
-        if (!customerName.equals("Enter Customer Name")) {
+        if (!customerName.isEmpty() && !currentItems.isEmpty() && !abbreviatedItems.isEmpty()) {
             StringBuilder orderContents = new StringBuilder();
-            for (String items : abbreviatedItems) {
-                boolean isMeal = false;
-                for (Item m : allMeals) {
-                    if (items.substring(0, 2).equals(m.getName())) {
-                        isMeal = true;
-                    }
+            for (String item : abbreviatedItems) {
+                String fullName = Item.getFullItemNameFromString(item);
+                if (AllItems.get(fullName) != null && AllItems.get(fullName) instanceof Meal) {
+                    orderContents.append(item.substring(3).replace(',', ' '));
+                } else {
+                    orderContents.append(item.replace(',', ' '));
                 }
-                if (isMeal) {
-                    // Remove the meals tag in front of the items
-                    items = items.substring(3);
-                }
-
-                orderContents.append(items.replace(',', ' '));
                 orderContents.append(" ");
             }
-            orderContents.delete(orderContents.length() - 1, orderContents.length());
+
+            if (orderContents.length() > 0) {
+                orderContents.delete(orderContents.length() - 1, orderContents.length());
+            }
 
             Order temp = new Order(orderContents.toString(), Customer.getCustomerByName(customerName), null, true);
 
-            enterName.setText("Enter Customer Name");
             abbreviatedItems.clear();
             currentItems.clear();
             update();
 
             JOptionPane.showMessageDialog(this, "Order in process!");
-        } else {
+        } else if (customerName.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter a customer name!");
+        } else if (currentItems.isEmpty() && abbreviatedItems.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please choose items for your order!");
         }
     }//GEN-LAST:event_checkoutButtonActionPerformed
 
-    private void entreesButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entreesButtonMouseClicked
-        //JOptionPane.showMessageDialog(this, "Hi")
+    public void updateFoodButtons() throws SQLException {
+        meal1.setText(Meal.createButtonHTML(AllItems.get("M1")));
+        meal2.setText(Meal.createButtonHTML(AllItems.get("M2")));
+        meal3.setText(Meal.createButtonHTML(AllItems.get("M3")));
+        meal4.setText(Meal.createButtonHTML(AllItems.get("M4")));
+        meal5.setText(Meal.createButtonHTML(AllItems.get("M5")));
+
+        entree1.setText(Item.createButtonHTML(AllItems.get("E1")));
+        entree2.setText(Item.createButtonHTML(AllItems.get("E2")));
+        entree3.setText(Item.createButtonHTML(AllItems.get("E3")));
+        entree4.setText(Item.createButtonHTML(AllItems.get("E4")));
+        entree5.setText(Item.createButtonHTML(AllItems.get("E5")));
+        entree6.setText(Item.createButtonHTML(AllItems.get("E6")));
+        entree7.setText(Item.createButtonHTML(AllItems.get("E7")));
+
+        side1.setText(Item.createButtonHTML(AllItems.get("S1")));
+        side2.setText(Item.createButtonHTML(AllItems.get("S2")));
+        side3.setText(Item.createButtonHTML(AllItems.get("S3")));
+        side4.setText(Item.createButtonHTML(AllItems.get("S4")));
+
+        beverage1.setText(Item.createButtonHTML(AllItems.get("B1")));
+        beverage2.setText(Item.createButtonHTML(AllItems.get("B2")));
+        beverage3.setText(Item.createButtonHTML(AllItems.get("B3")));
+        beverage4.setText(Item.createButtonHTML(AllItems.get("B4")));
+        beverage5.setText(Item.createButtonHTML(AllItems.get("B5")));
+
+        dessert1.setText(Item.createButtonHTML(AllItems.get("D1")));
+        dessert2.setText(Item.createButtonHTML(AllItems.get("D2")));
+    }
+    
+    
+    private void entreesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entreesButtonActionPerformed
+        //JOptionPane.showMessageDialog(this, "Hi");
         mealsPanel.setVisible(false);
         entreesPanel.setVisible(true);
         sidesPanel.setVisible(false);
@@ -1241,166 +1853,199 @@ public class PoSGUI extends javax.swing.JFrame {
         mealFrame.setVisible(false);
         toppingFrame.setVisible(false);
         othersFrame.setVisible(false);
-    }//GEN-LAST:event_entreesButtonMouseClicked
-
-    private void entreesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entreesButtonActionPerformed
-        //JOptionPane.showMessageDialog(this, "Hi2")
+        trendFrame.setVisible(false);
     }//GEN-LAST:event_entreesButtonActionPerformed
 
-    private void mealsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mealsButtonMouseClicked
-        mealsPanel.setVisible(true);
-        entreesPanel.setVisible(false);
-        sidesPanel.setVisible(false);
-        beveragePanel.setVisible(false);
-        dessertsPanel.setVisible(false);
-        toppingFrame.setVisible(false);
-        othersFrame.setVisible(false);
-    }//GEN-LAST:event_mealsButtonMouseClicked
-
-    private void sidesButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidesButtonMouseClicked
-        mealsPanel.setVisible(false);
-        entreesPanel.setVisible(false);
-        sidesPanel.setVisible(true);
-        beveragePanel.setVisible(false);
-        dessertsPanel.setVisible(false);
-        mealFrame.setVisible(false);
-        toppingFrame.setVisible(false);
-        othersFrame.setVisible(false);
-    }//GEN-LAST:event_sidesButtonMouseClicked
-
-    private void dessertsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dessertsButtonMouseClicked
-        mealsPanel.setVisible(false);
-        entreesPanel.setVisible(false);
-        sidesPanel.setVisible(false);
-        beveragePanel.setVisible(false);
-        dessertsPanel.setVisible(true);
-        mealFrame.setVisible(false);
-        toppingFrame.setVisible(false);
-        othersFrame.setVisible(false);
-    }//GEN-LAST:event_dessertsButtonMouseClicked
-
-    private void beverageButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverageButtonMouseClicked
-        mealsPanel.setVisible(false);
-        entreesPanel.setVisible(false);
-        sidesPanel.setVisible(false);
-        beveragePanel.setVisible(true);
-        dessertsPanel.setVisible(false);
-        mealFrame.setVisible(false);
-        toppingFrame.setVisible(false);
-        othersFrame.setVisible(false);
-    }//GEN-LAST:event_beverageButtonMouseClicked
-
     private void entree1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree1ActionPerformed
+        toppingFrame.setVisible(true);
+        entreeLabel.setText("Adding Entree1");
+        entreePriceChange.setText("0.00");
+        priceDateEntree.setText("Date Range (yyyy-mm-dd)");
+        entreeAvailability.setSelected(true);
+        addCommitButton.setText("Add");
+        if(employeeView)
+        {
+            setAvailabilityOn();
+        }
+        entree1Select();
     }//GEN-LAST:event_entree1ActionPerformed
 
     private void entree2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree2ActionPerformed
+        toppingFrame.setVisible(true);
+        entreeLabel.setText("Adding Entree2");
+        entreePriceChange.setText("0.00");
+        priceDateEntree.setText("Date Range (yyyy-mm-dd)");
+        entreeAvailability.setSelected(true);
+        addCommitButton.setText("Add");
+        if(employeeView)
+        {
+            setAvailabilityOn();
+        }
+        entree2Select();
     }//GEN-LAST:event_entree2ActionPerformed
 
     private void entree3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree3ActionPerformed
+        toppingFrame.setVisible(true);
+        entreeLabel.setText("Adding Entree3");
+        entreePriceChange.setText("0.00");
+        priceDateEntree.setText("Date Range (yyyy-mm-dd)");
+        entreeAvailability.setSelected(true);
+        addCommitButton.setText("Add");
+        if(employeeView)
+        {
+            setAvailabilityOn();
+        }
+        entree3Select();
     }//GEN-LAST:event_entree3ActionPerformed
 
     private void entree4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree4ActionPerformed
+        toppingFrame.setVisible(true);
+        entreeAvailability.setSelected(true);
+        entreeLabel.setText("Adding Entree4");
+        entreePriceChange.setText("0.00");
+        priceDateEntree.setText("Date Range (yyyy-mm-dd)");
+        addCommitButton.setText("Add");
+        if(employeeView)
+        {
+            setAvailabilityOn();
+        }
+        entree4Select();
     }//GEN-LAST:event_entree4ActionPerformed
 
     private void entree5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree5ActionPerformed
+        toppingFrame.setVisible(true);
+        entreeAvailability.setSelected(true);
+        entreeLabel.setText("Adding Entree5");
+        entreePriceChange.setText("0.00");
+        priceDateEntree.setText("Date Range (yyyy-mm-dd)");
+        addCommitButton.setText("Add");
+        if(employeeView)
+        {
+            setAvailabilityOn();
+        }
+        entree5Select();
     }//GEN-LAST:event_entree5ActionPerformed
 
     private void entree6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree6ActionPerformed
+        toppingFrame.setVisible(true);
+        entreeAvailability.setSelected(true);
+        entreeLabel.setText("Adding Entree6");
+        entreePriceChange.setText("0.00");
+        priceDateEntree.setText("Date Range (yyyy-mm-dd)");
+        addCommitButton.setText("Add");
+        if(employeeView)
+        {
+            setAvailabilityOn();
+        }
+        entree6Select();
     }//GEN-LAST:event_entree6ActionPerformed
 
     private void entree7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entree7ActionPerformed
+        toppingFrame.setVisible(true);
+        entreeAvailability.setSelected(true);
+        entreeLabel.setText("Adding Entree7");
+        entreePriceChange.setText("0.00");
+        priceDateEntree.setText("Date Range (yyyy-mm-dd)");
+        addCommitButton.setText("Add");
+        if(employeeView)
+        {
+            setAvailabilityOn();
+        }
+        entree7Select();
     }//GEN-LAST:event_entree7ActionPerformed
 
     private void side1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_side1ActionPerformed
+        othersOpen();
+        otherAvailability.setSelected(true);
+        otherPriceChange.setText("0.00");
+        priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+        othersLabel.setText("Adding Side1");
     }//GEN-LAST:event_side1ActionPerformed
 
     private void side2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_side2ActionPerformed
+        othersOpen();
+        otherAvailability.setSelected(true);
+        otherPriceChange.setText("0.00");
+        priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+        othersLabel.setText("Adding Side2");
     }//GEN-LAST:event_side2ActionPerformed
 
     private void side3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_side3ActionPerformed
+        othersOpen();
+        otherAvailability.setSelected(true);
+        otherPriceChange.setText("0.00");
+        priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+        othersLabel.setText("Adding Side3");
     }//GEN-LAST:event_side3ActionPerformed
 
     private void side4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_side4ActionPerformed
+        othersOpen();
+        otherAvailability.setSelected(true);
+        otherPriceChange.setText("0.00");
+        priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+        othersLabel.setText("Adding Side4");
     }//GEN-LAST:event_side4ActionPerformed
 
     private void beverage1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beverage1ActionPerformed
+        othersOpen();
+        otherAvailability.setSelected(true);
+        otherPriceChange.setText("0.00");
+        priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+        othersLabel.setText("Adding Beverage1");
     }//GEN-LAST:event_beverage1ActionPerformed
 
     private void beverage2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beverage2ActionPerformed
+        othersOpen();
+        otherAvailability.setSelected(true);
+        otherPriceChange.setText("0.00");
+        priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+        othersLabel.setText("Adding Beverage2");
     }//GEN-LAST:event_beverage2ActionPerformed
 
     private void beverage3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beverage3ActionPerformed
+        othersOpen();
+        otherAvailability.setSelected(true);
+        otherPriceChange.setText("0.00");
+        priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+        othersLabel.setText("Adding Beverage3");
     }//GEN-LAST:event_beverage3ActionPerformed
 
     private void beverage4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beverage4ActionPerformed
+        othersOpen();
+        otherAvailability.setSelected(true);
+        otherPriceChange.setText("0.00");
+        priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+        othersLabel.setText("Adding Beverage4");
     }//GEN-LAST:event_beverage4ActionPerformed
 
     private void beverage5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beverage5ActionPerformed
+        othersOpen();
+        otherAvailability.setSelected(true);
+        otherPriceChange.setText("0.00");
+        priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+        othersLabel.setText("Adding Beverage5");
     }//GEN-LAST:event_beverage5ActionPerformed
 
     private void dessert1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dessert1ActionPerformed
+        othersOpen();
+        otherAvailability.setSelected(true);
+        otherPriceChange.setText("0.00");
+        priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+        othersLabel.setText("Adding Dessert1");
     }//GEN-LAST:event_dessert1ActionPerformed
 
     private void dessert2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dessert2ActionPerformed
+        othersOpen();
+        otherAvailability.setSelected(true);
+        otherPriceChange.setText("0.00");
+        priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+        othersLabel.setText("Adding Dessert2");
     }//GEN-LAST:event_dessert2ActionPerformed
-
-    private void meal1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_meal1MouseClicked
-        mealFrame.setVisible(true);
-        toppingFrame.setVisible(false);
-        currentMeal.setText("Meal1");
-        entreeLabel.setText("Entree1");
-        sideLabel.setText("Side2");
-        beverageLabel.setText("Beverage4");
-        customizations.setText("No Customizations");
-    }//GEN-LAST:event_meal1MouseClicked
-
-    private void meal5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_meal5MouseClicked
-        mealFrame.setVisible(true);
-        toppingFrame.setVisible(false);
-        currentMeal.setText("Meal5");
-        entreeLabel.setText("Entree5");
-        sideLabel.setText("Side2");
-        beverageLabel.setText("Beverage5");
-        customizations.setText("No Customizations");
-    }//GEN-LAST:event_meal5MouseClicked
-
-    private void meal4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_meal4MouseClicked
-        mealFrame.setVisible(true);
-        toppingFrame.setVisible(false);
-        currentMeal.setText("Meal4");
-        entreeLabel.setText("Entree1");
-        sideLabel.setText("Side2");
-        beverageLabel.setText("Beverage1");
-        customizations.setText("No Customizations");
-    }//GEN-LAST:event_meal4MouseClicked
-
-    private void meal3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_meal3MouseClicked
-        mealFrame.setVisible(true);
-        toppingFrame.setVisible(false);
-        currentMeal.setText("Meal3");
-        entreeLabel.setText("Entree6");
-        sideLabel.setText("Side3");
-        beverageLabel.setText("Beverage2");
-        customizations.setText("No Customizations");
-    }//GEN-LAST:event_meal3MouseClicked
-
-    private void meal2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_meal2MouseClicked
-        mealFrame.setVisible(true);
-        toppingFrame.setVisible(false);
-        currentMeal.setText("Meal2");
-        entreeLabel.setText("Entree5");
-        sideLabel.setText("Side4");
-        beverageLabel.setText("Beverage5");
-        customizations.setText("No Customizations");
-    }//GEN-LAST:event_meal2MouseClicked
-
-    private void entreeCustomizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entreeCustomizeMouseClicked
-    }//GEN-LAST:event_entreeCustomizeMouseClicked
 
     private void entreeCustomizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entreeCustomizeActionPerformed
         toppingFrame.setVisible(true);
-        toppingLabel.setText("Customizing " + entreeLabel.getText());
-        switch(entreeLabel.getText())
+        entreeLabel.setText("Customizing " + entreeMealLabel.getText());
+        switch(entreeMealLabel.getText())
         {
             case "Entree1":
                 entree1Select();
@@ -1424,23 +2069,26 @@ public class PoSGUI extends javax.swing.JFrame {
                 entree7Select();
                 break;
         }
+        setAvailabilityOff();
         addCommitButton.setText("Save Changes");
     }//GEN-LAST:event_entreeCustomizeActionPerformed
 
     private void addItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addItemsActionPerformed
-    }//GEN-LAST:event_addItemsActionPerformed
-
-    private void addItemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addItemsMouseClicked
+        if(unavailableItems.contains(currentMeal.getText()))
+        {
+            JOptionPane.showMessageDialog(this, "Cannot add unavailable item.");
+            return;
+        }
         if(customizations.getText().equals("No Customizations"))
             customizations.setText("");
-        currentItems.add(currentMeal.getText() + "," + entreeLabel.getText() + 
+        currentItems.add(currentMeal.getText() + "," + entreeMealLabel.getText() + 
                 " " + customizations.getText().replaceAll(", ", " ").replaceAll("<html>|</html>", "") + "," + sideLabel.getText() + ","
                 + beverageLabel.getText());
-        abbreviatedItems.add(currentMeal.getText().charAt(0) + "" + currentMeal.getText().charAt(4) + "," + entreeLabel.getText().charAt(0) + entreeLabel.getText().charAt(6) +
+        abbreviatedItems.add(currentMeal.getText().charAt(0) + "" + currentMeal.getText().charAt(4) + "," + entreeMealLabel.getText().charAt(0) + entreeMealLabel.getText().charAt(6) + 
                 "" + customizations.getText().replaceAll(", ", "").replaceAll("<html>|</html>", "").replaceAll("noTopping","-T").replaceAll("addTopping","+T") + "," + sideLabel.getText().charAt(0) + sideLabel.getText().charAt(4) + ","
                 + beverageLabel.getText().charAt(0) + beverageLabel.getText().charAt(8));
         update();
-    }//GEN-LAST:event_addItemsMouseClicked
+    }//GEN-LAST:event_addItemsActionPerformed
 
     private void enterNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterNameActionPerformed
     }//GEN-LAST:event_enterNameActionPerformed
@@ -1455,16 +2103,6 @@ public class PoSGUI extends javax.swing.JFrame {
         enterName.setText("");
     }//GEN-LAST:event_enterNameMouseClicked
 
-    private void entreeCustomizeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_entreeCustomizeFocusLost
-    }//GEN-LAST:event_entreeCustomizeFocusLost
-
-    private void entree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree1MouseClicked
-        toppingFrame.setVisible(true);
-        toppingLabel.setText("Adding Entree1");
-        addCommitButton.setText("Add");
-        entree1Select();
-    }//GEN-LAST:event_entree1MouseClicked
-
     private void entree1Select()
     {
         topping1Box.setSelected(true);
@@ -1476,9 +2114,14 @@ public class PoSGUI extends javax.swing.JFrame {
     
     private void addCommitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCommitButtonActionPerformed
         if(addCommitButton.getText().equals("Add"))
-        {
+        {   
             String customText = "";
-            String currentEntree = toppingLabel.getText().split(" ")[1];
+            String currentEntree = entreeLabel.getText().split(" ")[1];
+            if(unavailableItems.contains(currentEntree))
+            {
+                JOptionPane.showMessageDialog(this, "Cannot add unavailable item.");
+                return;
+            }
             if(currentEntree.equals("Entree1"))
             {//<editor-fold defaultstate="collapsed" desc="Topping Stuff">              
                 if(!topping1Box.isSelected())
@@ -1562,7 +2205,7 @@ public class PoSGUI extends javax.swing.JFrame {
                 if(!topping1Box.isSelected())
                     customText += "noTopping1 ";
                 if(topping2Box.isSelected())
-                    customText += "addTopping2 ";
+                    customText += "Topping2 ";
                 if(!topping3Box.isSelected())
                     customText += "noTopping3 ";
                 if(!topping4Box.isSelected())
@@ -1571,16 +2214,16 @@ public class PoSGUI extends javax.swing.JFrame {
                     customText += "addTopping5";
             }//</editor-fold>
             currentItems.add(currentEntree + " " + customText);
-            abbreviatedItems.add(currentEntree.charAt(0) + "" + currentEntree.charAt(6) +
-                    "" + customText.replaceAll(" ", "").replaceAll("<html>|</html>", "").replaceAll("noTopping","-T").replaceAll("addTopping","+T"));
+            abbreviatedItems.add(currentEntree.charAt(0) + "" + currentEntree.charAt(6) + 
+                "" + customText.replaceAll(" ", "").replaceAll("<html>|</html>", "").replaceAll("noTopping","-T").replaceAll("addTopping","+T"));
             update();
         }
         else if(addCommitButton.getText().equals("Save Changes"))
         {
             String customText = "<html>";
-            String currentEntree = toppingLabel.getText().split(" ")[1];
+            String currentEntree = entreeLabel.getText().split(" ")[1];
             if(currentEntree.equals("Entree1"))
-            {//<editor-fold defaultstate="collapsed" desc="Topping Stuff">
+            {//<editor-fold defaultstate="collapsed" desc="Topping Stuff">             
                 if(!topping1Box.isSelected())
                     customText += "noTopping1, ";
                 if(!topping2Box.isSelected())
@@ -1662,7 +2305,7 @@ public class PoSGUI extends javax.swing.JFrame {
                 if(!topping1Box.isSelected())
                     customText += "noTopping1, ";
                 if(topping2Box.isSelected())
-                    customText += "addTopping2, ";
+                    customText += "Topping2, ";
                 if(!topping3Box.isSelected())
                     customText += "noTopping3, ";
                 if(!topping4Box.isSelected())
@@ -1671,16 +2314,10 @@ public class PoSGUI extends javax.swing.JFrame {
                     customText += "addTopping5";
             }
             customizations.setText(customText+"</html>");//</editor-fold>
+            toppingFrame.setVisible(false);
         }
 
     }//GEN-LAST:event_addCommitButtonActionPerformed
-
-    private void entree2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree2MouseClicked
-        toppingFrame.setVisible(true);
-        toppingLabel.setText("Adding Entree2");
-        addCommitButton.setText("Add");
-        entree2Select();
-    }//GEN-LAST:event_entree2MouseClicked
 
     private void entree2Select()
     {
@@ -1689,15 +2326,7 @@ public class PoSGUI extends javax.swing.JFrame {
         topping3Box.setSelected(true);
         topping4Box.setSelected(false);
         topping5Box.setSelected(false);
-    }
-    
-    private void entree3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree3MouseClicked
-        toppingFrame.setVisible(true);
-        toppingLabel.setText("Adding Entree3");
-        addCommitButton.setText("Add");
-        entree3Select();
-    }//GEN-LAST:event_entree3MouseClicked
-
+    }  
     private void entree3Select()
     {
         topping1Box.setSelected(false);
@@ -1705,13 +2334,7 @@ public class PoSGUI extends javax.swing.JFrame {
         topping3Box.setSelected(false);
         topping4Box.setSelected(true);
         topping5Box.setSelected(true);
-    }
-    private void entree4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree4MouseClicked
-        toppingFrame.setVisible(true);
-        toppingLabel.setText("Adding Entree4");
-        addCommitButton.setText("Add");
-        entree4Select();
-    }//GEN-LAST:event_entree4MouseClicked
+    }    
     private void entree4Select()
     {
         topping1Box.setSelected(true);
@@ -1720,13 +2343,6 @@ public class PoSGUI extends javax.swing.JFrame {
         topping4Box.setSelected(true);
         topping5Box.setSelected(false);
     }
-    private void entree5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree5MouseClicked
-        toppingFrame.setVisible(true);
-        toppingLabel.setText("Adding Entree5");
-        addCommitButton.setText("Add");
-        entree5Select();
-    }//GEN-LAST:event_entree5MouseClicked
-
     private void entree5Select()
     {
         topping1Box.setSelected(true);
@@ -1735,13 +2351,6 @@ public class PoSGUI extends javax.swing.JFrame {
         topping4Box.setSelected(true);
         topping5Box.setSelected(false);
     }
-    private void entree6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree6MouseClicked
-        toppingFrame.setVisible(true);
-        toppingLabel.setText("Adding Entree6");
-        addCommitButton.setText("Add");
-        entree6Select();
-    }//GEN-LAST:event_entree6MouseClicked
-
     private void entree6Select()
     {
         topping1Box.setSelected(true);
@@ -1750,13 +2359,6 @@ public class PoSGUI extends javax.swing.JFrame {
         topping4Box.setSelected(true);
         topping5Box.setSelected(true);
     }
-    private void entree7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree7MouseClicked
-        toppingFrame.setVisible(true);
-        toppingLabel.setText("Adding Entree7");
-        addCommitButton.setText("Add");
-        entree7Select();
-    }//GEN-LAST:event_entree7MouseClicked
-
     private void entree7Select()
     {
         topping1Box.setSelected(true);
@@ -1766,32 +2368,15 @@ public class PoSGUI extends javax.swing.JFrame {
         topping5Box.setSelected(false);
     }
     
-    private void topping2BoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topping2BoxActionPerformed
-    }//GEN-LAST:event_topping2BoxActionPerformed
-
-    private void topping3BoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topping3BoxActionPerformed
-    }//GEN-LAST:event_topping3BoxActionPerformed
-
-    private void topping4BoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topping4BoxActionPerformed
-    }//GEN-LAST:event_topping4BoxActionPerformed
-
-    private void topping5BoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topping5BoxActionPerformed
-    }//GEN-LAST:event_topping5BoxActionPerformed
-
-    private void topping1BoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topping1BoxActionPerformed
-    }//GEN-LAST:event_topping1BoxActionPerformed
-
     private void quantityAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantityAddActionPerformed
     }//GEN-LAST:event_quantityAddActionPerformed
 
     private void quantityButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantityButtonActionPerformed
-    }//GEN-LAST:event_quantityButtonActionPerformed
-
-    private void quantityAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quantityAddMouseClicked
-        quantityAdd.setText("");
-    }//GEN-LAST:event_quantityAddMouseClicked
-
-    private void quantityButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quantityButtonMouseClicked
+        if(unavailableItems.contains(othersLabel.getText().split(" ")[1]))
+        {
+            JOptionPane.showMessageDialog(this, "Cannot add unavailable item.");
+            return;
+        }
         if(quantityAdd.getText().matches("[+1234567890]"))
         {
             for(int i = 0; i < Integer.parseInt(quantityAdd.getText()); i++)
@@ -1802,101 +2387,721 @@ public class PoSGUI extends javax.swing.JFrame {
             }
         }
         update();
-    }//GEN-LAST:event_quantityButtonMouseClicked
+    }//GEN-LAST:event_quantityButtonActionPerformed
+
+    private void quantityAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quantityAddMouseClicked
+        quantityAdd.setText("");
+    }//GEN-LAST:event_quantityAddMouseClicked
 
     private void othersOpen()
     {
         othersFrame.setVisible(true);
         toppingFrame.setVisible(false);
         mealFrame.setVisible(false);
+        trendFrame.setVisible(false);
         quantityAdd.setText("1");
+        otherPriceChange.setText("0.00");
+        priceDateOthers.setText("Date Range (yyyy-mm-dd)");
     }
-    private void side1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side1MouseClicked
-        othersOpen();
-        othersLabel.setText("Adding Side1");
-    }//GEN-LAST:event_side1MouseClicked
-
-    private void side2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side2MouseClicked
-        othersOpen();
-        othersLabel.setText("Adding Side2");
-    }//GEN-LAST:event_side2MouseClicked
-
-    private void side3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side3MouseClicked
-        othersOpen();
-        othersLabel.setText("Adding Side3");
-    }//GEN-LAST:event_side3MouseClicked
-
-    private void side4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side4MouseClicked
-        othersOpen();
-        othersLabel.setText("Adding Side4");
-    }//GEN-LAST:event_side4MouseClicked
-
-    private void beverage1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverage1MouseClicked
-        othersOpen();
-        othersLabel.setText("Adding Beverage1");
-    }//GEN-LAST:event_beverage1MouseClicked
-
-    private void beverage2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverage2MouseClicked
-        othersOpen();
-        othersLabel.setText("Adding Beverage2");
-    }//GEN-LAST:event_beverage2MouseClicked
-
-    private void beverage3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverage3MouseClicked
-        othersOpen();
-        othersLabel.setText("Adding Beverage3");
-    }//GEN-LAST:event_beverage3MouseClicked
-
-    private void beverage4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverage4MouseClicked
-        othersOpen();
-        othersLabel.setText("Adding Beverage4");
-    }//GEN-LAST:event_beverage4MouseClicked
-
-    private void beverage5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverage5MouseClicked
-        othersOpen();
-        othersLabel.setText("Adding Beverage5");
-    }//GEN-LAST:event_beverage5MouseClicked
-
-    private void dessert1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dessert1MouseClicked
-        othersOpen();
-        othersLabel.setText("Adding Dessert1");
-    }//GEN-LAST:event_dessert1MouseClicked
-
-    private void dessert2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dessert2MouseClicked
-        othersOpen();
-        othersLabel.setText("Adding Dessert2");
-    }//GEN-LAST:event_dessert2MouseClicked
-
-    private void clearOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearOrderMouseClicked
-        currentItems.clear();
-        update();
-    }//GEN-LAST:event_clearOrderMouseClicked
-
+    
     private void employeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeButtonActionPerformed
-    }//GEN-LAST:event_employeeButtonActionPerformed
-
-    private void employeeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeButtonMouseClicked
-        employeeView = !employeeView;
         if(employeeView)
         {
-            employeeButton.setText("Customer View");
-            //clearOrder.enable();
-            clearOrder.setVisible(true);
-            //employee only stuff
+            employeeView = false;
+            employeeButton.setText("Employee View");
+            JOptionPane.showMessageDialog(this, "Logged off Employee View.");
+            clearOrder.setVisible(false);
+            setAvailabilityOff();
+            //hide employee only stuff
         }
         else
         {
-            employeeButton.setText("Employee View");
-            clearOrder.setVisible(false);
-            //hide employee only stuff
+            employeeVerify.setVisible(true);
         }
-    }//GEN-LAST:event_employeeButtonMouseClicked
+    }//GEN-LAST:event_employeeButtonActionPerformed
 
-    public static ArrayList<Item> allBeverages = null;
-    public static ArrayList<Item> allDesserts = null;
-    public static ArrayList<Item> allEntrees = null;
-    public static ArrayList<Item> allMeals = null;
-    public static ArrayList<Item> allSides = null;
-    public static ArrayList<Item> allToppings = null;
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+    }//GEN-LAST:event_formWindowClosed
+
+    private void employeePWBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeePWBoxActionPerformed
+
+    }//GEN-LAST:event_employeePWBoxActionPerformed
+
+    private void employeeConfirmActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_employeeConfirmActionPerformed
+        Employee employee = Employee.getEmployeeByID(Integer.parseInt(String.valueOf(employeePWBox.getPassword())));
+
+        if (employee != null)
+        {
+            employeeView = true;
+            JOptionPane.showMessageDialog(this, String.format("Logged in as %s.", employee.getName()));
+            employeeButton.setText("Customer View");
+            clearOrder.setVisible(true);
+            employeeVerify.setVisible(false);
+            setAvailabilityOn();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Invalid ID.");
+            employeeVerify.setVisible(false);
+        }
+        employeePWBox.setText("");
+    }//GEN-LAST:event_employeeConfirmActionPerformed
+
+    private void setAvailabilityOn()
+    {
+        entreeAvailability.setVisible(true);
+        mealAvailability.setVisible(true);
+        otherAvailability.setVisible(true);
+        mealPriceChange.setVisible(true);
+        otherPriceChange.setVisible(true);
+        entreePriceChange.setVisible(true);
+        confirmPriceEntree.setVisible(true);
+        confirmPriceMeal.setVisible(true);
+        confirmPriceOthers.setVisible(true);
+
+        priceDateEntree.setVisible(true);
+        priceDateMeal.setVisible(true);
+        priceDateOthers.setVisible(true);
+        priceDeltaEntree.setVisible(true);
+        priceDeltaMeal.setVisible(true);
+        priceDeltaOthers.setVisible(true);
+        priceEffectEntree.setVisible(true);
+        priceEffectMeal.setVisible(true);
+        priceEffectOthers.setVisible(true);
+    }
+    private void setAvailabilityOff()
+    {
+        entreeAvailability.setVisible(false);
+        mealAvailability.setVisible(false);
+        otherAvailability.setVisible(false);
+        mealPriceChange.setVisible(false);
+        otherPriceChange.setVisible(false);
+        entreePriceChange.setVisible(false);
+        confirmPriceEntree.setVisible(false);
+        confirmPriceMeal.setVisible(false);
+        confirmPriceOthers.setVisible(false);
+
+        priceDateEntree.setVisible(false);
+        priceDateMeal.setVisible(false);
+        priceDateOthers.setVisible(false);
+        priceDeltaEntree.setVisible(false);
+        priceDeltaMeal.setVisible(false);
+        priceDeltaOthers.setVisible(false);
+        priceEffectEntree.setVisible(false);
+        priceEffectMeal.setVisible(false);
+        priceEffectOthers.setVisible(false);
+    }
+    
+    private void upSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upSelectedActionPerformed
+        if(selectIndex>0)
+        {
+            selectIndex--;
+            update();
+        }
+    }//GEN-LAST:event_upSelectedActionPerformed
+
+    private void clearOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearOrderActionPerformed
+        currentItems.clear();
+        abbreviatedItems.clear();
+        update();
+    }//GEN-LAST:event_clearOrderActionPerformed
+
+    private void mealAvailabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mealAvailabilityActionPerformed
+        if(!mealAvailability.isSelected())
+        {
+            if(!unavailableItems.contains(currentMeal.getText()))
+            {
+                unavailableItems.add(currentMeal.getText());
+            }
+        }
+        else
+        {
+            if(unavailableItems.contains(currentMeal.getText()))
+            {
+                unavailableItems.remove(unavailableItems.indexOf(currentMeal.getText()));
+            }
+        }
+        updateAvailability();
+    }//GEN-LAST:event_mealAvailabilityActionPerformed
+
+    private void customerLoginActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_customerLoginActionPerformed
+        //some stuff about going through the db to verify name
+        if(!enterName.getText().equals("Enter Customer Name"))
+        {
+            customerName = enterName.getText();
+
+            Customer customer = Customer.getCustomerByName(customerName);
+            ArrayList<Item> recommendedItems = Customer.getCustomerRecommendations(customer, 2);
+
+            String customerWelcome;
+
+            if (recommendedItems.isEmpty()) {
+                // This is a new customer or one with no previous orders
+                customerWelcome = String.format("Logged in as: %s \n\nWelcome, %s!", customerName, customerName);
+            } else {
+                // This is an old customer, show their recommended items.
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append(String.format("Logged in as: %s \n\nWelcome back, %s! How about trying ", customerName, customerName));
+                for (Item i : recommendedItems) {
+                    stringBuilder.append(i.getFullName() + ", ");
+                }
+                stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
+                stringBuilder.append(" today?");
+
+                customerWelcome = stringBuilder.toString();
+            }
+
+            JOptionPane.showMessageDialog(this, customerWelcome);
+        } else {
+            JOptionPane.showMessageDialog(this, "Please enter a customer name!");
+        }
+    }//GEN-LAST:event_customerLoginActionPerformed
+
+    private void removeSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSelectedActionPerformed
+        currentItems.remove(selectIndex);
+        abbreviatedItems.remove(selectIndex);
+        if(selectIndex>0)
+        {
+            selectIndex--;
+        }
+        update();
+    }//GEN-LAST:event_removeSelectedActionPerformed
+
+    private void downSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downSelectedActionPerformed
+        if(selectIndex<currentItems.size()-1)
+        {
+            selectIndex++;
+            update();
+        }
+    }//GEN-LAST:event_downSelectedActionPerformed
+
+    private void sidesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sidesButtonActionPerformed
+        mealsPanel.setVisible(false);
+        entreesPanel.setVisible(false);
+        sidesPanel.setVisible(true);
+        beveragePanel.setVisible(false);
+        dessertsPanel.setVisible(false);
+        mealFrame.setVisible(false);
+        toppingFrame.setVisible(false);
+        othersFrame.setVisible(false);
+    }//GEN-LAST:event_sidesButtonActionPerformed
+
+    private void beverageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beverageButtonActionPerformed
+        mealsPanel.setVisible(false);
+        entreesPanel.setVisible(false);
+        sidesPanel.setVisible(false);
+        beveragePanel.setVisible(true);
+        dessertsPanel.setVisible(false);
+        mealFrame.setVisible(false);
+        toppingFrame.setVisible(false);
+        othersFrame.setVisible(false);
+    }//GEN-LAST:event_beverageButtonActionPerformed
+
+    private void dessertsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dessertsButtonActionPerformed
+        mealsPanel.setVisible(false);
+        entreesPanel.setVisible(false);
+        sidesPanel.setVisible(false);
+        beveragePanel.setVisible(false);
+        dessertsPanel.setVisible(true);
+        mealFrame.setVisible(false);
+        toppingFrame.setVisible(false);
+        othersFrame.setVisible(false);
+    }//GEN-LAST:event_dessertsButtonActionPerformed
+
+    private void entreeAvailabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entreeAvailabilityActionPerformed
+        String entree = entreeLabel.getText().split(" ")[1];
+        if(!entreeAvailability.isSelected())
+        {
+            if(!unavailableItems.contains(entree))
+            {
+                unavailableItems.add(entree);
+            }
+        }
+        else
+        {
+            if(unavailableItems.contains(entree))
+            {
+                unavailableItems.remove(unavailableItems.indexOf(entree));
+            }
+        }
+        updateAvailability();
+    }//GEN-LAST:event_entreeAvailabilityActionPerformed
+
+    private void toppingFrameWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_toppingFrameWindowClosing
+        if(employeeView)
+        {
+            setAvailabilityOn();
+        }
+    }//GEN-LAST:event_toppingFrameWindowClosing
+
+    private void otherAvailabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_otherAvailabilityActionPerformed
+        String others = othersLabel.getText().split(" ")[1];
+        if(!otherAvailability.isSelected())
+        {
+            if(!unavailableItems.contains(others))
+            {
+                unavailableItems.add(others);
+            }
+        }
+        else
+        {
+            if(unavailableItems.contains(others))
+            {
+                unavailableItems.remove(unavailableItems.indexOf(others));
+            }
+        }
+        updateAvailability();
+    }//GEN-LAST:event_otherAvailabilityActionPerformed
+
+    private void entree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree1MouseClicked
+        if(employeeView && entree1.isEnabled()==false)
+        {
+            toppingFrame.setVisible(true);
+            entreeLabel.setText("Adding Entree1");
+            entreePriceChange.setText("0.00");
+            priceDateEntree.setText("Date Range (yyyy-mm-dd)");
+            setAvailabilityOn();
+            entree1Select();
+        }
+    }//GEN-LAST:event_entree1MouseClicked
+
+    private void entree2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree2MouseClicked
+        if(employeeView && entree2.isEnabled()==false)
+        {
+            toppingFrame.setVisible(true);
+            entreeLabel.setText("Adding Entree2");
+            entreePriceChange.setText("0.00");
+            priceDateEntree.setText("Date Range (yyyy-mm-dd)");
+            setAvailabilityOn();
+            entree2Select();
+        }
+    }//GEN-LAST:event_entree2MouseClicked
+
+    private void entree3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree3MouseClicked
+        if(employeeView && entree3.isEnabled()==false)
+        {
+            toppingFrame.setVisible(true);
+            entreeLabel.setText("Adding Entree3");
+            entreePriceChange.setText("0.00");
+            priceDateEntree.setText("Date Range (yyyy-mm-dd)");
+            setAvailabilityOn();
+            entree3Select();
+        }
+    }//GEN-LAST:event_entree3MouseClicked
+
+    private void entree4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree4MouseClicked
+        if(employeeView && entree4.isEnabled()==false)
+        {
+            toppingFrame.setVisible(true);
+            entreeLabel.setText("Adding Entree4");
+            entreePriceChange.setText("0.00");
+            priceDateEntree.setText("Date Range (yyyy-mm-dd)");
+            setAvailabilityOn();
+            entree4Select();
+        }
+    }//GEN-LAST:event_entree4MouseClicked
+
+    private void entree5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree5MouseClicked
+        if(employeeView && entree5.isEnabled()==false)
+        {
+            toppingFrame.setVisible(true);
+            entreeLabel.setText("Adding Entree5");
+            entreePriceChange.setText("0.00");
+            priceDateEntree.setText("Date Range (yyyy-mm-dd)");
+            setAvailabilityOn();
+            entree5Select();
+        }
+    }//GEN-LAST:event_entree5MouseClicked
+
+    private void entree6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree6MouseClicked
+        if(employeeView && entree6.isEnabled()==false)
+        {
+            toppingFrame.setVisible(true);
+            entreeLabel.setText("Adding Entree6");
+            entreePriceChange.setText("0.00");
+            priceDateEntree.setText("Date Range (yyyy-mm-dd)");
+            setAvailabilityOn();
+            entree6Select();
+        }
+    }//GEN-LAST:event_entree6MouseClicked
+
+    private void entree7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entree7MouseClicked
+        if(employeeView && entree7.isEnabled()==false)
+        {
+            toppingFrame.setVisible(true);
+            entreeLabel.setText("Adding Entree7");
+            entreePriceChange.setText("0.00");
+            priceDateEntree.setText("Date Range (yyyy-mm-dd)");
+            setAvailabilityOn();
+            entree7Select();
+        }
+    }//GEN-LAST:event_entree7MouseClicked
+
+    private void meal1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_meal1MouseClicked
+        if(employeeView && meal1.isEnabled()==false)
+        {
+            mealFrame.setVisible(true);
+            toppingFrame.setVisible(false);
+            mealAvailability.setSelected(false);
+            currentMeal.setText("Meal1");
+            entreeMealLabel.setText("Entree1");
+            sideLabel.setText("Side2");
+            beverageLabel.setText("Beverage1");
+            customizations.setText("No Customizations");
+            mealPriceChange.setText("0.00");
+            priceDateMeal.setText("Date Range (yyyy-mm-dd)");
+        }
+    }//GEN-LAST:event_meal1MouseClicked
+
+    private void meal2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_meal2MouseClicked
+        if(employeeView && meal2.isEnabled()==false)
+        {
+            mealFrame.setVisible(true);
+            toppingFrame.setVisible(false);
+            mealAvailability.setSelected(false);
+            currentMeal.setText("Meal2");
+            entreeMealLabel.setText("Entree5");
+            sideLabel.setText("Side4");
+            beverageLabel.setText("Beverage5");
+            customizations.setText("No Customizations");
+            mealPriceChange.setText("0.00");
+            priceDateMeal.setText("Date Range (yyyy-mm-dd)");
+        }
+    }//GEN-LAST:event_meal2MouseClicked
+
+    private void meal3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_meal3MouseClicked
+        if(employeeView && meal3.isEnabled()==false)
+        {
+            mealFrame.setVisible(true);
+            toppingFrame.setVisible(false);
+            mealAvailability.setSelected(false);
+            currentMeal.setText("Meal3");
+            entreeMealLabel.setText("Entree6");
+            sideLabel.setText("Side3");
+            beverageLabel.setText("Beverage5");
+            customizations.setText("No Customizations");
+            mealPriceChange.setText("0.00");
+            priceDateMeal.setText("Date Range (yyyy-mm-dd)");
+        }
+    }//GEN-LAST:event_meal3MouseClicked
+
+    private void meal4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_meal4MouseClicked
+        if(employeeView && meal4.isEnabled()==false)
+        {
+            mealFrame.setVisible(true);
+            toppingFrame.setVisible(false);
+            mealAvailability.setSelected(false);
+            currentMeal.setText("Meal4");
+            entreeMealLabel.setText("Entree1");
+            sideLabel.setText("Side2");
+            beverageLabel.setText("Beverage1");
+            customizations.setText("No Customizations");
+            mealPriceChange.setText("0.00");
+            priceDateMeal.setText("Date Range (yyyy-mm-dd)");
+        }
+    }//GEN-LAST:event_meal4MouseClicked
+
+    private void meal5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_meal5MouseClicked
+        if(employeeView && meal5.isEnabled()==false)
+        {
+            mealFrame.setVisible(true);
+            toppingFrame.setVisible(false);
+            mealAvailability.setSelected(false);
+            currentMeal.setText("Meal5");
+            entreeMealLabel.setText("Entree5");
+            sideLabel.setText("Side2");
+            beverageLabel.setText("Beverage5");
+            customizations.setText("No Customizations");
+            mealPriceChange.setText("0.00");
+            priceDateMeal.setText("Date Range (yyyy-mm-dd)");
+        }
+    }//GEN-LAST:event_meal5MouseClicked
+
+    private void side1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side1MouseClicked
+        if(employeeView && side1.isEnabled()==false)
+        {
+            othersOpen();
+            otherAvailability.setSelected(false);
+            otherPriceChange.setText("0.00");
+            priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+            othersLabel.setText("Adding Side1");
+        }
+    }//GEN-LAST:event_side1MouseClicked
+
+    private void side2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side2MouseClicked
+        if(employeeView && side2.isEnabled()==false)
+        {
+            othersOpen();
+            otherAvailability.setSelected(false);
+            othersLabel.setText("Adding Side2");
+        }
+    }//GEN-LAST:event_side2MouseClicked
+
+    private void side3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side3MouseClicked
+        if(employeeView && side3.isEnabled()==false)
+        {
+            othersOpen();
+            otherAvailability.setSelected(false);
+            otherPriceChange.setText("0.00");
+            priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+            othersLabel.setText("Adding Side3");
+        }
+    }//GEN-LAST:event_side3MouseClicked
+
+    private void side4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_side4MouseClicked
+        if(employeeView && side4.isEnabled()==false)
+        {
+            othersOpen();
+            otherAvailability.setSelected(false);
+            otherPriceChange.setText("0.00");
+            priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+            othersLabel.setText("Adding Side4");
+        }
+    }//GEN-LAST:event_side4MouseClicked
+
+    private void beverage1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverage1MouseClicked
+        if(employeeView && beverage1.isEnabled()==false)
+        {
+            othersOpen();
+            otherAvailability.setSelected(false);
+            otherPriceChange.setText("0.00");
+            priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+            othersLabel.setText("Adding Beverage1");
+        }
+    }//GEN-LAST:event_beverage1MouseClicked
+
+    private void beverage2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverage2MouseClicked
+        if(employeeView && beverage2.isEnabled()==false)
+        {
+            othersOpen();
+            otherAvailability.setSelected(false);
+            otherPriceChange.setText("0.00");
+            priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+            othersLabel.setText("Adding Beverage2");
+        }
+    }//GEN-LAST:event_beverage2MouseClicked
+
+    private void beverage3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverage3MouseClicked
+        if(employeeView && beverage3.isEnabled()==false)
+        {
+            othersOpen();
+            otherAvailability.setSelected(false);
+            otherPriceChange.setText("0.00");
+            priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+            othersLabel.setText("Adding Beverage3");
+        }
+    }//GEN-LAST:event_beverage3MouseClicked
+
+    private void beverage4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverage4MouseClicked
+        if(employeeView && beverage4.isEnabled()==false)
+        {
+            othersOpen();
+            otherAvailability.setSelected(false);
+            otherPriceChange.setText("0.00");
+            priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+            othersLabel.setText("Adding Beverage4");
+        }
+    }//GEN-LAST:event_beverage4MouseClicked
+
+    private void beverage5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beverage5MouseClicked
+        if(employeeView && beverage5.isEnabled()==false)
+        {
+            othersOpen();
+            otherAvailability.setSelected(false);
+            otherPriceChange.setText("0.00");
+            priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+            othersLabel.setText("Adding Beverage5");
+        }
+    }//GEN-LAST:event_beverage5MouseClicked
+
+    private void dessert1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dessert1MouseClicked
+        if(employeeView && dessert1.isEnabled()==false)
+        {
+            othersOpen();
+            otherAvailability.setSelected(false);
+            otherPriceChange.setText("0.00");
+            priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+            othersLabel.setText("Adding Dessert1");
+        }
+    }//GEN-LAST:event_dessert1MouseClicked
+
+    private void dessert2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dessert2MouseClicked
+        if(employeeView && dessert2.isEnabled()==false)
+        {
+            othersOpen();
+            otherAvailability.setSelected(false);
+            otherPriceChange.setText("0.00");
+            priceDateOthers.setText("Date Range (yyyy-mm-dd)");
+            othersLabel.setText("Adding Dessert2");
+        }
+    }//GEN-LAST:event_dessert2MouseClicked
+
+    private void priceDateMealMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_priceDateMealMouseClicked
+        if(priceDateMeal.getText().equals("Date Range (yyyy-mm-dd)"))
+            priceDateMeal.setText("");
+    }//GEN-LAST:event_priceDateMealMouseClicked
+
+    private void priceDateOthersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_priceDateOthersMouseClicked
+        if(priceDateOthers.getText().equals("Date Range (yyyy-mm-dd)"))
+            priceDateOthers.setText("");
+    }//GEN-LAST:event_priceDateOthersMouseClicked
+
+    private void priceDateEntreeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_priceDateEntreeMouseClicked
+        if(priceDateEntree.getText().equals("Date Range (yyyy-mm-dd)"))
+            priceDateEntree.setText("");
+    }//GEN-LAST:event_priceDateEntreeMouseClicked
+
+    private void priceDateMealKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_priceDateMealKeyReleased
+        try {
+            LocalDate.parse(priceDateMeal.getText());
+
+            priceDateMeal.setForeground(Color.BLACK);
+
+            String itemName = Item.getAbbreviatedNameFromFullName(currentMeal.getText());
+
+            Float theoreticalPrice = Float.parseFloat(mealPriceChange.getText());
+
+            if (theoreticalPrice > 0.00) {
+                System.out.println(String.format("Item: %s, Date: %s, Theoretical Price: %s", itemName, priceDateMeal.getText(), theoreticalPrice.toString()));
+                priceDeltaMeal.setText(String.format("$%.2f", Item.priceChangeEffect(itemName, theoreticalPrice, priceDateMeal.getText())));
+            }
+        } catch (Exception e) {
+            priceDateMeal.setForeground(Color.RED);
+        }
+    }//GEN-LAST:event_priceDateMealKeyReleased
+
+    private void priceDateEntreeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_priceDateEntreeKeyReleased
+        try {
+            LocalDate.parse(priceDateEntree.getText());
+
+            priceDateEntree.setForeground(Color.BLACK);
+
+            String itemName = Item.getAbbreviatedNameFromFullName(entreeLabel.getText().split(" ")[1]);
+
+            Float theoreticalPrice = Float.parseFloat(entreePriceChange.getText());
+
+            if (theoreticalPrice > 0.00) {
+                System.out.println(String.format("Item: %s, Date: %s, Theoretical Price: %s", itemName, priceDateEntree.getText(), theoreticalPrice.toString()));
+                priceDeltaEntree.setText(String.format("$%.2f", Item.priceChangeEffect(itemName, theoreticalPrice, priceDateEntree.getText())));
+            }
+        } catch (Exception e) {
+            priceDateEntree.setForeground(Color.RED);
+        }
+    }//GEN-LAST:event_priceDateEntreeKeyReleased
+
+    private void priceDateOthersKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_priceDateOthersKeyReleased
+        try {
+            LocalDate.parse(priceDateOthers.getText());
+
+            priceDateOthers.setForeground(Color.BLACK);
+
+            String itemName = Item.getAbbreviatedNameFromFullName(othersLabel.getText().split(" ")[1]);
+
+            Float theoreticalPrice = Float.parseFloat(otherPriceChange.getText());
+
+            if (theoreticalPrice > 0.00) {
+                System.out.println(String.format("Item: %s, Date: %s, Theoretical Price: %s", itemName, priceDateOthers.getText(), theoreticalPrice.toString()));
+                priceDeltaOthers.setText(String.format("$%.2f", Item.priceChangeEffect(itemName, theoreticalPrice, priceDateOthers.getText())));
+            }
+        } catch (Exception e) {
+            priceDateOthers.setForeground(Color.RED);
+        }
+    }//GEN-LAST:event_priceDateOthersKeyReleased
+
+    private void confirmPriceOthersActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_confirmPriceOthersActionPerformed
+        if(otherPriceChange.getText().matches("[0-9]+([,.][0-9]{1,2})?"))
+        {
+            Float newPrice = Float.parseFloat(otherPriceChange.getText());
+            String itemName = Item.getAbbreviatedNameFromFullName(othersLabel.getText().split(" ")[1]);
+
+            if (newPrice <= 0.00) {
+                JOptionPane.showMessageDialog(this, "Changing price to <= 0.00 is invalid");
+                return;
+            }
+
+            Item item = AllItems.get(itemName);
+            if (item == null) {
+                JOptionPane.showMessageDialog(this, String.format("Invalid item inputted: %s", itemName));
+                return;
+            }
+
+            item.setPrice(newPrice);
+            updateFoodButtons();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Please use format xx.xx");
+        }
+    }//GEN-LAST:event_confirmPriceOthersActionPerformed
+
+    private void confirmPriceEntreeActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_confirmPriceEntreeActionPerformed
+        if(entreePriceChange.getText().matches("[0-9]+([,.][0-9]{1,2})?"))
+        {
+            Float newPrice = Float.parseFloat(entreePriceChange.getText());
+            String itemName = Item.getAbbreviatedNameFromFullName(entreeLabel.getText().split(" ")[1]);
+
+            if (newPrice <= 0.00) {
+                JOptionPane.showMessageDialog(this, "Changing price to <= 0.00 is invalid");
+                return;
+            }
+
+            Item item = AllItems.get(itemName);
+            if (item == null) {
+                JOptionPane.showMessageDialog(this, String.format("Invalid item inputted: %s", itemName));
+                return;
+            }
+
+            item.setPrice(newPrice);
+            updateFoodButtons();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Please use format xx.xx");
+        }
+    }//GEN-LAST:event_confirmPriceEntreeActionPerformed
+
+    private void confirmPriceMealActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_confirmPriceMealActionPerformed
+        if(mealPriceChange.getText().matches("[0-9]+([,.][0-9]{1,2})?"))
+        {
+            Float newPrice = Float.parseFloat(mealPriceChange.getText());
+            String itemName = Item.getAbbreviatedNameFromFullName(currentMeal.getText());
+
+            if (newPrice <= 0.00) {
+                JOptionPane.showMessageDialog(this, "Changing price to <= 0.00 is invalid");
+                return;
+            }
+
+            Item item = AllItems.get(itemName);
+            if (item == null) {
+                JOptionPane.showMessageDialog(this, String.format("Invalid item inputted: %s", itemName));
+                return;
+            }
+
+            item.setPrice(newPrice);
+            updateFoodButtons();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Please use format xx.xx");
+        }
+    }//GEN-LAST:event_confirmPriceMealActionPerformed
+
+    private void trendExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trendExitActionPerformed
+        trendFrame.setVisible(false);
+    }//GEN-LAST:event_trendExitActionPerformed
+
+    private void seeTrendActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_seeTrendActionPerformed
+        trendFrame.setVisible(true);
+
+        HashMap<String, ArrayList<Item>> trendingItems = Item.getTrendingItems(2);
+
+        top1Trending.setText(String.format("1. %s", trendingItems.get(Item.trending_up_key).get(0).getFullName()));
+        top2Trending.setText(String.format("2. %s", trendingItems.get(Item.trending_up_key).get(1).getFullName()));
+        bot1Trending.setText(String.format("1. %s", trendingItems.get(Item.trending_down_key).get(0).getFullName()));
+        bot2Trending.setText(String.format("2. %s", trendingItems.get(Item.trending_down_key).get(1).getFullName()));
+    }//GEN-LAST:event_seeTrendActionPerformed
+
+    private static HashMap<String, Item> AllItems = null;
 
     /**
      * @param args the command line arguments
@@ -1927,19 +3132,21 @@ public class PoSGUI extends javax.swing.JFrame {
 
         QueryBuilder.openDBConnection();
 
-        allBeverages = Beverage.getAllItems();
-        allDesserts = Dessert.getAllItems();
-        allEntrees = Entree.getAllItems();
-        allMeals = Meal.getAllItems();
-        allSides = Side.getAllItems();
-        allToppings = Topping.getAllItems();
+        if (AllItems == null) {
+            AllItems = Item.getAllItemsAsMap();
+        }
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PoSGUI().setVisible(true);
+                try {
+                    new PoSGUI().setVisible(true);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1953,17 +3160,31 @@ public class PoSGUI extends javax.swing.JFrame {
     private java.awt.Button beverageButton;
     private javax.swing.JLabel beverageLabel;
     private javax.swing.JPanel beveragePanel;
+    private javax.swing.JLabel bot1Trending;
+    private javax.swing.JLabel bot2Trending;
+    private javax.swing.JLabel botTrendHeader;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton checkoutButton;
     private javax.swing.JButton clearOrder;
+    private javax.swing.JButton confirmPriceEntree;
+    private javax.swing.JButton confirmPriceMeal;
+    private javax.swing.JButton confirmPriceOthers;
     private javax.swing.JLabel currentMeal;
-    private java.awt.TextArea currentOrder;
+    private javax.swing.JEditorPane currentOrder;
+    private javax.swing.JLabel currentlyTrending;
+    private javax.swing.JButton customerLogin;
     private javax.swing.JLabel customizations;
     private javax.swing.JButton dessert1;
     private javax.swing.JButton dessert2;
     private java.awt.Button dessertsButton;
     private javax.swing.JPanel dessertsPanel;
+    private javax.swing.JButton downSelected;
     private javax.swing.JButton employeeButton;
+    private javax.swing.JButton employeeConfirm;
+    private javax.swing.JPasswordField employeePWBox;
+    private javax.swing.JFrame employeeVerify;
+    private javax.swing.JLabel employeeVerifyLabel;
+    private javax.swing.JLabel encouragingWords;
     private javax.swing.JTextField enterName;
     private javax.swing.JButton entree1;
     private javax.swing.JButton entree2;
@@ -1972,8 +3193,11 @@ public class PoSGUI extends javax.swing.JFrame {
     private javax.swing.JButton entree5;
     private javax.swing.JButton entree6;
     private javax.swing.JButton entree7;
+    private javax.swing.JCheckBox entreeAvailability;
     private java.awt.Button entreeCustomize;
     private javax.swing.JLabel entreeLabel;
+    private javax.swing.JLabel entreeMealLabel;
+    private javax.swing.JTextField entreePriceChange;
     private java.awt.Button entreesButton;
     private javax.swing.JPanel entreesPanel;
     private javax.swing.JLayeredPane jLayeredPane1;
@@ -1981,23 +3205,39 @@ public class PoSGUI extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton meal1;
     private javax.swing.JButton meal2;
     private javax.swing.JButton meal3;
     private javax.swing.JButton meal4;
     private javax.swing.JButton meal5;
+    private javax.swing.JCheckBox mealAvailability;
     private javax.swing.JFrame mealFrame;
+    private javax.swing.JTextField mealPriceChange;
     private java.awt.Button mealsButton;
     private javax.swing.JPanel mealsPanel;
+    private javax.swing.JCheckBox otherAvailability;
+    private javax.swing.JTextField otherPriceChange;
     private javax.swing.JFrame othersFrame;
     private java.awt.Label othersLabel;
+    private javax.swing.JTextField priceDateEntree;
+    private javax.swing.JTextField priceDateMeal;
+    private javax.swing.JTextField priceDateOthers;
+    private javax.swing.JLabel priceDeltaEntree;
+    private javax.swing.JLabel priceDeltaMeal;
+    private javax.swing.JLabel priceDeltaOthers;
+    private javax.swing.JLabel priceEffectEntree;
+    private javax.swing.JLabel priceEffectMeal;
+    private javax.swing.JLabel priceEffectOthers;
     private java.awt.TextField quantityAdd;
     private java.awt.Button quantityButton;
+    private javax.swing.JButton removeSelected;
     private java.awt.ScrollPane scrollPane1;
     private java.awt.Scrollbar scrollbar1;
     private java.awt.Scrollbar scrollbar2;
     private java.awt.Scrollbar scrollbar3;
     private java.awt.Scrollbar scrollbar4;
+    private javax.swing.JButton seeTrend;
     private javax.swing.JButton side1;
     private javax.swing.JButton side2;
     private javax.swing.JButton side3;
@@ -2006,12 +3246,17 @@ public class PoSGUI extends javax.swing.JFrame {
     private java.awt.Button sidesButton;
     private javax.swing.JPanel sidesPanel;
     private java.awt.TextArea textArea1;
+    private javax.swing.JLabel top1Trending;
+    private javax.swing.JLabel top2Trending;
+    private javax.swing.JLabel topTrendHeader;
     private javax.swing.JCheckBox topping1Box;
     private javax.swing.JCheckBox topping2Box;
     private javax.swing.JCheckBox topping3Box;
     private javax.swing.JCheckBox topping4Box;
     private javax.swing.JCheckBox topping5Box;
     private javax.swing.JFrame toppingFrame;
-    private javax.swing.JLabel toppingLabel;
+    private javax.swing.JButton trendExit;
+    private javax.swing.JFrame trendFrame;
+    private javax.swing.JButton upSelected;
     // End of variables declaration//GEN-END:variables
 }
