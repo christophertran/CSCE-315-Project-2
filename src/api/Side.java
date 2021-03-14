@@ -11,16 +11,13 @@ public class Side extends Item{
         super(id, name, price, calories);
     }
 
-    public static ArrayList<Side> getAllItems() throws SQLException {
-        ArrayList<Side> items = new ArrayList<>();
-        ArrayList<HashMap<String, String>> itemsDict = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Side.tableName, null));
-        for (HashMap h : itemsDict) {
-            Side i = new Side(Integer.parseInt((String) h.get(Side.id_column)),
-                    (String) h.get(Side.name_column),
-                    Float.parseFloat((String) h.get(Side.price_column)),
-                    Integer.parseInt((String) h.get(Side.calories_column)));
-            items.add(i);
-        }
-        return items;
+    /**
+     * Return all items from sides table in the database
+     * @return ArrayList of all side items in database
+     * @throws SQLException Throws SQLException
+     */
+    public static ArrayList<Item> getAllItems() throws SQLException {
+        ArrayList<HashMap<String, String>> queryResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Side.tableName, null, null));
+        return Item.getItemsFromQueryResult(queryResult);
     }
 }

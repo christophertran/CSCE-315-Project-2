@@ -1203,7 +1203,7 @@ public class PoSGUI extends javax.swing.JFrame {
             StringBuilder orderContents = new StringBuilder();
             for (String items : abbreviatedItems) {
                 boolean isMeal = false;
-                for (Meal m : allMeals) {
+                for (Item m : allMeals) {
                     if (items.substring(0, 2).equals(m.getName())) {
                         isMeal = true;
                     }
@@ -1562,7 +1562,7 @@ public class PoSGUI extends javax.swing.JFrame {
                 if(!topping1Box.isSelected())
                     customText += "noTopping1 ";
                 if(topping2Box.isSelected())
-                    customText += "Topping2 ";
+                    customText += "addTopping2 ";
                 if(!topping3Box.isSelected())
                     customText += "noTopping3 ";
                 if(!topping4Box.isSelected())
@@ -1662,7 +1662,7 @@ public class PoSGUI extends javax.swing.JFrame {
                 if(!topping1Box.isSelected())
                     customText += "noTopping1, ";
                 if(topping2Box.isSelected())
-                    customText += "Topping2, ";
+                    customText += "addTopping2, ";
                 if(!topping3Box.isSelected())
                     customText += "noTopping3, ";
                 if(!topping4Box.isSelected())
@@ -1891,12 +1891,12 @@ public class PoSGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_employeeButtonMouseClicked
 
-    public static ArrayList<Beverage> allBeverages = null;
-    public static ArrayList<Dessert> allDesserts = null;
-    public static ArrayList<Entree> allEntrees = null;
-    public static ArrayList<Meal> allMeals = null;
-    public static ArrayList<Side> allSides = null;
-    public static ArrayList<Topping> allToppings = null;
+    public static ArrayList<Item> allBeverages = null;
+    public static ArrayList<Item> allDesserts = null;
+    public static ArrayList<Item> allEntrees = null;
+    public static ArrayList<Item> allMeals = null;
+    public static ArrayList<Item> allSides = null;
+    public static ArrayList<Item> allToppings = null;
 
     /**
      * @param args the command line arguments

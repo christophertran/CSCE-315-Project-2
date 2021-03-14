@@ -11,16 +11,13 @@ public class Topping extends Item {
         super(id, name, price, calories);
     }
 
-    public static ArrayList<Topping> getAllItems() throws SQLException {
-        ArrayList<Topping> items = new ArrayList<>();
-        ArrayList<HashMap<String, String>> itemsDict = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Topping.tableName, null));
-        for (HashMap h : itemsDict) {
-            Topping i = new Topping(Integer.parseInt((String) h.get(Topping.id_column)),
-                    (String) h.get(Topping.name_column),
-                    Float.parseFloat((String) h.get(Topping.price_column)),
-                    Integer.parseInt((String) h.get(Topping.calories_column)));
-            items.add(i);
-        }
-        return items;
+    /**
+     * Return all items from toppings table in the database
+     * @return ArrayList of all topping items in database
+     * @throws SQLException Throws SQLException
+     */
+    public static ArrayList<Item> getAllItems() throws SQLException {
+        ArrayList<HashMap<String, String>> queryResult = QueryBuilder.executeQuery(QueryBuilder.buildSelectionQuery(Topping.tableName, null, null));
+        return Item.getItemsFromQueryResult(queryResult);
     }
 }
